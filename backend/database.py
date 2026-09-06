@@ -6,44 +6,24 @@ def _build_engine():
     url = Config.DATABASE_URL
 
     if url.startswith("postgresql") or url.startswith("postgres"):
-        # Ensure correct driver prefix
         if url.startswith("postgres://"):
             url = url.replace("postgres://", "postgresql://", 1)
 
-        # For Supabase Transaction Pooler (port 6543), force pg8000 driver
-        # psycopg2 has issues with pgbouncer/transaction pooler
-        is_pooler = ":6543/" in url
-        if is_pooler:
-            if "postgresql://" in url and "postgresql+" not in url:
-                url = url.replace("postgresql://", "postgresql+pg8000://", 1)
-            return create_engine(
-                url,
-                pool_pre_ping=True,
-                pool_size=3,
-                max_overflow=5,
-                pool_timeout=30,
-                pool_recycle=300,
-                connect_args={"ssl_context": True}
-            )
-
-        # Direct connection (port 5432) — use psycopg2 with SSL
+        # Always use pg8000 (pure Python) — works on Render free tier
+        # with both direct (5432) and pooler (6543) connections
         if url.startswith("postgresql://") and not url.startswith("postgresql+"):
-            try:
-                import psycopg2
-            except ImportError:
-                url = url.replace("postgresql://", "postgresql+pg8000://", 1)
+            url = url.replace("postgresql://", "postgresql+pg8000://", 1)
 
         return create_engine(
             url,
             pool_pre_ping=True,
-            pool_size=3,
-            max_overflow=5,
+            pool_size=2,
+            max_overflow=3,
             pool_timeout=30,
             pool_recycle=300,
-            connect_args={"sslmode": "require", "connect_timeout": 10}
+            connect_args={"ssl_context": True}
         )
     else:
-        # SQLite fallback
         return create_engine(url, connect_args={"check_same_thread": False})
 
 engine = _build_engine()
