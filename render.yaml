@@ -3,7 +3,7 @@ services:
     name: shree-sai-jewellers-api
     env: python
     buildCommand: "pip install -r backend/requirements.txt"
-    startCommand: "gunicorn backend.app:app --workers 4 --timeout 120"
+    startCommand: "gunicorn backend.app:app --workers 2 --timeout 120 --bind 0.0.0.0:$PORT"
     plan: free
     envVars:
       - key: FLASK_ENV
@@ -11,18 +11,20 @@ services:
       - key: FLASK_DEBUG
         value: "False"
       - key: DATABASE_URL
+        value: "postgresql://postgres.sddrmokboatatwgbohkp:Shreesai%4009876@aws-0-ap-northeast-2.pooler.supabase.com:6543/postgres"
+      - key: SECRET_KEY
         sync: false
-      - key: RAZORPAY_KEY_ID
+      - key: IMAGEKIT_URL_ENDPOINT
         sync: false
-      - key: RAZORPAY_KEY_SECRET
+      - key: IMAGEKIT_PUBLIC_KEY
         sync: false
-      - key: CLOUDINARY_CLOUD_NAME
-        sync: false
-      - key: CLOUDINARY_API_KEY
-        sync: false
-      - key: CLOUDINARY_API_SECRET
+      - key: IMAGEKIT_PRIVATE_KEY
         sync: false
       - key: RESEND_API_KEY
         sync: false
+      - key: MAIL_SENDER
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
       - key: CORS_ORIGINS
-        value: "https://shreesaijewellers.com,https://*.vercel.app,http://localhost:8080"
+        value: "https://shree-sai-jewellers.pages.dev,https://cbaf18f8.shree-sai-jewellers.pages.dev,https://main.shree-sai-jewellers.pages.dev,http://localhost:8080"
