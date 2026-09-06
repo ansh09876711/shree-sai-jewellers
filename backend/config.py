@@ -10,7 +10,10 @@ class Config:
     SECRET_KEY = os.getenv("SECRET_KEY", "shree-sai-jewellers-secret-key-2026")
     
     # Supabase PostgreSQL Database URL
-    DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///shree_sai_jewellers.db")
+    _db_url = os.getenv("DATABASE_URL", "")
+    # Strip any whitespace/newlines that may be introduced by hosting env vars
+    _db_url = _db_url.strip().replace("\n", "").replace("\r", "")
+    DATABASE_URL = _db_url if _db_url else "sqlite:///shree_sai_jewellers.db"
     
     # Handle postgres:// and postgresql:// drivers (psycopg2 vs pg8000)
     if DATABASE_URL:
