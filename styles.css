@@ -1,0 +1,9 @@
+/* ==========================================================================
+   SHREE SAI JEWELLERS — MASTER STYLESHEET
+   Modular Architecture:
+   - css/desktop.css : Base design tokens, typography, layout & desktop components
+   - css/mobile.css  : Mobile nav drawer, bottom navigation bar, touch & responsive queries
+   ========================================================================== */
+
+@import url('css/desktop.css');
+@import url('css/mobile.css') screen and (max-width: 1024px);

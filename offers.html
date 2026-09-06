@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exclusive Offers & Deals | Shree Sai Jewellers</title>
+  <meta name="description" content="Explore active jewellery offers, festive discounts, and exclusive coupon codes from Shree Sai Jewellers.">
+  <link rel="canonical" href="https://shreesaijewellers.com/offers.html">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💎</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="top-bar">
+  <div class="container top-bar-inner">
+    <div class="top-trust-badges"><span class="trust-badge-item">✅ BIS Hallmarked</span><span class="top-sep">|</span><span class="trust-badge-item">🛡️ Insured Delivery</span></div>
+    <div class="live-rates">
+      <div class="live-pulse"><div class="pulse-dot"></div><span class="live-label">Live Rates</span></div>
+      <div class="rate-items"><span class="rate-item"><strong>24K:</strong> <span id="rate24k">—</span></span><span class="rate-sep">·</span><span class="rate-item"><strong>22K:</strong> <span id="rate22k">—</span></span></div>
+    </div>
+    <a href="tel:+919876543210" class="top-phone">📞 +91 98765 43210</a>
+  </div>
+</div>
+<header class="main-header" id="mainHeader">
+  <div class="container header-inner">
+    <button class="hamburger" id="hamburgerBtn"><span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span></button>
+    <a href="index.html" class="brand-logo">
+      <svg class="brand-emblem" viewBox="0 0 44 44" fill="none">
+        <defs><linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFF8E7"/><stop offset="40%" stop-color="#E2B755"/><stop offset="75%" stop-color="#C5933A"/><stop offset="100%" stop-color="#8B6017"/></linearGradient></defs>
+        <path d="M22 4L27 14H17L22 4Z" fill="url(#goldGrad)"/><path d="M22 40L8 16H36L22 40Z" fill="url(#goldGrad)" opacity="0.9"/><circle cx="22" cy="9" r="2" fill="#FFF8E7"/>
+      </svg>
+      <div class="brand-text"><span class="brand-name">Shree Sai Jewellers</span><span class="brand-tagline">✦ Fine Heirloom Jewellery ✦</span></div>
+    </a>
+    <nav class="desktop-nav"><ul class="nav-menu">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="products.html" class="nav-link">Jewellery</a></li>
+      <li><a href="offers.html" class="nav-link active">Offers <span class="nav-badge hot">HOT</span></a></li>
+      <li><a href="about.html" class="nav-link">About Us</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+      <li><a href="login.html" class="nav-link" style="color:var(--clr-gold);font-weight:600;">👤 Login / Register</a></li>
+    </ul></nav>
+    <div class="nav-actions">
+      <button class="icon-btn" onclick="renderWishlistDrawer(); openDrawer('wishlistDrawer')">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="badge-count wishlist-count" style="display:none;">0</span>
+      </button>
+      <button class="icon-btn icon-btn-cart" onclick="renderCartDrawer(); openDrawer('cartDrawer')">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="badge-count cart-count" style="display:none;">0</span>
+      </button>
+      <!-- Login / User Account -->
+      <a href="login.html" class="icon-btn" id="userNavBtn" title="My Account" aria-label="Login / My Account" style="text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="badge-count user-logged-badge" id="userLoggedBadge" style="display:none; background:#6bcb77; width:8px; height:8px; min-width:8px; padding:0; top:4px; right:4px; border-radius:50%;"></span>
+      </a>
+    </div>
+
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <div class="page-hero-label">Limited Time</div>
+    <h1 class="page-hero-title">Exclusive Offers & Deals</h1>
+    <p class="page-hero-desc">Take advantage of our seasonal discounts, festive coupons, and special promotions on handcrafted jewellery.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--sp-6);" id="offersGrid"></div>
+    <!-- Offer products (sale items) -->
+    <div style="margin-top:var(--sp-12);">
+      <div class="section-header">
+        <span class="section-label">On Sale Right Now</span>
+        <h2 class="section-title">Sale Products</h2>
+        <div class="section-divider"><span class="section-divider-icon">🏷️</span></div>
+      </div>
+      <div class="product-grid" id="saleProductsGrid"></div>
+    </div>
+  </div>
+</section>
+
+<div id="drawerOverlay" class="drawer-overlay"></div>
+<aside id="cartDrawer" class="drawer">
+  <div class="drawer-header"><h2 class="drawer-title">🛍️ Shopping Vault</h2><button class="drawer-close" onclick="closeDrawer('cartDrawer')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div id="cartBody" class="drawer-body"></div>
+  <div id="cartFooter" class="drawer-footer" style="display:none;"></div>
+</aside>
+<aside id="wishlistDrawer" class="drawer">
+  <div class="drawer-header"><h2 class="drawer-title">❤️ My Wishlist</h2><button class="drawer-close" onclick="closeDrawer('wishlistDrawer')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div id="wishlistBody" class="drawer-body"></div>
+</aside>
+<div id="mobileNav" class="mobile-nav">
+  <div id="mobileNavBackdrop" class="mobile-nav-backdrop"></div>
+  <div class="mobile-nav-drawer">
+    <div class="mobile-nav-header"><span class="brand-name" style="font-size:var(--fs-base);">Shree Sai Jewellers</span><button class="drawer-close" onclick="closeMobileNav()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link" onclick="closeMobileNav()">Home</a>
+      <a href="products.html" class="mobile-nav-link" onclick="closeMobileNav()">All Jewellery</a>
+      <a href="offers.html" class="mobile-nav-link active" onclick="closeMobileNav()">🎁 Offers</a>
+    </div>
+  </div>
+</div>
+<button id="backToTop" class="back-to-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<div id="toastContainer" class="toast-container"></div>
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    loadLiveRates();
+    loadOffers('offersGrid');
+    loadProductSection('saleProductsGrid', { badge: 'sale', sort: 'discount', limit: 8 });
+  });
+</script>
+</body>
+</html>

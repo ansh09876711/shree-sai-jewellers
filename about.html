@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Shree Sai Jewellers — Est. 1984</title>
+  <meta name="description" content="Discover the story of Shree Sai Jewellers — 40 years of handcrafted heirloom jewellery, BIS certified gold, and generations of trust.">
+  <link rel="canonical" href="https://shreesaijewellers.com/about.html">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💎</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="top-bar">
+  <div class="container top-bar-inner">
+    <div class="top-trust-badges"><span class="trust-badge-item">✅ Est. 1984</span><span class="top-sep">|</span><span class="trust-badge-item">🏆 BIS Certified</span></div>
+    <a href="tel:+919876543210" class="top-phone">📞 +91 98765 43210</a>
+  </div>
+</div>
+<header class="main-header" id="mainHeader">
+  <div class="container header-inner">
+    <button class="hamburger" id="hamburgerBtn"><span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span></button>
+    <a href="index.html" class="brand-logo">
+      <svg class="brand-emblem" viewBox="0 0 44 44" fill="none">
+        <defs><linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFF8E7"/><stop offset="40%" stop-color="#E2B755"/><stop offset="75%" stop-color="#C5933A"/><stop offset="100%" stop-color="#8B6017"/></linearGradient></defs>
+        <path d="M22 4L27 14H17L22 4Z" fill="url(#goldGrad)"/><path d="M22 40L8 16H36L22 40Z" fill="url(#goldGrad)" opacity="0.9"/><circle cx="22" cy="9" r="2" fill="#FFF8E7"/>
+      </svg>
+      <div class="brand-text"><span class="brand-name">Shree Sai Jewellers</span><span class="brand-tagline">✦ Fine Heirloom Jewellery · Est. 1984 ✦</span></div>
+    </a>
+    <nav class="desktop-nav"><ul class="nav-menu">
+      <li><a href="index.html" class="nav-link">Home</a></li>
+      <li><a href="products.html" class="nav-link">Jewellery</a></li>
+      <li><a href="offers.html" class="nav-link">Offers</a></li>
+      <li><a href="about.html" class="nav-link active">About Us</a></li>
+      <li><a href="contact.html" class="nav-link">Contact</a></li>
+      <li><a href="login.html" class="nav-link" style="color:var(--clr-gold);font-weight:600;">👤 Login / Register</a></li>
+    </ul></nav>
+    <div class="nav-actions">
+      <button class="icon-btn icon-btn-cart" onclick="renderCartDrawer(); openDrawer('cartDrawer')">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="badge-count cart-count" style="display:none;">0</span>
+      </button>
+      <!-- Login / User Account -->
+      <a href="login.html" class="icon-btn" id="userNavBtn" title="My Account" aria-label="Login / My Account" style="text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="badge-count user-logged-badge" id="userLoggedBadge" style="display:none; background:#6bcb77; width:8px; height:8px; min-width:8px; padding:0; top:4px; right:4px; border-radius:50%;"></span>
+      </a>
+    </div>
+
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="page-hero" style="min-height:50vh;display:flex;align-items:center;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?q=80&w=1920&auto=format&fit=crop');background-size:cover;background-position:center;opacity:0.15;"></div>
+  <div class="container page-hero-content" style="position:relative;z-index:1;">
+    <div class="page-hero-label">Our Heritage</div>
+    <h1 class="page-hero-title">Four Decades of Artistry</h1>
+    <p class="page-hero-desc">Since 1984, Shree Sai Jewellers has been crafting heirloom jewellery that transcends generations — each piece a testament to India's rich jewellery tradition.</p>
+    <a href="products.html" class="btn btn-primary" style="margin-top:var(--sp-6);">Explore Our Collection ✦</a>
+  </div>
+</section>
+
+<!-- Story -->
+<section class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-16);align-items:center;">
+      <div class="fade-in">
+        <span class="section-label">The Beginning</span>
+        <h2 style="font-family:var(--font-display);font-size:clamp(var(--fs-2xl),4vw,var(--fs-4xl));font-weight:300;line-height:var(--lh-snug);margin:var(--sp-4) 0 var(--sp-6);">
+          A Legacy Built on<br><span class="text-gold">Trust & Craftsmanship</span>
+        </h2>
+        <p style="color:var(--clr-text-secondary);line-height:var(--lh-loose);margin-bottom:var(--sp-4);">
+          Founded in 1984 by visionary artisan <strong style="color:var(--clr-text-primary);">Shri Sai Ratan Das</strong>, our journey began in a modest workshop in the heart of Indore's jewellery district. What started as a small family craft has grown into one of India's most trusted fine jewellery houses.
+        </p>
+        <p style="color:var(--clr-text-secondary);line-height:var(--lh-loose);margin-bottom:var(--sp-6);">
+          For over 40 years, we have been the custodians of traditional Indian jewellery artistry — from intricate Kundan and Polki work to contemporary diamond solitaires. Every piece that leaves our atelier is a labour of love, precision, and uncompromising quality.
+        </p>
+        <div style="display:flex;gap:var(--sp-8);">
+          <div><div style="font-family:var(--font-display);font-size:var(--fs-3xl);color:var(--clr-gold);font-weight:600;">40+</div><div style="font-size:var(--fs-xs);color:var(--clr-text-muted);text-transform:uppercase;letter-spacing:0.05em;">Years of Heritage</div></div>
+          <div><div style="font-family:var(--font-display);font-size:var(--fs-3xl);color:var(--clr-gold);font-weight:600;">50K+</div><div style="font-size:var(--fs-xs);color:var(--clr-text-muted);text-transform:uppercase;letter-spacing:0.05em;">Families Served</div></div>
+          <div><div style="font-family:var(--font-display);font-size:var(--fs-3xl);color:var(--clr-gold);font-weight:600;">15K+</div><div style="font-size:var(--fs-xs);color:var(--clr-text-muted);text-transform:uppercase;letter-spacing:0.05em;">Designs Created</div></div>
+        </div>
+      </div>
+      <div class="fade-in" style="border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:4/5;">
+        <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=800&auto=format&fit=crop" alt="Jewellery artisan at work" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Values -->
+<section class="section" style="background:var(--clr-surface);">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">What We Stand For</span>
+      <h2 class="section-title">Our Core Values</h2>
+      <div class="section-divider"><span class="section-divider-icon">✦</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--sp-6);">
+      <div class="fade-in" style="padding:var(--sp-8);border:1px solid var(--clr-border);border-radius:var(--radius-xl);">
+        <div style="font-size:36px;margin-bottom:var(--sp-4);">🏆</div>
+        <h3 style="font-family:var(--font-display);font-size:var(--fs-xl);margin-bottom:var(--sp-3);">Uncompromised Quality</h3>
+        <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);line-height:var(--lh-loose);">Every gram of gold is BIS hallmarked. Every diamond is IGI certified. We never compromise on material quality.</p>
+      </div>
+      <div class="fade-in fade-in-delay-1" style="padding:var(--sp-8);border:1px solid var(--clr-border);border-radius:var(--radius-xl);">
+        <div style="font-size:36px;margin-bottom:var(--sp-4);">🤝</div>
+        <h3 style="font-family:var(--font-display);font-size:var(--fs-xl);margin-bottom:var(--sp-3);">Transparent Pricing</h3>
+        <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);line-height:var(--lh-loose);">We provide full price breakdown — gold weight, making charges, stone charges, and GST. No hidden costs, ever.</p>
+      </div>
+      <div class="fade-in fade-in-delay-2" style="padding:var(--sp-8);border:1px solid var(--clr-border);border-radius:var(--radius-xl);">
+        <div style="font-size:36px;margin-bottom:var(--sp-4);">🎨</div>
+        <h3 style="font-family:var(--font-display);font-size:var(--fs-xl);margin-bottom:var(--sp-3);">Artisanal Mastery</h3>
+        <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);line-height:var(--lh-loose);">Our master craftsmen have decades of experience in traditional jewellery techniques, from Kundan to filigree work.</p>
+      </div>
+      <div class="fade-in fade-in-delay-3" style="padding:var(--sp-8);border:1px solid var(--clr-border);border-radius:var(--radius-xl);">
+        <div style="font-size:36px;margin-bottom:var(--sp-4);">❤️</div>
+        <h3 style="font-family:var(--font-display);font-size:var(--fs-xl);margin-bottom:var(--sp-3);">Customer First</h3>
+        <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);line-height:var(--lh-loose);">Our 50,000+ happy customers are our greatest achievement. Your satisfaction is our lifelong commitment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Certifications -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Our Credentials</span>
+      <h2 class="section-title">Certifications & Assurance</h2>
+      <div class="section-divider"><span class="section-divider-icon">🏛️</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--sp-6);">
+      <div style="text-align:center;padding:var(--sp-6);border:1px solid var(--clr-border-gold);border-radius:var(--radius-xl);background:rgba(197,147,58,0.03);">
+        <div style="font-size:48px;margin-bottom:var(--sp-4);">🏛️</div>
+        <h3 style="font-family:var(--font-display);font-size:var(--fs-lg);color:var(--clr-gold);margin-bottom:var(--sp-2);">BIS Hallmark</h3>
+        <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);">Bureau of Indian Standards certified 22K (916) and 18K (750) gold jewellery</p>
+      </div>
+      <div style="text-align:center;padding:var(--sp-6);border:1px solid var(--clr-border-gold);border-radius:var(--radius-xl);background:rgba(197,147,58,0.03);">
+        <div style="font-size:48px;margin-bottom:var(--sp-4);">💎</div>
+        <h3 style="font-family:var(--font-display);font-size:var(--fs-lg);color:var(--clr-gold);margin-bottom:var(--sp-2);">IGI Certified</h3>
+        <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);">International Gemological Institute certified natural and lab diamonds</p>
+      </div>
+      <div style="text-align:center;padding:var(--sp-6);border:1px solid var(--clr-border-gold);border-radius:var(--radius-xl);background:rgba(197,147,58,0.03);">
+        <div style="font-size:48px;margin-bottom:var(--sp-4);">📜</div>
+        <h3 style="font-family:var(--font-display);font-size:var(--fs-lg);color:var(--clr-gold);margin-bottom:var(--sp-2);">SGL Certified</h3>
+        <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);">Scientific Gemological Laboratories certification for coloured gemstones and Polki</p>
+      </div>
+      <div style="text-align:center;padding:var(--sp-6);border:1px solid var(--clr-border-gold);border-radius:var(--radius-xl);background:rgba(197,147,58,0.03);">
+        <div style="font-size:48px;margin-bottom:var(--sp-4);">🛡️</div>
+        <h3 style="font-family:var(--font-display);font-size:var(--fs-lg);color:var(--clr-gold);margin-bottom:var(--sp-2);">GST Compliant</h3>
+        <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);">Fully GST registered and compliant. You receive proper GST invoice with every purchase</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" style="background:var(--clr-surface);">
+  <div class="container" style="text-align:center;">
+    <span class="section-label">Begin Your Journey</span>
+    <h2 style="font-family:var(--font-display);font-size:clamp(var(--fs-2xl),4vw,var(--fs-4xl));font-weight:300;margin:var(--sp-4) 0 var(--sp-6);">
+      Discover Our<br><span class="text-gold">Heirloom Collection</span>
+    </h2>
+    <p style="font-size:var(--fs-md);color:var(--clr-text-secondary);max-width:480px;margin:0 auto var(--sp-8);">
+      Every piece in our collection carries four decades of expertise. Find yours today.
+    </p>
+    <div style="display:flex;gap:var(--sp-4);justify-content:center;flex-wrap:wrap;">
+      <a href="products.html" class="btn btn-primary btn-lg">✦ Shop Now</a>
+      <a href="contact.html" class="btn btn-outline btn-lg">Book Showroom Visit</a>
+    </div>
+  </div>
+</section>
+
+<div id="drawerOverlay" class="drawer-overlay"></div>
+<aside id="cartDrawer" class="drawer">
+  <div class="drawer-header"><h2 class="drawer-title">🛍️ Shopping Vault</h2><button class="drawer-close" onclick="closeDrawer('cartDrawer')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div id="cartBody" class="drawer-body"></div>
+  <div id="cartFooter" class="drawer-footer" style="display:none;"></div>
+</aside>
+<div id="mobileNav" class="mobile-nav">
+  <div id="mobileNavBackdrop" class="mobile-nav-backdrop"></div>
+  <div class="mobile-nav-drawer">
+    <div class="mobile-nav-header"><span class="brand-name" style="font-size:var(--fs-base);">Shree Sai Jewellers</span><button class="drawer-close" onclick="closeMobileNav()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link" onclick="closeMobileNav()">Home</a>
+      <a href="products.html" class="mobile-nav-link" onclick="closeMobileNav()">All Jewellery</a>
+      <a href="offers.html" class="mobile-nav-link" onclick="closeMobileNav()">🎁 Offers</a>
+      <a href="about.html" class="mobile-nav-link active" onclick="closeMobileNav()">About Us</a>
+      <a href="contact.html" class="mobile-nav-link" onclick="closeMobileNav()">Contact</a>
+    </div>
+  </div>
+</div>
+<button id="backToTop" class="back-to-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<div id="toastContainer" class="toast-container"></div>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

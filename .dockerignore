@@ -1,0 +1,10 @@
+.git
+__pycache__
+*.pyc
+*.pyo
+*.db
+.env
+backend/.env
+node_modules
+.DS_Store
+shree_sai_jewellers.db

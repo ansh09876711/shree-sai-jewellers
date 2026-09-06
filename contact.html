@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us & Concierge | Shree Sai Jewellers</title>
+  <meta name="description" content="Get in touch with Shree Sai Jewellers VIP concierge. Visit our showroom, book a private appointment, or inquire about custom bespoke jewellery.">
+  <link rel="canonical" href="https://shreesaijewellers.com/contact.html">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💎</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-12);
+      align-items: start;
+    }
+    @media (max-width: 1024px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .contact-form-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border-gold);
+      border-radius: var(--radius-xl);
+      padding: var(--sp-8);
+      box-shadow: var(--shadow-md);
+    }
+    .contact-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: var(--sp-4);
+      margin-bottom: var(--sp-8);
+    }
+    .contact-card {
+      background: var(--clr-surface-2);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-5);
+      display: flex;
+      gap: var(--sp-4);
+      align-items: flex-start;
+      transition: all var(--dur-fast);
+    }
+    .contact-card:hover {
+      border-color: var(--clr-border-gold);
+      transform: translateY(-2px);
+    }
+    .contact-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: rgba(197, 147, 58, 0.1);
+      border: 1px solid var(--clr-border-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--clr-gold);
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="container top-bar-inner">
+    <div class="top-trust-badges">
+      <span class="trust-badge-item">🏛️ BIS 916 Certified</span>
+      <span class="top-sep">|</span>
+      <span class="trust-badge-item">💎 IGI Graded Solitaires</span>
+    </div>
+    <div class="live-rates">
+      <div class="live-pulse"><div class="pulse-dot"></div><span class="live-label">Live Rates</span></div>
+      <div class="rate-items">
+        <span class="rate-item"><strong>24K:</strong> <span id="rate24k">—</span></span>
+        <span class="rate-sep">·</span>
+        <span class="rate-item"><strong>22K:</strong> <span id="rate22k">—</span></span>
+      </div>
+    </div>
+    <a href="tel:+919876543210" class="top-phone">📞 VIP Concierge: +91 98765 43210</a>
+  </div>
+</div>
+
+<!-- MAIN HEADER -->
+<header class="main-header" id="mainHeader">
+  <div class="container header-inner">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+    <a href="index.html" class="brand-logo">
+      <svg class="brand-emblem" viewBox="0 0 44 44" fill="none">
+        <defs>
+          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFF8E7"/>
+            <stop offset="40%" stop-color="#E2B755"/>
+            <stop offset="75%" stop-color="#C5933A"/>
+            <stop offset="100%" stop-color="#8B6017"/>
+          </linearGradient>
+        </defs>
+        <path d="M22 4L27 14H17L22 4Z" fill="url(#goldGrad)"/>
+        <path d="M22 40L8 16H36L22 40Z" fill="url(#goldGrad)" opacity="0.9"/>
+        <path d="M22 40L16 16H28L22 40Z" fill="url(#goldGrad)"/>
+        <circle cx="22" cy="9" r="2" fill="#FFF8E7"/>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-name">Shree Sai Jewellers</span>
+        <span class="brand-tagline">✦ Fine Heirloom Jewellery · Est. 1984 ✦</span>
+      </div>
+    </a>
+    <nav class="desktop-nav">
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <a href="products.html" class="nav-link">Jewellery ▾</a>
+          <div class="nav-dropdown">
+            <a href="products.html?category=Rings">💍 Rings</a>
+            <a href="products.html?category=Necklaces">✨ Necklaces</a>
+            <a href="products.html?category=Earrings">💎 Earrings</a>
+            <a href="products.html?category=Bracelets">👑 Bracelets</a>
+            <a href="products.html?category=Bangles">💫 Bangles</a>
+            <a href="products.html?category=Chains">🔗 Chains</a>
+          </div>
+        </li>
+        <li><a href="offers.html" class="nav-link">Offers</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="contact.html" class="nav-link active">Contact</a></li>
+        <li><a href="login.html" class="nav-link" style="color:var(--clr-gold);font-weight:600;">👤 Login / Register</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="order-tracking.html" class="icon-btn" title="Track Order">
+        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </a>
+      <button class="icon-btn" onclick="renderWishlistDrawer(); openDrawer('wishlistDrawer')" title="Wishlist">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="badge-count wishlist-count" style="display:none;">0</span>
+      </button>
+      <button class="icon-btn icon-btn-cart" onclick="renderCartDrawer(); openDrawer('cartDrawer')" title="Cart">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="badge-count cart-count" style="display:none;">0</span>
+      </button>
+      <!-- Login / User Account -->
+      <a href="login.html" class="icon-btn" id="userNavBtn" title="My Account" aria-label="Login / My Account" style="text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="badge-count user-logged-badge" id="userLoggedBadge" style="display:none; background:#6bcb77; width:8px; height:8px; min-width:8px; padding:0; top:4px; right:4px; border-radius:50%;"></span>
+      </a>
+    </div>
+
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <div class="page-hero-label">We Are Here For You</div>
+    <h1 class="page-hero-title">Get in Touch</h1>
+    <p class="page-hero-desc">Whether you seek a bespoke bridal commission, have questions on hallmarking, or wish to schedule a VIP showroom visit, our jewellery experts are at your service.</p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main style="padding: var(--sp-16) 0 var(--sp-24);">
+  <div class="container">
+
+    <!-- Quick Info Cards -->
+    <div class="contact-cards-grid">
+      <div class="contact-card">
+        <div class="contact-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="spec-label">Showroom Location</div>
+          <div style="font-size:var(--fs-sm);color:var(--clr-text-primary);margin-top:2px;" id="storeAddress">Shree Sai Jewellers, Main Market, Indore, Madhya Pradesh - 452009</div>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 11.7 19.79 19.79 0 0 1 1.04 3.12 2 2 0 0 1 3 1.12h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div>
+          <div class="spec-label">Direct Phone & WhatsApp</div>
+          <div style="font-size:var(--fs-sm);margin-top:2px;"><a href="tel:+919876543210" style="color:var(--clr-gold);font-weight:600;" id="storePhone">+91 98765 43210</a></div>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <div class="spec-label">Client Concierge Email</div>
+          <div style="font-size:var(--fs-sm);margin-top:2px;"><a href="mailto:care@shreesaijewellers.com" style="color:var(--clr-gold);" id="storeEmail">care@shreesaijewellers.com</a></div>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="spec-label">Operating Hours</div>
+          <div style="font-size:var(--fs-xs);color:var(--clr-text-secondary);margin-top:2px;" id="storeHours">Mon–Sat: 10:00 AM – 8:00 PM<br>Sun: 11:00 AM – 6:00 PM</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form & Map Grid -->
+    <div class="contact-grid">
+      
+      <!-- Contact Form -->
+      <div class="contact-form-card">
+        <h2 style="font-family:var(--font-display);font-size:var(--fs-2xl);font-weight:400;margin-bottom:var(--sp-2);">Send an Inquiry</h2>
+        <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);margin-bottom:var(--sp-6);">Our jewellery consultants respond within 24 hours.</p>
+
+        <form id="contactForm" novalidate>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="contactName">Full Name *</label>
+              <input type="text" id="contactName" name="name" class="form-input" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contactPhone">Phone / WhatsApp *</label>
+              <input type="tel" id="contactPhone" name="phone" class="form-input" placeholder="+91 XXXXX XXXXX" required>
+            </div>
+            <div class="form-group full">
+              <label class="form-label" for="contactEmail">Email Address *</label>
+              <input type="email" id="contactEmail" name="email" class="form-input" placeholder="your.email@example.com" required>
+            </div>
+            <div class="form-group full">
+              <label class="form-label" for="contactSubject">Inquiry Type</label>
+              <select id="contactSubject" name="subject" class="form-select">
+                <option value="General Inquiry">General Product Inquiry</option>
+                <option value="Bespoke Bridal Commission">Bespoke Bridal Commission</option>
+                <option value="Showroom VIP Visit">Book Showroom VIP Visit</option>
+                <option value="Gold Exchange & Rates">Gold Exchange & Valuation</option>
+                <option value="Order Support">Order Tracking & Support</option>
+              </select>
+            </div>
+            <div class="form-group full">
+              <label class="form-label" for="contactMessage">Your Message *</label>
+              <textarea id="contactMessage" name="message" class="form-textarea" placeholder="Tell us how we can assist you with your jewellery requirements..." rows="5" required></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" style="width:100%;margin-top:var(--sp-6);justify-content:center;">
+            ✦ Send Message to Concierge
+          </button>
+        </form>
+      </div>
+
+      <!-- Map & Showroom Visit Details -->
+      <div style="display:flex;flex-direction:column;gap:var(--sp-6);">
+        <div class="map-embed" style="height:360px;">
+          <iframe
+            src="https://maps.google.com/maps?q=Shree+Sai+Jewellers&ll=22.691971,75.8254417&z=17&output=embed"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Shree Sai Jewellers Atelier Map"></iframe>
+        </div>
+
+        <div style="background:var(--clr-surface);border:1px solid var(--clr-border);border-radius:var(--radius-xl);padding:var(--sp-6);">
+          <h3 style="font-family:var(--font-display);font-size:var(--fs-lg);color:var(--clr-gold);margin-bottom:var(--sp-3);">
+            ✨ VIP Private Lounge Appointments
+          </h3>
+          <p style="font-size:var(--fs-sm);color:var(--clr-text-secondary);line-height:var(--lh-loose);margin-bottom:var(--sp-4);">
+            Planning your bridal trousseau or a high-value solitaire purchase? Book a private styling session with our master gemologists in our private viewing lounge with zero waiting time.
+          </p>
+          <a href="https://wa.me/919876543210?text=Hello%20Shree%20Sai%20Jewellers,%20I%20would%20like%20to%20book%20a%20private%20concierge%20appointment" target="_blank" rel="noopener" class="btn btn-outline" style="width:100%;justify-content:center;">
+            💬 Reserve via WhatsApp
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand-logo" style="display:inline-flex;margin-bottom:var(--sp-4);">
+          <div class="brand-text">
+            <span class="brand-name" style="font-size:var(--fs-lg);">Shree Sai Jewellers</span>
+            <span class="brand-tagline">✦ Fine Heirloom Jewellery · Est. 1984 ✦</span>
+          </div>
+        </a>
+        <p>Custodians of India's jewellery heritage since 1984. Every piece is handcrafted with love, certified for purity, and delivered with care.</p>
+      </div>
+
+      <div class="footer-col footer-col-quick">
+        <h5>Quick Links</h5>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="products.html">All Jewellery</a>
+          <a href="offers.html">Current Offers</a>
+          <a href="order-tracking.html">Track Order</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+
+      <div class="footer-col footer-col-categories">
+        <h5>Categories</h5>
+        <div class="footer-links">
+          <a href="products.html?category=Rings">Rings</a>
+          <a href="products.html?category=Necklaces">Necklaces</a>
+          <a href="products.html?category=Earrings">Earrings</a>
+          <a href="products.html?category=Bangles">Bangles</a>
+          <a href="products.html?category=Bracelets">Bracelets</a>
+          <a href="products.html?category=Chains">Chains</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Policies</h5>
+        <div class="footer-links">
+          <a href="#">100% Insured Delivery</a>
+          <a href="#">7-Day Easy Returns</a>
+          <a href="#">BIS Hallmarking Guide</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Shree Sai Jewellers. All rights reserved. 100% BIS Hallmarked & IGI Certified.</p>
+      <div class="footer-bottom-links">
+        <a href="sitemap.xml">Sitemap</a>
+        <a href="robots.txt">Robots.txt</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- DRAWERS -->
+<div id="drawerOverlay" class="drawer-overlay"></div>
+<aside id="cartDrawer" class="drawer">
+  <div class="drawer-header"><h2 class="drawer-title">🛍️ Shopping Vault</h2><button class="drawer-close" onclick="closeDrawer('cartDrawer')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div id="cartBody" class="drawer-body"></div>
+  <div id="cartFooter" class="drawer-footer" style="display:none;"></div>
+</aside>
+<aside id="wishlistDrawer" class="drawer">
+  <div class="drawer-header"><h2 class="drawer-title">❤️ My Wishlist</h2><button class="drawer-close" onclick="closeDrawer('wishlistDrawer')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div id="wishlistBody" class="drawer-body"></div>
+</aside>
+<div id="mobileNav" class="mobile-nav">
+  <div id="mobileNavBackdrop" class="mobile-nav-backdrop"></div>
+  <div class="mobile-nav-drawer">
+    <div class="mobile-nav-header"><span class="brand-name" style="font-size:var(--fs-base);">Shree Sai Jewellers</span><button class="drawer-close" onclick="closeMobileNav()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link" onclick="closeMobileNav()">Home</a>
+      <a href="products.html" class="mobile-nav-link" onclick="closeMobileNav()">All Jewellery</a>
+      <a href="offers.html" class="mobile-nav-link" onclick="closeMobileNav()">🎁 Offers</a>
+      <a href="about.html" class="mobile-nav-link" onclick="closeMobileNav()">About Us</a>
+      <a href="contact.html" class="mobile-nav-link active" onclick="closeMobileNav()">Contact</a>
+    </div>
+  </div>
+</div>
+
+<button id="backToTop" class="back-to-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<div id="toastContainer" class="toast-container"></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    loadLiveRates();
+    loadStoreInfo();
+  });
+</script>
+</body>
+</html>

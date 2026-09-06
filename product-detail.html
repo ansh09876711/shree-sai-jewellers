@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details | Shree Sai Jewellers</title>
+  <meta name="description" content="View detailed product information including price breakdown, specifications, and certifications.">
+  <!-- Modular Stylesheets: Desktop Base + Mobile Specific -->
+  <link rel="stylesheet" href="css/desktop.css">
+  <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width: 1024px)">
+  <style>
+    .review-form { background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: var(--radius-xl); padding: var(--sp-8); }
+    .rating-stars { display: flex; gap: var(--sp-2); flex-direction: row-reverse; justify-content: flex-end; margin-bottom: var(--sp-4); }
+    .rating-stars input { display: none; }
+    .rating-stars label { font-size: 28px; cursor: pointer; color: var(--clr-border); transition: color var(--dur-fast); }
+    .rating-stars input:checked ~ label, .rating-stars label:hover, .rating-stars label:hover ~ label { color: var(--clr-gold); }
+    .related-section { background: var(--clr-surface); }
+
+    /* Product Detail Gallery Styles */
+    .product-detail-section { padding: 30px 0 60px; }
+    .product-detail-grid {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .gallery-main {
+      background: #110c08;
+      border: 1px solid rgba(226, 183, 85, 0.25);
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 460px;
+      max-height: 460px;
+      position: sticky;
+      top: 90px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+    }
+    .gallery-main img, #galleryMainImg {
+      width: 100%;
+      height: 100%;
+      max-height: 460px;
+      object-fit: contain;
+      object-position: center;
+      transition: transform 0.4s ease;
+      background: #110c08;
+    }
+    .gallery-main:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-thumbs {
+      display: flex;
+      gap: 12px;
+      margin-top: 14px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .gallery-thumb {
+      width: 70px;
+      height: 70px;
+      border-radius: 12px;
+      border: 1.5px solid rgba(226, 183, 85, 0.2);
+      overflow: hidden;
+      cursor: pointer;
+      flex-shrink: 0;
+      background: #110c08;
+      transition: all 0.2s ease;
+    }
+    .gallery-thumb:hover, .gallery-thumb.active {
+      border-color: #E2B755;
+      box-shadow: 0 0 12px rgba(226, 183, 85, 0.35);
+      transform: translateY(-2px);
+    }
+    .gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 992px) {
+      .product-detail-grid { grid-template-columns: 1fr; gap: 32px; }
+      .gallery-main { height: 380px; max-height: 380px; position: static; }
+    }
+    @media (max-width: 576px) {
+      .gallery-main { height: 300px; max-height: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="container top-bar-inner">
+    <div class="top-trust-badges">
+      <span class="trust-badge-item">✅ BIS 916 Hallmarked</span>
+      <span class="top-sep">|</span>
+      <span class="trust-badge-item">🏆 IGI Certified</span>
+    </div>
+    <div class="live-rates">
+      <div class="live-pulse"><div class="pulse-dot"></div><span class="live-label">Live Rates</span></div>
+      <div class="rate-items">
+        <span class="rate-item"><strong>24K:</strong> <span id="rate24k">—</span></span>
+        <span class="rate-sep">·</span>
+        <span class="rate-item"><strong>22K:</strong> <span id="rate22k">—</span></span>
+      </div>
+    </div>
+    <a href="tel:+919876543210" class="top-phone">📞 +91 98765 43210</a>
+  </div>
+</div>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileNav()"></div>
+<nav class="mobile-nav-drawer" id="mobileNavDrawer">
+  <div class="mobile-nav-header">
+    <a href="index.html" class="brand-logo" style="gap:10px;">
+      <svg style="width:30px;height:30px;filter:drop-shadow(0 0 8px rgba(226,183,85,0.4))" viewBox="0 0 44 44" fill="none"><defs><linearGradient id="gMob" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFF8E7"/><stop offset="40%" stop-color="#E2B755"/><stop offset="100%" stop-color="#8B6017"/></linearGradient></defs><path d="M22 4L27 14H17L22 4Z" fill="url(#gMob)"/><path d="M22 40L8 16H36L22 40Z" fill="url(#gMob)" opacity="0.9"/><path d="M22 40L16 16H28L22 40Z" fill="url(#gMob)"/><circle cx="22" cy="9" r="2" fill="#FFF8E7"/></svg>
+      <span style="font-family:'Cinzel',serif;font-size:13px;font-weight:600;letter-spacing:0.15em;background:linear-gradient(135deg,#FFF8E7,#E2B755,#8B6017);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-transform:uppercase;">Shree Sai</span>
+    </a>
+    <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+  </div>
+  <div class="mobile-nav-links">
+    <div class="mobile-nav-section-label">Navigation</div>
+    <a href="index.html" class="mobile-nav-link"><span class="mobile-nav-icon">🏠</span> Home</a>
+    <a href="products.html" class="mobile-nav-link"><span class="mobile-nav-icon">💎</span> All Jewellery</a>
+    <div class="mobile-nav-section-label">Categories</div>
+    <a href="products.html?category=Rings" class="mobile-nav-link"><span class="mobile-nav-icon">💍</span> Rings</a>
+    <a href="products.html?category=Necklaces" class="mobile-nav-link"><span class="mobile-nav-icon">✨</span> Necklaces</a>
+    <a href="products.html?category=Earrings" class="mobile-nav-link"><span class="mobile-nav-icon">💫</span> Earrings</a>
+    <a href="products.html?category=Bangles" class="mobile-nav-link"><span class="mobile-nav-icon">⭕</span> Bangles</a>
+    <a href="products.html?category=Bracelets" class="mobile-nav-link"><span class="mobile-nav-icon">👑</span> Bracelets</a>
+    <a href="products.html?category=Chains" class="mobile-nav-link"><span class="mobile-nav-icon">🔗</span> Chains</a>
+    <div class="mobile-nav-section-label">More</div>
+    <a href="offers.html" class="mobile-nav-link"><span class="mobile-nav-icon">🎁</span> Offers &amp; Sale</a>
+    <a href="login.html" class="mobile-nav-link"><span class="mobile-nav-icon">👤</span> My Account</a>
+    <a href="order-tracking.html" class="mobile-nav-link"><span class="mobile-nav-icon">📦</span> Track Order</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header class="main-header" id="mainHeader">
+  <div class="container header-inner">
+    <button class="hamburger" id="hamburgerBtn" onclick="openMobileNav()"><span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span></button>
+    <a href="index.html" class="brand-logo">
+      <svg class="brand-emblem" viewBox="0 0 44 44" fill="none">
+        <defs><linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFF8E7"/><stop offset="40%" stop-color="#E2B755"/><stop offset="75%" stop-color="#C5933A"/><stop offset="100%" stop-color="#8B6017"/></linearGradient></defs>
+        <path d="M22 4L27 14H17L22 4Z" fill="url(#goldGrad)"/><path d="M22 40L8 16H36L22 40Z" fill="url(#goldGrad)" opacity="0.9"/><path d="M22 40L16 16H28L22 40Z" fill="url(#goldGrad)"/><circle cx="22" cy="9" r="2" fill="#FFF8E7"/>
+      </svg>
+      <div class="brand-text"><span class="brand-name">Shree Sai Jewellers</span><span class="brand-tagline">✦ Fine Heirloom Jewellery ✦</span></div>
+    </a>
+    <nav class="desktop-nav">
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item"><a href="products.html" class="nav-link active">Jewellery ▾</a>
+          <div class="nav-dropdown">
+            <a href="products.html?category=Rings">💍 Rings</a>
+            <a href="products.html?category=Necklaces">✨ Necklaces</a>
+            <a href="products.html?category=Earrings">💎 Earrings</a>
+            <a href="products.html?category=Bracelets">👑 Bracelets</a>
+            <a href="products.html?category=Bangles">💫 Bangles</a>
+            <a href="products.html?category=Chains">🔗 Chains</a>
+          </div>
+        </li>
+        <li><a href="offers.html" class="nav-link">Offers</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <div class="header-search-wrap">
+        <svg class="search-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="headerSearchInput" class="header-search" placeholder="Search jewellery…" autocomplete="off">
+        <div id="searchSuggestions" class="search-suggestions"></div>
+      </div>
+      <a href="search.html" class="icon-btn mobile-search-btn" title="Search jewellery" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </a>
+      <button class="icon-btn" onclick="renderWishlistDrawer(); openDrawer('wishlistDrawer')">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="badge-count wishlist-count" style="display:none;">0</span>
+      </button>
+      <button class="icon-btn icon-btn-cart" onclick="renderCartDrawer(); openDrawer('cartDrawer')">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="badge-count cart-count" style="display:none;">0</span>
+      </button>
+      <!-- Login / User Account -->
+      <a href="login.html" class="icon-btn" id="userNavBtn" title="My Account" aria-label="Login / My Account" style="text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="badge-count user-logged-badge" id="userLoggedBadge" style="display:none; background:#6bcb77; width:8px; height:8px; min-width:8px; padding:0; top:4px; right:4px; border-radius:50%;"></span>
+      </a>
+    </div>
+
+  </div>
+</header>
+
+<!-- PRODUCT DETAIL CONTENT — Rendered by ProductDetail.init() -->
+<section class="product-detail-section">
+  <div class="container" id="productDetailContainer">
+    <div class="loading-overlay"><div class="spinner"></div></div>
+  </div>
+</section>
+
+<!-- RELATED PRODUCTS -->
+<section class="section related-section" id="relatedSection">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">You May Also Like</span>
+      <h2 class="section-title">Related Jewellery</h2>
+      <div class="section-divider"><span class="section-divider-icon">💎</span></div>
+    </div>
+    <div class="product-grid" id="relatedProductsGrid"></div>
+  </div>
+</section>
+
+<!-- REVIEW FORM (available after purchase via URL params) -->
+<section class="section" id="reviewSection" style="display:none;">
+  <div class="container" style="max-width:600px;">
+    <div class="section-header">
+      <span class="section-label">Your Opinion Matters</span>
+      <h2 class="section-title">Write a Review</h2>
+    </div>
+    <div class="review-form">
+      <form id="reviewForm" novalidate>
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input type="text" name="reviewer_name" class="form-input" placeholder="Full Name" required>
+        </div>
+        <div class="form-group" style="margin-top:var(--sp-4);">
+          <label class="form-label">Email</label>
+          <input type="email" name="email" class="form-input" placeholder="Your email" required>
+        </div>
+        <div class="form-group" style="margin-top:var(--sp-4);">
+          <label class="form-label">Rating</label>
+          <div class="rating-stars">
+            <input type="radio" name="rating" id="star5" value="5"><label for="star5">★</label>
+            <input type="radio" name="rating" id="star4" value="4"><label for="star4">★</label>
+            <input type="radio" name="rating" id="star3" value="3"><label for="star3">★</label>
+            <input type="radio" name="rating" id="star2" value="2"><label for="star2">★</label>
+            <input type="radio" name="rating" id="star1" value="1"><label for="star1">★</label>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top:var(--sp-4);">
+          <label class="form-label">Your Review</label>
+          <textarea name="text" class="form-textarea" placeholder="Share your experience with this jewellery…" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top:var(--sp-6);width:100%;">Submit Review ✦</button>
+      </form>
+      <div id="reviewThanks" style="display:none;text-align:center;padding:var(--sp-8);">
+        <div style="font-size:48px;margin-bottom:var(--sp-4);">⭐</div>
+        <h3 style="font-family:var(--font-display);font-size:var(--fs-xl);">Thank You!</h3>
+        <p style="color:var(--clr-text-muted);margin-top:var(--sp-3);">Your review has been submitted and will appear after approval.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Drawers & Mobile Nav -->
+<div id="drawerOverlay" class="drawer-overlay"></div>
+<aside id="cartDrawer" class="drawer">
+  <div class="drawer-header"><h2 class="drawer-title">🛍️ Shopping Vault</h2><button class="drawer-close" onclick="closeDrawer('cartDrawer')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div id="cartBody" class="drawer-body"></div>
+  <div id="cartFooter" class="drawer-footer" style="display:none;"></div>
+</aside>
+<aside id="wishlistDrawer" class="drawer">
+  <div class="drawer-header"><h2 class="drawer-title">❤️ My Wishlist</h2><button class="drawer-close" onclick="closeDrawer('wishlistDrawer')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div id="wishlistBody" class="drawer-body"></div>
+</aside>
+<div id="mobileNav" class="mobile-nav">
+  <div id="mobileNavBackdrop" class="mobile-nav-backdrop"></div>
+  <div class="mobile-nav-drawer">
+    <div class="mobile-nav-header"><span class="brand-name" style="font-size:var(--fs-base);">Shree Sai Jewellers</span><button class="drawer-close" onclick="closeMobileNav()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link" onclick="closeMobileNav()">Home</a>
+      <a href="products.html" class="mobile-nav-link" onclick="closeMobileNav()">All Jewellery</a>
+      <a href="offers.html" class="mobile-nav-link" onclick="closeMobileNav()">🎁 Offers</a>
+      <a href="contact.html" class="mobile-nav-link" onclick="closeMobileNav()">Contact</a>
+    </div>
+  </div>
+</div>
+
+<button id="backToTop" class="back-to-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<div id="toastContainer" class="toast-container"></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+  // Show review form if coming from order
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('order_id') && params.get('review') === 'true') {
+      document.getElementById('reviewSection').style.display = 'block';
+    }
+    loadLiveRates();
+  });
+  function openMobileNav() {
+    document.getElementById('mobileNavDrawer').classList.add('open');
+    document.getElementById('mobileNavOverlay').classList.add('show');
+    document.getElementById('hamburgerBtn').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileNav() {
+    document.getElementById('mobileNavDrawer').classList.remove('open');
+    document.getElementById('mobileNavOverlay').classList.remove('show');
+    document.getElementById('hamburgerBtn').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileNav(); });
+</script>
+
+<!-- BOTTOM NAV (Mobile Only) -->
+<nav class="bottom-nav">
+  <a href="index.html" class="bottom-nav-item">
+    <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+    <span>Home</span>
+  </a>
+  <a href="products.html" class="bottom-nav-item">
+    <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    <span>Shop</span>
+  </a>
+  <button class="bottom-nav-item" onclick="history.back()">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    <span>Back</span>
+  </button>
+  <button class="bottom-nav-item" onclick="renderWishlistDrawer && renderWishlistDrawer(); openDrawer && openDrawer('wishlistDrawer')">
+    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    <span>Wishlist</span>
+  </button>
+  <a href="login.html" class="bottom-nav-item">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span>Account</span>
+  </a>
+</nav>
+
+</body>
+</html>

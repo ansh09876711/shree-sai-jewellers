@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /checkout.html
+Disallow: /order-success.html
+
+Sitemap: https://shreesaijewellers.com/sitemap.xml

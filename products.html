@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jewellery Collection | Shree Sai Jewellers</title>
+  <meta name="description" content="Browse our complete collection of handcrafted gold, diamond, and silver jewellery. Filter by category, metal, price, and purity.">
+  <link rel="canonical" href="https://shreesaijewellers.com/products.html">
+  <!-- Modular Stylesheets: Desktop Base + Mobile Specific -->
+  <link rel="stylesheet" href="css/desktop.css">
+  <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width: 1024px)">
+  <style>
+    @media (max-width: 1024px) {
+      .filter-toggle-btn { display: flex !important; }
+      .catalog-layout { grid-template-columns: 1fr !important; }
+    }
+    .filter-toggle-btn {
+      display: none;
+      align-items: center;
+      gap: var(--sp-2);
+      background: var(--clr-surface-2);
+      border: 1px solid var(--clr-border);
+      border-radius: var(--radius-full);
+      padding: var(--sp-2) var(--sp-4);
+      font-size: var(--fs-sm);
+      color: var(--clr-text-secondary);
+      cursor: pointer;
+    }
+    .filter-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(9,8,10,0.5);
+      z-index: calc(var(--z-drawer) - 1);
+    }
+    .filter-backdrop.show { display: block; }
+    @media (max-width: 768px) {
+      .filter-sidebar.mobile-open { display: block !important; }
+      .filter-sidebar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="container top-bar-inner">
+    <div class="top-trust-badges">
+      <span class="trust-badge-item">✅ BIS 916 Hallmarked</span>
+      <span class="top-sep">|</span>
+      <span class="trust-badge-item">🛡️ Insured Delivery</span>
+    </div>
+    <div class="live-rates">
+      <div class="live-pulse"><div class="pulse-dot"></div><span class="live-label">Live Rates</span></div>
+      <div class="rate-items">
+        <span class="rate-item"><strong>24K:</strong> <span id="rate24k">—</span></span>
+        <span class="rate-sep">·</span>
+        <span class="rate-item"><strong>22K:</strong> <span id="rate22k">—</span></span>
+      </div>
+    </div>
+    <a href="tel:+919876543210" class="top-phone">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 11.7 19.79 19.79 0 0 1 1.04 3.12 2 2 0 0 1 3 1.12h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      +91 98765 43210
+    </a>
+  </div>
+</div>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileNav()"></div>
+<nav class="mobile-nav-drawer" id="mobileNavDrawer">
+  <div class="mobile-nav-header">
+    <a href="index.html" class="brand-logo" style="gap:10px;">
+      <svg style="width:30px;height:30px;filter:drop-shadow(0 0 8px rgba(226,183,85,0.4))" viewBox="0 0 44 44" fill="none"><defs><linearGradient id="gMob" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFF8E7"/><stop offset="40%" stop-color="#E2B755"/><stop offset="100%" stop-color="#8B6017"/></linearGradient></defs><path d="M22 4L27 14H17L22 4Z" fill="url(#gMob)"/><path d="M22 40L8 16H36L22 40Z" fill="url(#gMob)" opacity="0.9"/><path d="M22 40L16 16H28L22 40Z" fill="url(#gMob)"/><circle cx="22" cy="9" r="2" fill="#FFF8E7"/></svg>
+      <span style="font-family:'Cinzel',serif;font-size:13px;font-weight:600;letter-spacing:0.15em;background:linear-gradient(135deg,#FFF8E7,#E2B755,#8B6017);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-transform:uppercase;">Shree Sai</span>
+    </a>
+    <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+  </div>
+  <div class="mobile-nav-links">
+    <div class="mobile-nav-section-label">Navigation</div>
+    <a href="index.html" class="mobile-nav-link"><span class="mobile-nav-icon">🏠</span> Home</a>
+    <a href="products.html" class="mobile-nav-link"><span class="mobile-nav-icon">💎</span> All Jewellery</a>
+    <div class="mobile-nav-section-label">Categories</div>
+    <a href="products.html?category=Rings" class="mobile-nav-link"><span class="mobile-nav-icon">💍</span> Rings</a>
+    <a href="products.html?category=Necklaces" class="mobile-nav-link"><span class="mobile-nav-icon">✨</span> Necklaces</a>
+    <a href="products.html?category=Earrings" class="mobile-nav-link"><span class="mobile-nav-icon">💫</span> Earrings</a>
+    <a href="products.html?category=Bangles" class="mobile-nav-link"><span class="mobile-nav-icon">⭕</span> Bangles</a>
+    <a href="products.html?category=Bracelets" class="mobile-nav-link"><span class="mobile-nav-icon">👑</span> Bracelets</a>
+    <a href="products.html?category=Chains" class="mobile-nav-link"><span class="mobile-nav-icon">🔗</span> Chains</a>
+    <div class="mobile-nav-section-label">More</div>
+    <a href="offers.html" class="mobile-nav-link"><span class="mobile-nav-icon">🎁</span> Offers &amp; Sale</a>
+    <a href="about.html" class="mobile-nav-link"><span class="mobile-nav-icon">🏛️</span> About Us</a>
+    <a href="contact.html" class="mobile-nav-link"><span class="mobile-nav-icon">📞</span> Contact</a>
+    <a href="login.html" class="mobile-nav-link"><span class="mobile-nav-icon">👤</span> My Account</a>
+    <a href="order-tracking.html" class="mobile-nav-link"><span class="mobile-nav-icon">📦</span> Track Order</a>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header class="main-header" id="mainHeader">
+  <div class="container header-inner">
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="openMobileNav()">
+      <span class="hamburger-bar"></span><span class="hamburger-bar"></span><span class="hamburger-bar"></span>
+    </button>
+    <a href="index.html" class="brand-logo">
+      <svg class="brand-emblem" viewBox="0 0 44 44" fill="none">
+        <defs><linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFF8E7"/><stop offset="40%" stop-color="#E2B755"/><stop offset="75%" stop-color="#C5933A"/><stop offset="100%" stop-color="#8B6017"/></linearGradient></defs>
+        <path d="M22 4L27 14H17L22 4Z" fill="url(#goldGrad)"/>
+        <path d="M22 40L8 16H36L22 40Z" fill="url(#goldGrad)" opacity="0.9"/>
+        <path d="M22 40L16 16H28L22 40Z" fill="url(#goldGrad)"/>
+        <circle cx="22" cy="9" r="2" fill="#FFF8E7"/>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-name">Shree Sai Jewellers</span>
+        <span class="brand-tagline">✦ Fine Heirloom Jewellery ✦</span>
+      </div>
+    </a>
+    <nav class="desktop-nav">
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li class="nav-item">
+          <a href="products.html" class="nav-link active">Jewellery ▾</a>
+          <div class="nav-dropdown">
+            <a href="products.html?category=Rings">💍 Rings</a>
+            <a href="products.html?category=Necklaces">✨ Necklaces</a>
+            <a href="products.html?category=Earrings">💎 Earrings</a>
+            <a href="products.html?category=Bracelets">👑 Bracelets</a>
+            <a href="products.html?category=Bangles">💫 Bangles</a>
+            <a href="products.html?category=Chains">🔗 Chains</a>
+          </div>
+        </li>
+        <li><a href="offers.html" class="nav-link">Offers</a></li>
+        <li><a href="about.html" class="nav-link">About Us</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="login.html" class="nav-link" style="color:var(--clr-gold);font-weight:600;">👤 Login / Register</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <div class="header-search-wrap">
+        <svg class="search-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="headerSearchInput" class="header-search" placeholder="Search jewellery…" autocomplete="off">
+        <div id="searchSuggestions" class="search-suggestions"></div>
+      </div>
+      <a href="search.html" class="icon-btn mobile-search-btn" title="Search jewellery" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </a>
+      <a href="order-tracking.html" class="icon-btn" title="Track Order">
+        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </a>
+      <button class="icon-btn" onclick="renderWishlistDrawer(); openDrawer('wishlistDrawer')" title="Wishlist">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="badge-count wishlist-count" style="display:none;">0</span>
+      </button>
+      <button class="icon-btn icon-btn-cart" onclick="renderCartDrawer(); openDrawer('cartDrawer')" title="Cart">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="badge-count cart-count" style="display:none;">0</span>
+      </button>
+      <!-- Login / User Account -->
+      <a href="login.html" class="icon-btn" id="userNavBtn" title="My Account" aria-label="Login / My Account" style="text-decoration:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="badge-count user-logged-badge" id="userLoggedBadge" style="display:none; background:#6bcb77; width:8px; height:8px; min-width:8px; padding:0; top:4px; right:4px; border-radius:50%;"></span>
+      </a>
+    </div>
+
+  </div>
+</header>
+
+<!-- SUB-NAV -->
+<nav class="sub-nav">
+  <ul class="sub-nav-list">
+    <li><a href="products.html" class="sub-nav-link" data-category="all">✦ All</a></li>
+    <li><a href="products.html?category=Rings" class="sub-nav-link" data-category="Rings">💍 Rings</a></li>
+    <li><a href="products.html?category=Necklaces" class="sub-nav-link" data-category="Necklaces">✨ Necklaces</a></li>
+    <li><a href="products.html?category=Earrings" class="sub-nav-link" data-category="Earrings">💎 Earrings</a></li>
+    <li><a href="products.html?category=Bangles" class="sub-nav-link" data-category="Bangles">💫 Bangles</a></li>
+    <li><a href="products.html?category=Bracelets" class="sub-nav-link" data-category="Bracelets">👑 Bracelets</a></li>
+    <li><a href="products.html?category=Chains" class="sub-nav-link" data-category="Chains">🔗 Chains</a></li>
+    <li><a href="products.html?jewellery_type=Gold" class="sub-nav-link">🥇 Gold</a></li>
+    <li><a href="products.html?jewellery_type=Diamond" class="sub-nav-link">💎 Diamond</a></li>
+    <li><a href="products.html?jewellery_type=Silver" class="sub-nav-link">⚪ Silver</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container page-hero-content">
+    <div class="page-hero-label">Our Collection</div>
+    <h1 class="page-hero-title" id="pageHeroTitle">Fine Jewellery</h1>
+    <p class="page-hero-desc">Explore our handcrafted collection of certified gold, diamond, and silver jewellery.</p>
+  </div>
+</section>
+
+<!-- MAIN CATALOG -->
+<section class="section" id="catalogSection">
+  <div class="container">
+
+    <!-- Mobile filter toggle -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-4);">
+      <button class="filter-toggle-btn" id="filterToggleBtn" onclick="toggleMobileFilter(); document.getElementById('filterBackdrop').classList.toggle('show')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+        Filters
+      </button>
+      <div id="activeFilters" class="active-filters"></div>
+    </div>
+
+    <div class="catalog-layout">
+
+      <!-- FILTER SIDEBAR -->
+      <aside class="filter-sidebar" id="filterSidebar">
+        <div class="filter-header">
+          <h2 class="filter-title">Filters</h2>
+          <button class="btn btn-ghost btn-sm" onclick="ProductListing.resetFilters()">Reset All</button>
+        </div>
+
+        <!-- Category -->
+        <div class="filter-group">
+          <div class="filter-group-label">Category</div>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter-group="jewellery_type" value="Gold"> <span class="filter-option-label">Gold</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter-group="jewellery_type" value="Diamond"> <span class="filter-option-label">Diamond</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter-group="jewellery_type" value="Silver"> <span class="filter-option-label">Silver</span></label>
+        </div>
+
+        <!-- Metal -->
+        <div class="filter-group">
+          <div class="filter-group-label">Metal</div>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter-group="metal" value="22K Yellow Gold"> <span class="filter-option-label">22K Yellow Gold</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter-group="metal" value="18K White Gold"> <span class="filter-option-label">18K White Gold</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter-group="metal" value="18K Rose Gold"> <span class="filter-option-label">18K Rose Gold</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter-group="metal" value="925 Sterling Silver"> <span class="filter-option-label">925 Sterling Silver</span></label>
+        </div>
+
+        <!-- Purity -->
+        <div class="filter-group">
+          <div class="filter-group-label">Gold Purity</div>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter-group="purity" value="22KT (916)"> <span class="filter-option-label">22KT (916)</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter-group="purity" value="18KT (750)"> <span class="filter-option-label">18KT (750)</span></label>
+          <label class="filter-option"><input type="checkbox" class="filter-checkbox" data-filter-group="purity" value="92.5% Silver"> <span class="filter-option-label">92.5% Silver</span></label>
+        </div>
+
+        <!-- Availability -->
+        <div class="filter-group">
+          <div class="filter-group-label">Availability</div>
+          <label class="filter-option">
+            <input type="checkbox" id="inStockOnly" class="filter-checkbox">
+            <span class="filter-option-label">In Stock Only</span>
+          </label>
+        </div>
+
+        <!-- Mobile close -->
+        <button class="btn btn-primary" style="width:100%;margin-top:var(--sp-4);display:none;" id="applyMobileFilter"
+                onclick="toggleMobileFilter(); document.getElementById('filterBackdrop').classList.remove('show')">
+          Apply Filters
+        </button>
+      </aside>
+
+      <!-- PRODUCTS MAIN -->
+      <div>
+        <!-- Toolbar -->
+        <div class="catalog-toolbar">
+          <span class="result-count" id="resultCount">Loading products…</span>
+          <select class="sort-select" id="sortSelect">
+            <option value="featured">Featured</option>
+            <option value="newest">Newest First</option>
+            <option value="price_asc">Price: Low to High</option>
+            <option value="price_desc">Price: High to Low</option>
+            <option value="popular">Most Popular</option>
+            <option value="discount">Highest Discount</option>
+          </select>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="product-grid" id="productsGrid">
+          <!-- Loaded dynamically via ProductListing.init() -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Filter backdrop for mobile -->
+<div id="filterBackdrop" class="filter-backdrop" onclick="toggleMobileFilter(); this.classList.remove('show')"></div>
+
+<!-- Cart & Wishlist Drawers -->
+<div id="drawerOverlay" class="drawer-overlay"></div>
+<aside id="cartDrawer" class="drawer">
+  <div class="drawer-header"><h2 class="drawer-title">🛍️ Shopping Vault</h2><button class="drawer-close" onclick="closeDrawer('cartDrawer')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div id="cartBody" class="drawer-body"></div>
+  <div id="cartFooter" class="drawer-footer" style="display:none;"></div>
+</aside>
+<aside id="wishlistDrawer" class="drawer">
+  <div class="drawer-header"><h2 class="drawer-title">❤️ My Wishlist</h2><button class="drawer-close" onclick="closeDrawer('wishlistDrawer')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+  <div id="wishlistBody" class="drawer-body"></div>
+</aside>
+
+<!-- Mobile Nav -->
+<div id="mobileNav" class="mobile-nav">
+  <div id="mobileNavBackdrop" class="mobile-nav-backdrop"></div>
+  <div class="mobile-nav-drawer">
+    <div class="mobile-nav-header"><span class="brand-name" style="font-size:var(--fs-base);">Shree Sai Jewellers</span><button class="drawer-close" onclick="closeMobileNav()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+    <div class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link" onclick="closeMobileNav()">Home</a>
+      <a href="products.html" class="mobile-nav-link active" onclick="closeMobileNav()">All Jewellery</a>
+      <a href="products.html?category=Rings" class="mobile-nav-link" onclick="closeMobileNav()">💍 Rings</a>
+      <a href="products.html?category=Necklaces" class="mobile-nav-link" onclick="closeMobileNav()">✨ Necklaces</a>
+      <a href="products.html?category=Earrings" class="mobile-nav-link" onclick="closeMobileNav()">💎 Earrings</a>
+      <a href="products.html?category=Bangles" class="mobile-nav-link" onclick="closeMobileNav()">💫 Bangles</a>
+      <a href="products.html?category=Bracelets" class="mobile-nav-link" onclick="closeMobileNav()">👑 Bracelets</a>
+      <a href="products.html?category=Chains" class="mobile-nav-link" onclick="closeMobileNav()">🔗 Chains</a>
+      <a href="offers.html" class="mobile-nav-link" onclick="closeMobileNav()">🎁 Offers</a>
+    </div>
+  </div>
+</div>
+
+<button id="backToTop" class="back-to-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+<div id="toastContainer" class="toast-container"></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+  // Mobile filter: show the apply button
+  document.addEventListener('DOMContentLoaded', () => {
+    const applyBtn = document.getElementById('applyMobileFilter');
+    if (applyBtn && window.innerWidth <= 768) applyBtn.style.display = 'block';
+  });
+  function openMobileNav() {
+    document.getElementById('mobileNavDrawer').classList.add('open');
+    document.getElementById('mobileNavOverlay').classList.add('show');
+    document.getElementById('hamburgerBtn').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileNav() {
+    document.getElementById('mobileNavDrawer').classList.remove('open');
+    document.getElementById('mobileNavOverlay').classList.remove('show');
+    document.getElementById('hamburgerBtn').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileNav(); });
+</script>
+
+<!-- BOTTOM NAV (Mobile Only) -->
+<nav class="bottom-nav">
+  <a href="index.html" class="bottom-nav-item">
+    <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+    <span>Home</span>
+  </a>
+  <a href="products.html" class="bottom-nav-item active">
+    <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    <span>Shop</span>
+  </a>
+  <a href="offers.html" class="bottom-nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+    <span>Offers</span>
+  </a>
+  <button class="bottom-nav-item" onclick="renderWishlistDrawer && renderWishlistDrawer(); openDrawer && openDrawer('wishlistDrawer')">
+    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    <span>Wishlist</span>
+  </button>
+  <a href="login.html" class="bottom-nav-item">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span>Account</span>
+  </a>
+</nav>
+
+</body>
+</html>

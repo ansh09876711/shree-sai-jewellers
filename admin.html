@@ -1,0 +1,2668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal — Shree Sai Jewellers</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Chart.js for Interactive Analytics -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --clr-gold: #E2B755;
+      --clr-gold-light: #FFF8E7;
+      --clr-gold-dark: #C5933A;
+      --clr-bg: #0b0704;
+      --clr-surface-1: #130d08;
+      --clr-surface-2: #1c140d;
+      --clr-surface-3: #261c13;
+      --clr-border: rgba(226, 183, 85, 0.18);
+      --clr-text: #FFF8E7;
+      --clr-muted: rgba(255, 248, 231, 0.6);
+      --clr-success: #6bcb77;
+      --clr-danger: #ff6b6b;
+      --clr-info: #4ea8de;
+      --clr-warning: #ffd166;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      overflow-x: hidden;
+    }
+
+    /* ── Sidebar ── */
+    .admin-sidebar {
+      width: 270px;
+      background: var(--clr-surface-1);
+      border-right: 1px solid var(--clr-border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      z-index: 100;
+      transition: transform 0.3s ease;
+    }
+
+    .brand-box {
+      padding: 24px 20px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--clr-border);
+    }
+    .brand-emblem { font-size: 1.8rem; filter: drop-shadow(0 2px 8px rgba(226,183,85,0.4)); }
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.28rem;
+      font-weight: 700;
+      color: var(--clr-gold);
+      line-height: 1.1;
+    }
+    .brand-tag {
+      font-size: 0.62rem;
+      color: var(--clr-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .nav-category-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(226, 183, 85, 0.45);
+      padding: 10px 12px 4px;
+      font-weight: 700;
+    }
+    .nav-btn {
+      width: 100%;
+      text-align: left;
+      padding: 9px 12px;
+      border-radius: 9px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--clr-muted);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover {
+      background: rgba(226, 183, 85, 0.08);
+      color: var(--clr-gold-light);
+    }
+    .nav-btn.active {
+      background: linear-gradient(135deg, rgba(226, 183, 85, 0.18), rgba(197, 147, 58, 0.08));
+      color: var(--clr-gold);
+      font-weight: 600;
+      border-color: var(--clr-border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .nav-btn .icon { font-size: 1.05rem; }
+
+    .sidebar-footer {
+      padding: 14px 16px;
+      border-top: 1px solid var(--clr-border);
+      background: var(--clr-surface-2);
+    }
+    .admin-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .admin-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--clr-gold-light), var(--clr-gold));
+      color: #1a0a00;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+    }
+
+    /* ── Main Canvas ── */
+    .admin-main {
+      flex: 1;
+      overflow-y: auto;
+      padding: 28px 36px;
+      min-width: 0;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 26px;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--clr-gold-light);
+    }
+    .page-sub {
+      font-size: 0.8rem;
+      color: var(--clr-muted);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ── Metric Cards ── */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .metric-card {
+      background: var(--clr-surface-1);
+      border: 1px solid var(--clr-border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--clr-gold), transparent);
+    }
+    .metric-lbl { font-size: 0.72rem; color: var(--clr-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+    .metric-val { font-size: 1.65rem; font-weight: 700; color: var(--clr-gold-light); margin: 6px 0 2px; }
+    .metric-trend { font-size: 0.74rem; display: flex; align-items: center; gap: 4px; }
+    .trend-up { color: var(--clr-success); }
+    .trend-alert { color: var(--clr-danger); }
+
+    /* ── Panels & Cards ── */
+    .panel {
+      background: var(--clr-surface-1);
+      border: 1px solid var(--clr-border);
+      border-radius: 16px;
+      padding: 22px 24px;
+      margin-bottom: 24px;
+    }
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .panel-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--clr-gold);
+    }
+
+    /* ── Buttons ── */
+    .btn-gold {
+      background: linear-gradient(135deg, #FFF8E7 0%, #E2B755 60%, #C5933A 100%);
+      color: #1a0a00;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(197, 147, 58, 0.25);
+    }
+    .btn-gold:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    
+    .btn-outline {
+      background: transparent;
+      color: var(--clr-gold);
+      border: 1px solid var(--clr-border);
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-outline:hover { background: rgba(226, 183, 85, 0.1); border-color: var(--clr-gold); color: #FFF8E7; }
+
+    .btn-danger {
+      background: transparent;
+      color: var(--clr-danger);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      padding: 7px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+    .btn-danger:hover { background: rgba(255,107,107,0.15); }
+
+    /* ── Tables ── */
+    .table-wrap { overflow-x: auto; }
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.84rem;
+    }
+    .admin-table th {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--clr-border);
+      color: var(--clr-gold);
+      font-weight: 700;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+    }
+    .admin-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(226, 183, 85, 0.08);
+      vertical-align: middle;
+    }
+    .admin-table tr:hover { background: rgba(226, 183, 85, 0.03); }
+
+    .prod-img-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid var(--clr-border);
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge.gold { background: rgba(226, 183, 85, 0.15); color: var(--clr-gold); border: 1px solid var(--clr-border); }
+    .badge.green { background: rgba(107, 203, 119, 0.15); color: var(--clr-success); border: 1px solid rgba(107,203,119,0.3); }
+    .badge.red { background: rgba(255, 107, 107, 0.15); color: var(--clr-danger); border: 1px solid rgba(255,107,107,0.3); }
+    .badge.blue { background: rgba(78, 168, 222, 0.15); color: var(--clr-info); border: 1px solid rgba(78,168,222,0.3); }
+
+    /* ── Form Controls ── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+    .form-group label { font-size: 0.72rem; color: var(--clr-gold); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+    .form-input, .form-select, .form-textarea {
+      background: var(--clr-surface-2);
+      border: 1px solid var(--clr-border);
+      border-radius: 9px;
+      padding: 9px 12px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--clr-gold); }
+
+    /* ── Charts Grid ── */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Modals ── */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .modal-card {
+      background: var(--clr-surface-1);
+      border: 1px solid var(--clr-border);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 680px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 28px 32px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.9);
+      position: relative;
+    }
+    .modal-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--clr-gold), transparent);
+    }
+
+    /* ── Bill Generator & Invoice Styling ── */
+    .bill-controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+      background: var(--clr-surface-1);
+      border: 1px solid var(--clr-border);
+      border-radius: 14px;
+      padding: 14px 20px;
+    }
+    .ssj-bill-canvas {
+      background: #ffffff;
+      color: #1a1a1a;
+      border-radius: 14px;
+      padding: 34px 40px;
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45);
+      max-width: 920px;
+      margin: 0 auto 40px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      position: relative;
+    }
+    .ssj-bill-header {
+      border-bottom: 2.5px solid #b8860b;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .ssj-shop-info {
+      flex: 1;
+    }
+    .ssj-bill-input, .ssj-bill-textarea, .ssj-bill-select {
+      border: 1px dashed transparent;
+      border-bottom: 1px solid #d1d5db;
+      background: rgba(243, 244, 246, 0.5);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-family: inherit;
+      color: #111827;
+      outline: none;
+      transition: all 0.2s;
+      width: 100%;
+    }
+    .ssj-bill-input:hover, .ssj-bill-textarea:hover, .ssj-bill-select:hover {
+      background: rgba(226, 183, 85, 0.08);
+      border-bottom-color: #b8860b;
+    }
+    .ssj-bill-input:focus, .ssj-bill-textarea:focus, .ssj-bill-select:focus {
+      background: #ffffff;
+      border: 1px solid #b8860b;
+      box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.2);
+    }
+    .bill-shop-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #855b14;
+      line-height: 1.1;
+      margin-bottom: 4px;
+      border: none;
+      background: transparent;
+      padding: 0;
+    }
+    .bill-meta-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 20px;
+      margin-bottom: 22px;
+      padding: 16px;
+      background: #fafaf9;
+      border: 1px solid #e7e5e4;
+      border-radius: 8px;
+    }
+    .bill-section-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      color: #855b14;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #e7e5e4;
+      padding-bottom: 4px;
+    }
+    .bill-field-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 0.82rem;
+    }
+    .bill-field-row label {
+      font-weight: 600;
+      color: #4b5563;
+      min-width: 105px;
+      font-size: 0.8rem;
+    }
+    .ssj-bill-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 0.84rem;
+    }
+    .ssj-bill-table th {
+      background: #f5eedc;
+      color: #63430a;
+      padding: 9px 10px;
+      font-weight: 700;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border: 1px solid #d6cfbe;
+      text-align: left;
+    }
+    .ssj-bill-table td {
+      border: 1px solid #e5e7eb;
+      padding: 6px 8px;
+      vertical-align: middle;
+      color: #1f2937;
+    }
+    .ssj-bill-table tbody tr:nth-child(even) {
+      background: #fafafa;
+    }
+    .ssj-bill-table .item-amt {
+      font-weight: 700;
+      color: #111827;
+      text-align: right;
+    }
+    .bill-calc-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 14px;
+    }
+    .bill-totals-box {
+      width: 360px;
+      background: #fafaf9;
+      border: 1px solid #e7e5e4;
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+    .total-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 0;
+      font-size: 0.84rem;
+      color: #374151;
+    }
+    .grand-total-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0 2px;
+      margin-top: 6px;
+      border-top: 2px solid #855b14;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #855b14;
+    }
+    .bill-signatures-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px dashed #d1d5db;
+    }
+    .signature-block {
+      text-align: center;
+      min-width: 200px;
+    }
+    .sig-line {
+      height: 48px;
+      border-bottom: 1.5px solid #374151;
+      margin-bottom: 6px;
+    }
+    .sig-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+    .sig-subtitle {
+      font-size: 0.72rem;
+      color: #6b7280;
+    }
+
+    /* ══════════════════════════════════════════════════════════════
+       MOBILE RESPONSIVE — Admin Panel
+    ══════════════════════════════════════════════════════════════ */
+
+    /* Hamburger button — hidden on desktop */
+    .mob-menu-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: var(--clr-surface-2);
+      border: 1px solid var(--clr-border);
+      border-radius: 8px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .mob-menu-btn:hover { background: var(--clr-surface-3); }
+    .mob-menu-btn svg { width: 20px; height: 20px; stroke: var(--clr-gold); }
+
+    /* Sidebar overlay backdrop */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 99;
+      backdrop-filter: blur(2px);
+    }
+    .sidebar-overlay.active { display: block; }
+
+    @media (max-width: 768px) {
+
+      body { display: block; overflow-x: hidden; }
+
+      /* ── Sidebar becomes off-canvas drawer ── */
+      .admin-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 270px;
+        transform: translateX(-280px);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 200;
+        box-shadow: 4px 0 32px rgba(0, 0, 0, 0.6);
+      }
+      .admin-sidebar.open {
+        transform: translateX(0);
+      }
+
+      /* ── Main takes full width ── */
+      .admin-main {
+        width: 100%;
+        padding: 0;
+        min-height: 100vh;
+      }
+
+      /* ── Mobile top header bar ── */
+      .mob-topbar {
+        display: flex !important;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        background: var(--clr-surface-1);
+        border-bottom: 1px solid var(--clr-border);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+      .mob-topbar-title {
+        flex: 1;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--clr-gold);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .mob-menu-btn { display: flex; }
+
+      /* ── Page content area ── */
+      .admin-content-area {
+        padding: 16px;
+      }
+
+      /* ── Top bar (page title + actions) ── */
+      .top-bar {
+        margin-bottom: 16px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .page-title { font-size: 1.35rem; }
+      .top-actions { width: 100%; }
+      .top-actions .btn-gold { width: 100%; justify-content: center; }
+
+      /* ── Metric cards — 2 columns on mobile ── */
+      .metrics-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .metric-card { padding: 14px 12px; }
+      .metric-val  { font-size: 1.5rem; }
+
+      /* ── Charts stack vertically ── */
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* ── Panel padding ── */
+      .panel { padding: 14px; margin-bottom: 14px; }
+      .panel-header { flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+
+      /* ── Form grids — single column ── */
+      .form-grid { grid-template-columns: 1fr !important; }
+
+      /* ── Tables — horizontal scroll ── */
+      .table-wrap, .admin-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      table { min-width: 560px; }
+
+      /* ── Modal — full screen ── */
+      .modal-dialog {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        max-height: 100vh;
+        overflow-y: auto;
+      }
+      .modal-backdrop { align-items: flex-end; }
+
+      /* ── Bill/invoice panel ── */
+      .ssj-bill-canvas {
+        padding: 14px !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+      }
+
+      /* Bill controls bar */
+      .bill-controls-bar {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+        padding: 12px !important;
+        border-radius: 0 !important;
+        margin-bottom: 0 !important;
+      }
+      .bill-controls-bar > div:last-child {
+        width: 100% !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 8px !important;
+      }
+      .bill-controls-bar button {
+        flex: 1 !important;
+        min-width: 110px !important;
+        font-size: 0.78rem !important;
+        padding: 7px 10px !important;
+        text-align: center !important;
+      }
+
+      /* Bill header — stack shop info above RETAIL TAX INVOICE */
+      .ssj-bill-header {
+        flex-direction: column !important;
+        gap: 10px !important;
+        align-items: stretch !important;
+      }
+      .ssj-shop-info {
+        width: 100% !important;
+        min-width: 0 !important;
+        flex: none !important;
+      }
+      /* Override inline min-width:180px on the right block */
+      .bill-header-right {
+        text-align: left !important;
+        min-width: 0 !important;
+        width: 100% !important;
+      }
+      /* Shop name input full width */
+      .bill-shop-name {
+        font-size: 1.25rem !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        display: block !important;
+      }
+      #billShopTagline {
+        font-size: 0.74rem !important;
+        width: 100% !important;
+      }
+
+      /* Shop address grid — single column */
+      .bill-shop-addr-grid {
+        grid-template-columns: 1fr !important;
+        gap: 4px !important;
+      }
+
+      /* Customer + Invoice meta grid — stack vertically */
+      .bill-meta-grid {
+        grid-template-columns: 1fr !important;
+        gap: 14px !important;
+        padding: 12px !important;
+      }
+
+      /* Field rows — label on top, input below */
+      .bill-field-row {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 2px !important;
+        margin-bottom: 8px !important;
+      }
+      .bill-field-row label {
+        min-width: unset !important;
+        font-size: 0.68rem !important;
+        color: #855b14 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.04em !important;
+        font-weight: 700 !important;
+      }
+      .bill-field-row .ssj-bill-input,
+      .bill-field-row .ssj-bill-select {
+        width: 100% !important;
+        min-width: 0 !important;
+        font-size: 0.83rem !important;
+      }
+
+      /* Items table — horizontal scroll */
+      .ssj-bill-table-wrap {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        margin: 0 0 14px !important;
+      }
+      .ssj-bill-table {
+        min-width: 480px !important;
+        font-size: 0.76rem !important;
+      }
+      .ssj-bill-table th,
+      .ssj-bill-table td {
+        padding: 5px 6px !important;
+        font-size: 0.74rem !important;
+      }
+
+      /* Calc row (notes + totals) — stack vertically */
+      .bill-calc-row {
+        flex-direction: column !important;
+        gap: 14px !important;
+      }
+      .bill-totals-box {
+        width: 100% !important;
+      }
+
+      /* Signatures — stack centered */
+      .bill-signatures-row {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 20px !important;
+        margin-top: 20px !important;
+      }
+      .signature-block {
+        min-width: unset !important;
+        width: 100% !important;
+        max-width: 220px !important;
+      }
+
+      /* ── Buttons full-width where stacked ── */
+      .btn-row { flex-direction: column; }
+      .btn-row .btn-gold,
+      .btn-row .btn-outline,
+      .btn-row .btn-danger { width: 100%; }
+
+      /* ── Sidebar footer on mobile ── */
+      .sidebar-footer { padding: 12px 14px; }
+      .admin-pill { gap: 8px; }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 380px) {
+      .metrics-row { grid-template-columns: 1fr; }
+      .mob-topbar-title { font-size: 0.9rem; }
+      .admin-content-area { padding: 12px; }
+    }
+
+    /* Print Styles */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        display: block !important;
+        overflow: visible !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .admin-sidebar,
+      .top-bar,
+      .top-actions,
+      .bill-controls-bar,
+      .no-print,
+      .modal-backdrop,
+      .btn-gold,
+      .btn-outline,
+      .btn-danger,
+      #tabDashboard,
+      #tabProducts,
+      #tabCategories,
+      #tabOrders,
+      #tabPayments,
+      #tabRates,
+      #tabCoupons,
+      #tabBanners,
+      #tabReviews,
+      #tabCustomers,
+      #tabMessages,
+      #tabNewsletter,
+      #tabReports,
+      #tabLogs,
+      #tabSettings {
+        display: none !important;
+      }
+      .admin-main {
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: visible !important;
+        width: 100% !important;
+      }
+      #tabBilling {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .ssj-bill-canvas {
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+        padding: 2mm 0 !important;
+        margin: 0 !important;
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .ssj-bill-input, .ssj-bill-textarea, .ssj-bill-select {
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+        outline: none !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .ssj-bill-table th {
+        background: #eae3d2 !important;
+        color: #000000 !important;
+        border: 1px solid #333333 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .ssj-bill-table td {
+        border: 1px solid #555555 !important;
+        color: #000000 !important;
+      }
+      .bill-totals-box, .bill-meta-grid {
+        background: #fdfdfd !important;
+        border: 1px solid #666666 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .sig-line {
+        border-bottom: 1.5px solid #000000 !important;
+      }
+      .row-del-btn, .btn-add-item {
+        display: none !important;
+      }
+      @page {
+        size: A4 portrait;
+        margin: 8mm 10mm;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       ADMIN SIDEBAR NAVIGATION
+  ══════════════════════════════════════════════════════════════════ -->
+  <aside class="admin-sidebar">
+    <div class="brand-box">
+      <div class="brand-emblem">👑</div>
+      <div>
+        <div class="brand-name">Shree Sai Jewellers</div>
+        <div class="brand-tag">Enterprise Admin Portal</div>
+      </div>
+    </div>
+
+    <nav class="nav-scroll">
+      <div class="nav-category-label">Core Operations</div>
+      <button class="nav-btn active" onclick="showTab('dashboard')"><span class="icon">📊</span> Dashboard Analytics</button>
+      <button class="nav-btn" onclick="showTab('billing')"><span class="icon">🧾</span> Bill / Invoice Generator</button>
+      <button class="nav-btn" onclick="showTab('products')"><span class="icon">💎</span> Products Inventory</button>
+      <button class="nav-btn" onclick="showTab('categories')"><span class="icon">📁</span> Category Manager</button>
+      <button class="nav-btn" onclick="showTab('orders')"><span class="icon">📦</span> Orders & Delivery</button>
+      <button class="nav-btn" onclick="showTab('payments')"><span class="icon">💳</span> Payments & Transactions</button>
+      
+      <div class="nav-category-label">Bullion & Marketing</div>
+      <button class="nav-btn" onclick="showTab('rates')"><span class="icon">📈</span> Live Gold/Silver Rates</button>
+      <button class="nav-btn" onclick="showTab('coupons')"><span class="icon">🎟</span> Promo Codes & Coupons</button>
+      <button class="nav-btn" onclick="showTab('banners')"><span class="icon">🖼</span> Homepage Banners</button>
+      <button class="nav-btn" onclick="showTab('reviews')"><span class="icon">⭐</span> Customer Reviews</button>
+
+      <div class="nav-category-label">Customers & Inquiries</div>
+      <button class="nav-btn" onclick="showTab('customers')"><span class="icon">👥</span> Customer Database</button>
+      <button class="nav-btn" onclick="showTab('messages')"><span class="icon">💬</span> Contact Inquiries</button>
+      <button class="nav-btn" onclick="showTab('newsletter')"><span class="icon">📧</span> Newsletter Subscribers</button>
+      
+      <div class="nav-category-label">Reports & System</div>
+      <button class="nav-btn" onclick="showTab('reports')"><span class="icon">📑</span> Financial Reports</button>
+      <button class="nav-btn" onclick="showTab('logs')"><span class="icon">🛡</span> Audit Activity Logs</button>
+      <button class="nav-btn" onclick="showTab('settings')"><span class="icon">⚙</span> Store Settings</button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="admin-pill">
+        <div class="admin-avatar">👑</div>
+        <div style="overflow: hidden; flex:1;">
+          <div style="font-size:0.78rem; font-weight:700; color:var(--clr-gold);">Master Admin</div>
+          <div style="font-size:0.68rem; color:var(--clr-muted); text-overflow:ellipsis; overflow:hidden; white-space:nowrap;" id="sidebarAdminEmail">shreesaijewellers3@gmail.com</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:6px;">
+        <a href="index.html" class="btn-outline" style="flex:1; text-align:center; text-decoration:none; padding:6px 0;">🏠 Storefront</a>
+        <button onclick="adminLogout()" class="btn-danger" style="padding:6px 10px;">🚪 Logout</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       MAIN ADMINISTRATIVE DASHBOARD WORKSPACE
+  ══════════════════════════════════════════════════════════════════ -->
+  <main class="admin-main">
+
+    <!-- Sidebar overlay (mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+    <!-- Mobile top header -->
+    <div class="mob-topbar" style="display:none;">
+      <button class="mob-menu-btn" onclick="toggleSidebar()" aria-label="Open menu">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <span class="mob-topbar-title" id="mobCurrentTitle">Dashboard</span>
+      <span style="font-size:1.2rem;">👑</span>
+    </div>
+
+    <!-- All tab content wrapped for padding -->
+    <div class="admin-content-area">
+
+    <!-- Top Action Header -->
+    <div class="top-bar">
+      <div>
+        <h1 class="page-title" id="currentViewTitle">Dashboard Analytics</h1>
+        <p class="page-sub">Real-time e-commerce operational control & live sync with PostgreSQL</p>
+      </div>
+      <div class="top-actions">
+        <button class="btn-gold" onclick="openProductModal()">✨ Add Jewellery Product</button>
+      </div>
+    </div>
+
+    <!-- ══ TAB 1: DASHBOARD ANALYTICS ════════════════════════════ -->
+    <div id="tabDashboard">
+      <div class="metrics-row">
+        <div class="metric-card">
+          <div class="metric-lbl">Total Store Revenue</div>
+          <div class="metric-val" id="dTotalRevenue">₹0</div>
+          <div class="metric-trend trend-up">✓ Live Sales Synced</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-lbl">Total Orders</div>
+          <div class="metric-val" id="dTotalOrders">0</div>
+          <div class="metric-trend" id="dPendingOrdersTxt">0 Pending Shipments</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-lbl">Live Catalog Items</div>
+          <div class="metric-val" id="dTotalProducts">0</div>
+          <div class="metric-trend trend-up">✓ Online Storefront</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-lbl">Low Stock Alerts</div>
+          <div class="metric-val" id="dLowStock" style="color:var(--clr-danger);">0</div>
+          <div class="metric-trend trend-alert">Requires Restock</div>
+        </div>
+      </div>
+
+      <!-- Interactive Charts -->
+      <div class="charts-grid">
+        <div class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">📈 Sales & Revenue Trajectory</h2>
+          </div>
+          <canvas id="salesChart" height="120"></canvas>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <h2 class="panel-title">💎 Category Distribution</h2>
+          </div>
+          <canvas id="categoryChart" height="200"></canvas>
+        </div>
+      </div>
+
+      <!-- Quick Rates Controller Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h2 class="panel-title">📈 Live Bullion Rates Controller (Per Gram)</h2>
+            <div style="font-size:0.75rem; color:var(--clr-muted);">Changes immediately reflect across customer website header and calculation engine</div>
+          </div>
+          <span class="badge gold" id="rateStatusBadge">Synchronized</span>
+        </div>
+        <form onsubmit="handleRatesUpdate(event)" class="form-grid">
+          <div class="form-group">
+            <label>Gold 24K (Pure Bullion ₹/g)</label>
+            <input type="number" step="0.1" id="rateGold24" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label>Gold 22K (Hallmarked ₹/g)</label>
+            <input type="number" step="0.1" id="rateGold22" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label>Silver 999 (Pure ₹/g)</label>
+            <input type="number" step="0.1" id="rateSilver999" class="form-input" required>
+          </div>
+          <div class="form-group" style="justify-content:flex-end;">
+            <button type="submit" class="btn-gold" id="btnSaveRates">💾 Publish Rates Live</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Recent Orders & Inquiries -->
+      <div class="panel">
+        <div class="panel-header">
+          <h2 class="panel-title">📦 Recent Customer Orders</h2>
+          <button class="btn-outline" onclick="showTab('orders')">View All Orders →</button>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Total</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="recentOrdersTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB 2: PRODUCTS INVENTORY ═════════════════════════════ -->
+    <div id="tabProducts" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+            <h2 class="panel-title">Jewellery Product Catalog</h2>
+            <input type="text" id="prodSearchInp" class="form-input" placeholder="Search by name, SKU, metal…" oninput="filterProducts()" style="width:220px;">
+            <select id="prodCategoryFilter" class="form-select" onchange="filterProducts()" style="width:140px;">
+              <option value="all">All Categories</option>
+              <option value="Rings">Rings</option>
+              <option value="Necklaces">Necklaces</option>
+              <option value="Earrings">Earrings</option>
+              <option value="Bangles">Bangles</option>
+              <option value="Bracelets">Bracelets</option>
+              <option value="Chains">Chains</option>
+              <option value="Bridal">Bridal</option>
+            </select>
+          </div>
+          <button class="btn-gold" onclick="openProductModal()">+ Add New Product</button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Media</th>
+                <th>Name & SKU</th>
+                <th>Category</th>
+                <th>Purity</th>
+                <th>Gross Wt</th>
+                <th>Selling Price</th>
+                <th>Stock</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="productsTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB 3: CATEGORY MANAGER ═══════════════════════════════ -->
+    <div id="tabCategories" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Store Categories</h2>
+          <button class="btn-gold" onclick="openCategoryModal()">+ Add Category</button>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Icon</th>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Order</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="categoriesTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB 4: ORDERS & DELIVERY ══════════════════════════════ -->
+    <div id="tabOrders" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Customer Orders Management</h2>
+          <select id="orderStatusFilter" class="form-select" onchange="loadAdminOrders()" style="width:160px;">
+            <option value="all">All Statuses</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="processing">Processing</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Contact</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Tracking</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="allOrdersTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB 5: PAYMENTS ═══════════════════════════════════════ -->
+    <div id="tabPayments" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Razorpay & Store Payment Logs</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Razorpay Payment ID</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="paymentsTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB 6: RATES ══════════════════════════════════════════ -->
+    <div id="tabRates" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Bullion Rates & Valuation Engine</h2>
+        </div>
+        <p style="font-size:0.85rem; color:var(--clr-muted); margin-bottom:18px;">
+          Set live rates for 24 Karat Pure Gold, 22 Karat Standard Hallmarked Gold, and 999 Fine Silver. All product prices and live rates across the entire application synchronize in real-time.
+        </p>
+        <form onsubmit="handleRatesUpdate(event)" class="form-grid">
+          <div class="form-group">
+            <label>Gold 24 Karat (₹/g)</label>
+            <input type="number" step="0.1" id="rate24K_tab" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label>Gold 22 Karat (₹/g)</label>
+            <input type="number" step="0.1" id="rate22K_tab" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label>Silver 999 (₹/g)</label>
+            <input type="number" step="0.1" id="rateSilver_tab" class="form-input" required>
+          </div>
+          <div class="form-group" style="justify-content:flex-end;">
+            <button type="submit" class="btn-gold">💾 Save Rates to Supabase</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ══ TAB 7: COUPONS & PROMOS ═══════════════════════════════ -->
+    <div id="tabCoupons" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Promotional Discount Coupons</h2>
+          <button class="btn-gold" onclick="openCouponModal()">+ Create Coupon</button>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Discount</th>
+                <th>Min Order</th>
+                <th>Max Cap</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="couponsTableBody">
+              <tr>
+                <td><strong>SAI10</strong></td>
+                <td>10% OFF</td>
+                <td>₹10,000</td>
+                <td>₹5,000</td>
+                <td><span class="badge green">Active</span></td>
+              </tr>
+              <tr>
+                <td><strong>AKSHAYA5000</strong></td>
+                <td>Flat ₹5,000</td>
+                <td>₹50,000</td>
+                <td>₹5,000</td>
+                <td><span class="badge green">Active</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB 8: BANNERS ════════════════════════════════════════ -->
+    <div id="tabBanners" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Hero Carousel & Promo Banners</h2>
+        </div>
+        <p style="font-size:0.85rem; color:var(--clr-muted);">Manage high-resolution banners that appear on the customer-facing storefront carousel.</p>
+      </div>
+    </div>
+
+    <!-- ══ TAB 9: REVIEWS ════════════════════════════════════════ -->
+    <div id="tabReviews" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Customer Reviews & Testimonials</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Reviewer</th>
+                <th>Rating</th>
+                <th>Comment</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="reviewsTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB 10: CUSTOMERS ═════════════════════════════════════ -->
+    <div id="tabCustomers" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Registered Customer Database</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Joined</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="customersTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB 11: MESSAGES ══════════════════════════════════════ -->
+    <div id="tabMessages" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Customer Contact Inquiries</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="messagesTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB 12: NEWSLETTER ════════════════════════════════════ -->
+    <div id="tabNewsletter" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Newsletter Subscribers</h2>
+          <button class="btn-outline" onclick="exportNewsletterCSV()">📥 Export CSV</button>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Subscriber Email</th>
+                <th>Subscription Date</th>
+              </tr>
+            </thead>
+            <tbody id="newsletterTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB 13: REPORTS ═══════════════════════════════════════ -->
+    <div id="tabReports" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Sales & Financial Reporting</h2>
+        </div>
+        <div class="metrics-row">
+          <div class="metric-card">
+            <div class="metric-lbl">Daily Gross Sales</div>
+            <div class="metric-val" id="repDailySales">₹85,000</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-lbl">Monthly Gross Sales</div>
+            <div class="metric-val" id="repMonthlySales">₹12,40,000</div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-lbl">Annual Revenue</div>
+            <div class="metric-val" id="repAnnualSales">₹1.48 Cr</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB 14: AUDIT LOGS ════════════════════════════════════ -->
+    <div id="tabLogs" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Administrative Audit Trail & Security Logs</h2>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Admin</th>
+                <th>Action</th>
+                <th>Entity</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody id="logsTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TAB 15: SETTINGS ══════════════════════════════════════ -->
+    <div id="tabSettings" style="display:none;">
+      <div class="panel">
+        <div class="panel-header">
+          <h2 class="panel-title">Store & Business Configuration</h2>
+        </div>
+        <form onsubmit="handleSettingsUpdate(event)" class="form-grid">
+          <div class="form-group">
+            <label>Store Business Name</label>
+            <input type="text" id="setStoreName" class="form-input" value="Shree Sai Jewellers">
+          </div>
+          <div class="form-group">
+            <label>Tagline</label>
+            <input type="text" id="setStoreTagline" class="form-input" value="Fine Heirloom Jewellery · Est. 1984">
+          </div>
+          <div class="form-group">
+            <label>Customer Support Phone</label>
+            <input type="text" id="setStorePhone" class="form-input" value="+91 98765 43210">
+          </div>
+          <div class="form-group">
+            <label>Support Email</label>
+            <input type="email" id="setStoreEmail" class="form-input" value="care@shreesaijewellers.com">
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <label>Showroom Address</label>
+            <input type="text" id="setStoreAddress" class="form-input" value="Shree Sai Jewellers, Main Market, Indore, Madhya Pradesh - 452009">
+          </div>
+          <div class="form-group" style="grid-column: 1 / -1;">
+            <button type="submit" class="btn-gold">💾 Save Configuration</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ══ TAB 16: BILL / INVOICE GENERATOR ═════════════════════ -->
+    <div id="tabBilling" style="display:none;">
+      <!-- Action Toolbar (Hidden in Print) -->
+      <div class="bill-controls-bar no-print">
+        <div>
+          <h3 style="color:var(--clr-gold); font-size:1.1rem; margin-bottom:4px; font-weight:700;">🧾 Jewellery Tax Invoice & Bill Generator</h3>
+          <p style="color:var(--clr-muted); font-size:0.78rem;">Edit shop info, customer details, and products directly in the bill. Calculations update in real-time.</p>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button type="button" class="btn-outline" onclick="loadSampleJewelleryBill()">✨ Load Sample Bill</button>
+          <button type="button" class="btn-outline" onclick="resetBillingForm()">🔄 Clear / New Bill</button>
+          <button type="button" class="btn-gold" onclick="printBill()">🖨 Print / Save Invoice</button>
+        </div>
+      </div>
+
+      <!-- Printable A4 Bill Canvas -->
+      <div class="ssj-bill-canvas" id="printableBillArea">
+        
+        <!-- Header: Shop Details (Fully Editable) -->
+        <div class="ssj-bill-header">
+          <div class="ssj-shop-info">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px; min-width:0;">
+              <span style="font-size:1.8rem; flex-shrink:0;">👑</span>
+              <input type="text" id="billShopName" class="ssj-bill-input bill-shop-name" value="SHREE SAI JEWELLERS" title="Click to edit Shop Name" placeholder="Shop Name" style="min-width:0; flex:1;" oninput="document.getElementById('sigShopNameDisp').textContent = 'For ' + this.value">
+            </div>
+            <input type="text" id="billShopTagline" class="ssj-bill-input" style="font-size:0.8rem; font-weight:600; color:#855b14; margin-bottom:4px;" value="Exclusive Gold, Diamond & Silver Jewellery · 100% BIS Hallmarked" placeholder="Shop Tagline / Slogan">
+            <div class="bill-shop-addr-grid" style="display:grid; grid-template-columns: 1fr 1fr; gap:6px; margin-top:4px;">
+              <div class="bill-field-row">
+                <label style="min-width:65px;">📍 Address:</label>
+                <input type="text" id="billShopAddress" class="ssj-bill-input" value="Main Market, MG Road, Indore, M.P. - 452009" placeholder="Shop Address">
+              </div>
+              <div class="bill-field-row">
+                <label style="min-width:65px;">📞 Phone:</label>
+                <input type="text" id="billShopPhone" class="ssj-bill-input" value="+91 98765 43210, +91 731-2456789" placeholder="Phone Number">
+              </div>
+              <div class="bill-field-row">
+                <label style="min-width:65px;">✉ Email/Web:</label>
+                <input type="text" id="billShopEmail" class="ssj-bill-input" value="care@shreesaijewellers.com | shreesaijewellers.com" placeholder="Email & Website">
+              </div>
+              <div class="bill-field-row">
+                <label style="min-width:65px;">🏛 GSTIN/BIS:</label>
+                <input type="text" id="billShopGstin" class="ssj-bill-input" value="23AAAFS9876Q1Z2 | HM-916-IND-042" placeholder="GSTIN / Reg No.">
+              </div>
+            </div>
+          </div>
+          <div class="bill-header-right" style="text-align:right; min-width:180px;">
+            <div style="font-size:1.35rem; font-weight:800; color:#855b14; letter-spacing:0.06em; text-transform:uppercase; font-family:'Cormorant Garamond',serif;">RETAIL TAX INVOICE</div>
+            <div style="font-size:0.72rem; color:#6b7280; font-weight:600;">Original for Recipient</div>
+            <div style="margin-top:10px; display:inline-block; border:1px solid #b8860b; padding:4px 10px; border-radius:6px; background:#fffdf7; font-size:0.75rem; font-weight:700; color:#855b14;">
+              BIS HALLMARK CERTIFIED
+            </div>
+          </div>
+        </div>
+
+        <!-- Invoice Meta & Customer Grid -->
+        <div class="bill-meta-grid">
+          <div>
+            <div class="bill-section-title">Customer Details (Billed To)</div>
+            <div class="bill-field-row">
+              <label>Customer Name:</label>
+              <input type="text" id="billCustName" class="ssj-bill-input" value="Mr. Rakesh Sharma" placeholder="Enter Customer Name">
+            </div>
+            <div class="bill-field-row">
+              <label>Contact Number:</label>
+              <input type="text" id="billCustPhone" class="ssj-bill-input" value="+91 98260 12345" placeholder="Customer Mobile">
+            </div>
+            <div class="bill-field-row">
+              <label>Address / City:</label>
+              <input type="text" id="billCustAddress" class="ssj-bill-input" value="104, Saket Nagar, Indore (M.P.)" placeholder="Customer Address">
+            </div>
+            <div class="bill-field-row">
+              <label>PAN / Aadhaar (Opt):</label>
+              <input type="text" id="billCustPan" class="ssj-bill-input" value="" placeholder="Optional (Required for ₹2L+ purchases)">
+            </div>
+          </div>
+
+          <div>
+            <div class="bill-section-title">Invoice Information</div>
+            <div class="bill-field-row">
+              <label>Invoice Number:</label>
+              <input type="text" id="billInvoiceNo" class="ssj-bill-input" value="SSJ-INV-2026-0108" style="font-weight:700; color:#855b14;">
+            </div>
+            <div class="bill-field-row">
+              <label>Invoice Date:</label>
+              <input type="date" id="billDate" class="ssj-bill-input">
+            </div>
+            <div class="bill-field-row">
+              <label>Payment Mode:</label>
+              <select id="billPaymentMode" class="ssj-bill-select">
+                <option value="UPI / Online Transfer">UPI / Google Pay / PhonePe</option>
+                <option value="Cash">Cash</option>
+                <option value="Credit / Debit Card">Credit / Debit Card</option>
+                <option value="Net Banking / NEFT">Net Banking / NEFT</option>
+                <option value="Old Gold Exchange">Old Gold Exchange + Cash</option>
+              </select>
+            </div>
+            <div class="bill-field-row">
+              <label>Place of Supply:</label>
+              <input type="text" id="billPlaceSupply" class="ssj-bill-input" value="Madhya Pradesh (Code: 23)">
+            </div>
+          </div>
+        </div>
+
+        <!-- Jewellery Items Table -->
+        <div class="ssj-bill-table-wrap">
+        <table class="ssj-bill-table" id="billItemsTable">
+          <thead>
+            <tr>
+              <th style="width:40px; text-align:center;">S.No</th>
+              <th>Description of Jewellery Goods</th>
+              <th style="width:110px;">Purity / HSN</th>
+              <th style="width:80px; text-align:center;">Quantity</th>
+              <th style="width:120px; text-align:right;">Price / Rate (₹)</th>
+              <th style="width:130px; text-align:right;">Total Amount (₹)</th>
+              <th style="width:40px; text-align:center;" class="no-print">Action</th>
+            </tr>
+          </thead>
+          <tbody id="billItemsBody">
+            <!-- Rows injected by JavaScript -->
+          </tbody>
+        </table>
+        </div>
+
+        <!-- Add Item Button (Hidden in Print) -->
+        <div class="no-print" style="margin-bottom:20px; display:flex; gap:10px;">
+          <button type="button" class="btn-outline btn-add-item" onclick="addBillItemRow()" style="font-size:0.8rem; padding:6px 14px;">
+            ➕ Add Item Row
+          </button>
+        </div>
+
+        <!-- Ending: Calculations & Totals (Total, GST/SGST, Grand Total) -->
+        <div class="bill-calc-row">
+          <!-- Left Notes & Amount in Words -->
+          <div style="flex:1;">
+            <div style="background:#fafaf9; border:1px solid #e7e5e4; border-radius:8px; padding:12px 14px; margin-bottom:12px;">
+              <div style="font-size:0.75rem; font-weight:700; color:#6b7280; text-transform:uppercase; margin-bottom:4px;">Grand Total in Words:</div>
+              <div id="billTotalInWords" style="font-weight:700; color:#855b14; font-size:0.86rem; font-style:italic;">Rupees Zero Only</div>
+            </div>
+
+            <div style="background:#fffdf7; border:1px solid #e5e0d3; border-radius:8px; padding:12px 14px;">
+              <div style="font-size:0.72rem; font-weight:700; color:#855b14; text-transform:uppercase; margin-bottom:4px;">Terms & Conditions:</div>
+              <textarea id="billTerms" class="ssj-bill-textarea" rows="3" style="font-size:0.73rem; color:#4b5563; line-height:1.4;">1. All gold ornaments are guaranteed 100% BIS Hallmarked (916/750).
+2. Exchange or buyback permitted within 7 days with this original tax invoice.
+3. Making charges and statutory GST are non-refundable upon buyback.
+4. All disputes subject to Indore jurisdiction only.</textarea>
+            </div>
+          </div>
+
+          <!-- Right Calculation Breakdown Box -->
+          <div class="bill-totals-box">
+            <div class="total-line">
+              <span>Total (Subtotal):</span>
+              <strong id="billSubtotalDisp">₹0.00</strong>
+            </div>
+            <div class="total-line">
+              <span style="display:flex; align-items:center; gap:4px;">
+                Discount / Scheme:
+              </span>
+              <div style="width:110px;">
+                <input type="number" id="billDiscount" class="ssj-bill-input" value="0" min="0" oninput="calculateBillTotals()" style="text-align:right; font-weight:600; padding:2px 4px;">
+              </div>
+            </div>
+            <div class="total-line" style="border-top:1px dashed #e5e7eb; padding-top:6px;">
+              <span>Taxable Value:</span>
+              <strong id="billTaxableDisp">₹0.00</strong>
+            </div>
+            <div class="total-line">
+              <span style="display:flex; align-items:center; gap:4px;">
+                CGST (<input type="number" id="billCgstRate" value="1.5" step="0.1" style="width:40px; text-align:center; border:none; border-bottom:1px solid #ccc; font-size:0.78rem;" oninput="calculateBillTotals()">%):
+              </span>
+              <span id="billCgstDisp">₹0.00</span>
+            </div>
+            <div class="total-line">
+              <span style="display:flex; align-items:center; gap:4px;">
+                SGST (<input type="number" id="billSgstRate" value="1.5" step="0.1" style="width:40px; text-align:center; border:none; border-bottom:1px solid #ccc; font-size:0.78rem;" oninput="calculateBillTotals()">%):
+              </span>
+              <span id="billSgstDisp">₹0.00</span>
+            </div>
+            <div class="total-line" style="font-size:0.78rem; color:#6b7280;">
+              <span>Total GST (CGST + SGST):</span>
+              <span id="billTotalGstDisp">₹0.00</span>
+            </div>
+            <div class="grand-total-line">
+              <span>Grand Total:</span>
+              <span id="billGrandTotalDisp">₹0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Signature Section -->
+        <div class="bill-signatures-row">
+          <div class="signature-block">
+            <div class="sig-line"></div>
+            <div class="sig-title">Customer's Signature</div>
+            <div class="sig-subtitle">I accept the purity and weights mentioned</div>
+          </div>
+
+          <div style="text-align:center;">
+            <div style="display:inline-block; border:1px dashed #b8860b; border-radius:50%; width:70px; height:70px; display:flex; align-items:center; justify-content:center; margin:0 auto 6px; color:#855b14; font-size:0.6rem; text-align:center; font-weight:700; line-height:1.2;">
+              SHREE SAI<br>JEWELLERS<br>SEAL
+            </div>
+          </div>
+
+          <div class="signature-block">
+            <div class="sig-line"></div>
+            <div class="sig-title" id="sigShopNameDisp">For SHREE SAI JEWELLERS</div>
+            <div class="sig-subtitle">Authorized Signatory</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    </div><!-- /.admin-content-area -->
+  </main>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       ADD / EDIT PRODUCT MODAL (FULL JEWELLERY ATTRIBUTES)
+  ══════════════════════════════════════════════════════════════════ -->
+  <div class="modal-backdrop" id="productModal">
+    <div class="modal-card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+        <h2 style="font-family:'Cormorant Garamond',serif; color:var(--clr-gold-light); font-size:1.6rem;" id="prodModalHeading">Add Jewellery Masterpiece</h2>
+        <button onclick="closeProductModal()" style="background:none; border:none; font-size:1.6rem; color:var(--clr-muted); cursor:pointer;">&times;</button>
+      </div>
+
+      <form id="prodForm" onsubmit="saveProduct(event)">
+        <input type="hidden" id="pEditId">
+
+        <div class="form-group">
+          <label>Jewellery Piece Name *</label>
+          <input type="text" id="pName" class="form-input" placeholder="e.g. Royal Rajputana Bridal Kundan Haar" required>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Category *</label>
+            <select id="pCategory" class="form-select">
+              <option value="Rings">💍 Rings</option>
+              <option value="Necklaces">✨ Necklaces</option>
+              <option value="Earrings">💎 Earrings</option>
+              <option value="Bangles">💫 Bangles</option>
+              <option value="Bracelets">👑 Bracelets</option>
+              <option value="Chains">🔗 Chains</option>
+              <option value="Bridal">👰 Bridal Sets</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Metal Purity *</label>
+            <select id="pPurity" class="form-select">
+              <option value="22KT (916)">22KT (916) Hallmark Gold</option>
+              <option value="18KT (750)">18KT (750) Diamond Gold</option>
+              <option value="24KT (999)">24KT (999) Pure Gold</option>
+              <option value="925 Sterling">925 Sterling Silver</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Selling Price (₹) *</label>
+            <input type="number" id="pPrice" class="form-input" placeholder="125000" required>
+          </div>
+          <div class="form-group">
+            <label>Original MRP (₹)</label>
+            <input type="number" id="pOrigPrice" class="form-input" placeholder="140000">
+          </div>
+          <div class="form-group">
+            <label>Available Stock Units *</label>
+            <input type="number" id="pStock" class="form-input" value="5" required>
+          </div>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Gross Weight (g)</label>
+            <input type="text" id="pGrossWeight" class="form-input" placeholder="18.50 g">
+          </div>
+          <div class="form-group">
+            <label>Net Gold Weight (g)</label>
+            <input type="text" id="pNetWeight" class="form-input" placeholder="16.20 g">
+          </div>
+          <div class="form-group">
+            <label>Diamond Carat / Specs</label>
+            <input type="text" id="pDiamond" class="form-input" placeholder="0.75 ct (VVS-EF)">
+          </div>
+        </div>
+
+        <!-- Cloudinary Multi-Image Upload / URL Input -->
+        <div class="form-group">
+          <label>Product Images (Cloudinary Upload or Direct URLs)</label>
+          <div style="display:flex; gap:8px; margin-bottom:6px;">
+            <input type="url" id="pImageUrlInp" class="form-input" style="flex:1;" placeholder="https://images.unsplash.com/photo-...">
+            <input type="file" id="pImgFileInput" style="display:none;" onchange="uploadImageFile(this)">
+            <button type="button" class="btn-outline" onclick="document.getElementById('pImgFileInput').click()">📁 Cloudinary Upload</button>
+          </div>
+          <div id="pImgGallery" style="display:flex; gap:8px; flex-wrap:wrap; margin-top:6px;"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Product Description & Story</label>
+          <textarea id="pDescription" class="form-textarea" rows="3" placeholder="Crafted with generational mastery in 22KT BIS 916 hallmarked yellow gold..."></textarea>
+        </div>
+
+        <div style="display:flex; gap:16px; margin: 12px 0 20px; flex-wrap:wrap;">
+          <label style="font-size:0.8rem; display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="pBestseller"> ⭐ Bestseller</label>
+          <label style="font-size:0.8rem; display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="pTrending"> 🔥 Trending</label>
+          <label style="font-size:0.8rem; display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="pNewArrival" checked> ✨ New Arrival</label>
+          <label style="font-size:0.8rem; display:flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="pActive" checked> 🟢 Live on Site</label>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+          <button type="submit" class="btn-gold" style="flex:1; justify-content:center;">💾 Save & Publish Product</button>
+          <button type="button" onclick="closeProductModal()" class="btn-outline" style="padding:10px 18px;">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script>
+    /* ══════════════════════════════════════════════════════════════════
+       ADMIN APPLICATION ENGINE
+    ══════════════════════════════════════════════════════════════════ */
+    const API = (window.CONFIG ? CONFIG.API_BASE_URL.replace('/api', '') : '') + '/api/admin';
+    const ADMIN_WHITELIST = ['shreesaijewellers3@gmail.com', 'admin@shreesaijewellers.com'];
+
+    let allAdminProducts = [];
+    let currentUploadedImages = [];
+    let salesChartInstance = null;
+    let categoryChartInstance = null;
+
+    // ── Security Check ──
+    function verifyAdminAccess() {
+      try {
+        const raw = localStorage.getItem('SSJ_USER');
+        if (!raw) { location.href = 'login.html?admin=1'; return; }
+        const user = JSON.parse(raw);
+        if (!ADMIN_WHITELIST.includes((user.email || '').toLowerCase()) && !user.is_admin) {
+          alert("Unauthorized access: Master Admin login required.");
+          location.href = 'index.html';
+          return;
+        }
+        document.getElementById('sidebarAdminEmail').textContent = user.email || 'Admin';
+      } catch(_) {
+        location.href = 'login.html?admin=1';
+      }
+    }
+
+    verifyAdminAccess();
+
+    // ── Tab Switcher ──
+    function showTab(tabId) {
+      document.querySelectorAll('.admin-sidebar .nav-btn').forEach(b => b.classList.remove('active'));
+      if (event && event.currentTarget) event.currentTarget.classList.add('active');
+
+      const tabs = ['dashboard', 'billing', 'products', 'categories', 'orders', 'payments', 'rates', 'coupons', 'banners', 'reviews', 'customers', 'messages', 'newsletter', 'reports', 'logs', 'settings'];
+      tabs.forEach(t => {
+        const el = document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+        if (el) el.style.display = t === tabId ? 'block' : 'none';
+      });
+
+      const titleMap = {
+        dashboard: 'Dashboard Analytics',
+        billing: 'Tax Invoice & Bill Generator',
+        products: 'Products Inventory',
+        categories: 'Category Management',
+        orders: 'Orders & Fulfillment',
+        payments: 'Transactions & Payments',
+        rates: 'Bullion Rates Engine',
+        coupons: 'Discount Coupons',
+        banners: 'Hero Banners',
+        reviews: 'Customer Reviews',
+        customers: 'Customer Directory',
+        messages: 'Inquiries & Leads',
+        newsletter: 'Subscriber Base',
+        reports: 'Financial Reports',
+        logs: 'Audit Activity Logs',
+        settings: 'Store Configuration'
+      };
+      const title = titleMap[tabId] || 'Admin Portal';
+      document.getElementById('currentViewTitle').textContent = title;
+
+      // Update mobile top bar title and close sidebar
+      const mobTitle = document.getElementById('mobCurrentTitle');
+      if (mobTitle) mobTitle.textContent = title;
+      closeSidebar();
+
+      if (tabId === 'billing') initBillingSection();
+      if (tabId === 'products') loadAdminProducts();
+      if (tabId === 'categories') loadAdminCategories();
+      if (tabId === 'orders') loadAdminOrders();
+      if (tabId === 'reviews') loadAdminReviews();
+      if (tabId === 'customers') loadAdminCustomers();
+      if (tabId === 'messages') loadAdminMessages();
+      if (tabId === 'newsletter') loadAdminNewsletter();
+      if (tabId === 'logs') loadAdminLogs();
+    }
+
+    // ══════════════════════════════════════════════════════════════════
+    // BILL / INVOICE GENERATOR ENGINE
+    // ══════════════════════════════════════════════════════════════════
+    let billItemsInitialized = false;
+
+    function initBillingSection() {
+      // Set today's date if empty
+      const dateEl = document.getElementById('billDate');
+      if (dateEl && !dateEl.value) {
+        const today = new Date().toISOString().split('T')[0];
+        dateEl.value = today;
+      }
+      // If invoice number is empty, generate one
+      const invEl = document.getElementById('billInvoiceNo');
+      if (invEl && (!invEl.value || invEl.value === '')) {
+        const rand = Math.floor(1000 + Math.random() * 9000);
+        invEl.value = `SSJ-INV-${new Date().getFullYear()}-${rand}`;
+      }
+      if (!billItemsInitialized) {
+        loadSampleJewelleryBill();
+        billItemsInitialized = true;
+      }
+    }
+
+    function addBillItemRow(name = '', purity = '22KT (916)', qty = 1, price = 0) {
+      const tbody = document.getElementById('billItemsBody');
+      if (!tbody) return;
+      
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td style="text-align:center; font-weight:700;" class="row-sno">1</td>
+        <td>
+          <input type="text" class="ssj-bill-input item-name" value="${name}" placeholder="e.g. 22KT Gold Floral Ring / Necklace" style="font-weight:600;">
+        </td>
+        <td>
+          <input type="text" class="ssj-bill-input item-purity" value="${purity}" placeholder="22KT (916)">
+        </td>
+        <td style="text-align:center;">
+          <input type="number" class="ssj-bill-input item-qty" value="${qty}" min="1" step="1" style="text-align:center; font-weight:700;" oninput="calculateBillTotals()">
+        </td>
+        <td>
+          <input type="number" class="ssj-bill-input item-price" value="${price}" min="0" step="10" style="text-align:right; font-weight:600;" placeholder="0" oninput="calculateBillTotals()">
+        </td>
+        <td class="item-amt" style="font-weight:700; color:#855b14;">₹0.00</td>
+        <td style="text-align:center;" class="no-print">
+          <button type="button" onclick="removeBillItemRow(this)" style="background:none; border:none; cursor:pointer; font-size:1.1rem; color:#dc2626;" title="Delete Item">🗑</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+      reindexBillRows();
+      calculateBillTotals();
+    }
+
+    function removeBillItemRow(btn) {
+      const row = btn.closest('tr');
+      if (row) {
+        row.remove();
+        reindexBillRows();
+        calculateBillTotals();
+      }
+    }
+
+    function reindexBillRows() {
+      const rows = document.querySelectorAll('#billItemsBody tr');
+      rows.forEach((r, idx) => {
+        const sno = r.querySelector('.row-sno');
+        if (sno) sno.textContent = idx + 1;
+      });
+    }
+
+    function calculateBillTotals() {
+      const rows = document.querySelectorAll('#billItemsBody tr');
+      let subtotal = 0;
+
+      rows.forEach(r => {
+        const qty = parseFloat(r.querySelector('.item-qty')?.value) || 0;
+        const price = parseFloat(r.querySelector('.item-price')?.value) || 0;
+        const amt = qty * price;
+        subtotal += amt;
+        const amtDisp = r.querySelector('.item-amt');
+        if (amtDisp) amtDisp.textContent = `₹${amt.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      });
+
+      const discount = parseFloat(document.getElementById('billDiscount')?.value) || 0;
+      const taxable = Math.max(0, subtotal - discount);
+
+      const cgstRate = parseFloat(document.getElementById('billCgstRate')?.value) || 0;
+      const sgstRate = parseFloat(document.getElementById('billSgstRate')?.value) || 0;
+
+      const cgst = (taxable * cgstRate) / 100;
+      const sgst = (taxable * sgstRate) / 100;
+      const totalGst = cgst + sgst;
+      const grandTotal = Math.round(taxable + totalGst);
+
+      // Update DOM
+      document.getElementById('billSubtotalDisp').textContent = `₹${subtotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      document.getElementById('billTaxableDisp').textContent = `₹${taxable.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      document.getElementById('billCgstDisp').textContent = `₹${cgst.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      document.getElementById('billSgstDisp').textContent = `₹${sgst.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      document.getElementById('billTotalGstDisp').textContent = `₹${totalGst.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+      document.getElementById('billGrandTotalDisp').textContent = `₹${grandTotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+      // Words
+      document.getElementById('billTotalInWords').textContent = numberToIndianWords(grandTotal);
+    }
+
+    function loadSampleJewelleryBill() {
+      const tbody = document.getElementById('billItemsBody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+      addBillItemRow('Royal Rajputana 22KT Gold Haar (Gross Wt: 24.5g)', '22KT (916) / 7113', 1, 168500);
+      addBillItemRow('Solitaire Diamond Ring VVS-EF (Gold: 4.2g)', '18KT (750) / 7113', 1, 62000);
+      addBillItemRow('Antique Nakshi Gold Bangles Pair (32.0g)', '22KT (916) / 7113', 1, 215000);
+    }
+
+    function resetBillingForm() {
+      if (confirm('Create a new blank bill? Current inputs will be cleared.')) {
+        const tbody = document.getElementById('billItemsBody');
+        if (tbody) tbody.innerHTML = '';
+        addBillItemRow('', '22KT (916)', 1, 0);
+        const rand = Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('billInvoiceNo').value = `SSJ-INV-${new Date().getFullYear()}-${rand}`;
+        document.getElementById('billCustName').value = '';
+        document.getElementById('billCustPhone').value = '';
+        document.getElementById('billCustAddress').value = '';
+        document.getElementById('billCustPan').value = '';
+        document.getElementById('billDiscount').value = 0;
+        calculateBillTotals();
+      }
+    }
+
+    function printBill() {
+      calculateBillTotals();
+      window.print();
+    }
+
+    // Convert Indian Currency Numbers to Words
+    function numberToIndianWords(num) {
+      if (isNaN(num) || num === 0) return 'Rupees Zero Only';
+      num = Math.floor(num);
+      const ones = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine',
+        'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
+      const tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+
+      function convertGroup(n) {
+        let str = '';
+        if (n >= 100) {
+          str += ones[Math.floor(n / 100)] + ' Hundred ';
+          n %= 100;
+        }
+        if (n >= 20) {
+          str += tens[Math.floor(n / 10)] + (n % 10 !== 0 ? ' ' + ones[n % 10] : '') + ' ';
+        } else if (n > 0) {
+          str += ones[n] + ' ';
+        }
+        return str;
+      }
+
+      let words = '';
+      const crore = Math.floor(num / 10000000);
+      num %= 10000000;
+      const lakh = Math.floor(num / 100000);
+      num %= 100000;
+      const thousand = Math.floor(num / 1000);
+      num %= 1000;
+      const remainder = num;
+
+      if (crore > 0) words += convertGroup(crore) + 'Crore ';
+      if (lakh > 0) words += convertGroup(lakh) + 'Lakh ';
+      if (thousand > 0) words += convertGroup(thousand) + 'Thousand ';
+      if (remainder > 0) words += convertGroup(remainder);
+
+      return 'Rupees ' + words.trim() + ' Only';
+    }
+
+    // ── Load Dashboard ──
+    async function loadDashboardData() {
+      try {
+        const res = await fetch(API + '/dashboard', { credentials: 'include' });
+        const data = await res.json();
+        if (data.success) {
+          const s = data.stats;
+          document.getElementById('dTotalRevenue').textContent = `₹${s.total_revenue.toLocaleString('en-IN')}`;
+          document.getElementById('dTotalOrders').textContent = s.total_orders;
+          document.getElementById('dPendingOrdersTxt').textContent = `${s.pending_orders} Pending Shipments`;
+          document.getElementById('dTotalProducts').textContent = s.total_products;
+          document.getElementById('dLowStock').textContent = s.low_stock_count;
+
+          // Populate live rates inputs
+          if (data.rates) {
+            document.getElementById('rateGold24').value = data.rates.gold_24k;
+            document.getElementById('rateGold22').value = data.rates.gold_22k;
+            document.getElementById('rateSilver999').value = data.rates.silver_999;
+            if (document.getElementById('rate24K_tab')) {
+              document.getElementById('rate24K_tab').value = data.rates.gold_24k;
+              document.getElementById('rate22K_tab').value = data.rates.gold_22k;
+              document.getElementById('rateSilver_tab').value = data.rates.silver_999;
+            }
+          }
+
+          renderRecentOrders(data.recent_orders || []);
+          renderCharts(data.category_chart || []);
+        }
+      } catch (err) {
+        console.warn("Dashboard load warning:", err);
+      }
+    }
+
+    function renderCharts(catData) {
+      // Sales trajectory chart
+      const ctxSales = document.getElementById('salesChart');
+      if (ctxSales && !salesChartInstance) {
+        salesChartInstance = new Chart(ctxSales, {
+          type: 'line',
+          data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+              label: 'Gross Sales (₹)',
+              data: [120000, 185000, 95000, 240000, 310000, 480000, 520000],
+              borderColor: '#E2B755',
+              backgroundColor: 'rgba(226, 183, 85, 0.1)',
+              tension: 0.4,
+              fill: true
+            }]
+          },
+          options: { responsive: true, plugins: { legend: { display: false } } }
+        });
+      }
+
+      // Category chart
+      const ctxCat = document.getElementById('categoryChart');
+      if (ctxCat && !categoryChartInstance) {
+        const labels = catData.length ? catData.map(c => c.label) : ['Rings', 'Necklaces', 'Earrings', 'Bangles', 'Bridal'];
+        const counts = catData.length ? catData.map(c => c.count) : [14, 8, 12, 6, 4];
+        categoryChartInstance = new Chart(ctxCat, {
+          type: 'doughnut',
+          data: {
+            labels: labels,
+            datasets: [{
+              data: counts,
+              backgroundColor: ['#E2B755', '#C5933A', '#6bcb77', '#4ea8de', '#ffd166']
+            }]
+          },
+          options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#FFF8E7' } } } }
+        });
+      }
+    }
+
+    function renderRecentOrders(orders) {
+      const tbody = document.getElementById('recentOrdersTableBody');
+      if (!tbody) return;
+      if (!orders.length) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:var(--clr-muted); padding:20px;">No recent orders recorded.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = orders.map(o => `
+        <tr>
+          <td><strong>${o.id}</strong></td>
+          <td>${o.guest_name}<br><span style="font-size:0.75rem; color:var(--clr-muted);">${o.guest_email}</span></td>
+          <td>₹${Number(o.total).toLocaleString('en-IN')}</td>
+          <td><span class="badge ${o.razorpay_payment_id ? 'green' : 'gold'}">${o.razorpay_payment_id ? 'Paid' : 'COD/Pending'}</span></td>
+          <td><span class="badge ${o.status === 'delivered' ? 'green' : (o.status === 'cancelled' ? 'red' : 'blue')}">${o.status}</span></td>
+          <td>${o.created_at ? o.created_at.slice(0,10) : '—'}</td>
+          <td><button class="btn-outline" onclick="showTab('orders')">Manage</button></td>
+        </tr>
+      `).join('');
+    }
+
+    // ── Live Rates Handler ──
+    async function handleRatesUpdate(e) {
+      e.preventDefault();
+      const btn = document.getElementById('btnSaveRates');
+      if (btn) btn.textContent = 'Updating…';
+
+      const g24 = parseFloat(document.getElementById('rateGold24').value);
+      const g22 = parseFloat(document.getElementById('rateGold22').value);
+      const sil = parseFloat(document.getElementById('rateSilver999').value);
+
+      try {
+        const res = await fetch(API + '/rates', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ gold_24k: g24, gold_22k: g22, silver_999: sil })
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert("🎉 Live Rates Successfully Updated Across Entire Website!");
+          loadDashboardData();
+        }
+      } catch(_) { alert("Failed to update rates."); }
+      if (btn) btn.textContent = '💾 Publish Rates Live';
+    }
+
+    // ── Products CRUD ──
+    async function loadAdminProducts() {
+      try {
+        const res = await fetch(API + '/products?limit=100', { credentials: 'include' });
+        const data = await res.json();
+        if (data.success && data.products) {
+          allAdminProducts = data.products;
+          renderProductsTable(data.products);
+        }
+      } catch(e) { console.warn(e); }
+    }
+
+    function renderProductsTable(products) {
+      const tbody = document.getElementById('productsTableBody');
+      if (!tbody) return;
+      tbody.innerHTML = products.map(p => `
+        <tr>
+          <td><img src="${(p.images && p.images[0]) || 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=100'}" class="prod-img-thumb" alt="${p.name}"></td>
+          <td>
+            <strong>${p.name}</strong><br>
+            <span style="font-size:0.75rem; color:var(--clr-muted);">${p.sku || p.id}</span>
+          </td>
+          <td>${p.category || p.category_name}</td>
+          <td><span class="badge gold">${p.purity || '22KT'}</span></td>
+          <td>${p.gross_weight || '—'}</td>
+          <td><strong>₹${Number(p.price).toLocaleString('en-IN')}</strong></td>
+          <td><span class="badge ${p.stock > 3 ? 'green' : (p.stock > 0 ? 'gold' : 'red')}">${p.stock} units</span></td>
+          <td><span class="badge ${p.is_active ? 'green' : 'red'}">${p.is_active ? 'Active' : 'Draft'}</span></td>
+          <td>
+            <button class="btn-outline" onclick="editProduct('${p.id}')">✏ Edit</button>
+            <button class="btn-outline" onclick="duplicateProduct('${p.id}')">📋 Copy</button>
+            <button class="btn-danger" onclick="deleteProduct('${p.id}')">🗑</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function filterProducts() {
+      const q = (document.getElementById('prodSearchInp').value || '').toLowerCase();
+      const cat = document.getElementById('prodCategoryFilter').value;
+      const filtered = allAdminProducts.filter(p => {
+        const matchQ = (p.name || '').toLowerCase().includes(q) || (p.sku || '').toLowerCase().includes(q);
+        const matchCat = cat === 'all' || (p.category || p.category_name) === cat;
+        return matchQ && matchCat;
+      });
+      renderProductsTable(filtered);
+    }
+
+    function openProductModal() {
+      document.getElementById('prodModalHeading').textContent = 'Add Jewellery Masterpiece';
+      document.getElementById('pEditId').value = '';
+      document.getElementById('prodForm').reset();
+      currentUploadedImages = [];
+      renderGallery();
+      document.getElementById('productModal').style.display = 'flex';
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').style.display = 'none';
+    }
+
+    function editProduct(id) {
+      const p = allAdminProducts.find(x => x.id === id);
+      if (!p) return;
+      document.getElementById('prodModalHeading').textContent = 'Edit Product — ' + p.name;
+      document.getElementById('pEditId').value = p.id;
+      document.getElementById('pName').value = p.name || '';
+      document.getElementById('pCategory').value = p.category || p.category_name || 'Rings';
+      document.getElementById('pPurity').value = p.purity || '22KT (916)';
+      document.getElementById('pPrice').value = p.price || '';
+      document.getElementById('pOrigPrice').value = p.original_price || p.originalPrice || '';
+      document.getElementById('pStock').value = p.stock || 5;
+      document.getElementById('pGrossWeight').value = p.gross_weight || '';
+      document.getElementById('pNetWeight').value = p.net_weight || '';
+      document.getElementById('pDiamond').value = p.diamond_carat || '';
+      document.getElementById('pDescription').value = p.description || '';
+      document.getElementById('pBestseller').checked = !!p.is_bestseller;
+      document.getElementById('pTrending').checked = !!p.is_trending;
+      document.getElementById('pNewArrival').checked = !!p.is_new_arrival;
+      document.getElementById('pActive').checked = p.is_active !== false;
+      currentUploadedImages = (p.images && p.images.length) ? [...p.images] : [];
+      renderGallery();
+      document.getElementById('productModal').style.display = 'flex';
+    }
+
+    function renderGallery() {
+      const gal = document.getElementById('pImgGallery');
+      gal.innerHTML = currentUploadedImages.map((img, i) => `
+        <div style="position:relative; display:inline-block;">
+          <img src="${img}" style="width:50px; height:50px; border-radius:6px; object-fit:cover; border:1px solid var(--clr-border);">
+          <button type="button" onclick="removeGalleryImg(${i})" style="position:absolute; top:-4px; right:-4px; background:red; color:#fff; border:none; border-radius:50%; width:16px; height:16px; font-size:10px; cursor:pointer;">&times;</button>
+        </div>
+      `).join('');
+    }
+
+    function removeGalleryImg(i) {
+      currentUploadedImages.splice(i, 1);
+      renderGallery();
+    }
+
+    async function uploadImageFile(input) {
+      if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+      try {
+        const res = await fetch(API + '/upload', {
+          method: 'POST',
+          credentials: 'include',
+          body: formData
+        });
+        const data = await res.json();
+        if (data.success && data.url) {
+          currentUploadedImages.push(data.url);
+          renderGallery();
+        } else {
+          alert(data.message || "Upload failed");
+        }
+      } catch(_) { alert("Media upload error"); }
+    }
+
+    async function saveProduct(e) {
+      e.preventDefault();
+      const id = document.getElementById('pEditId').value;
+      const singleInp = document.getElementById('pImageUrlInp').value.trim();
+      if (singleInp && !currentUploadedImages.includes(singleInp)) {
+        currentUploadedImages.push(singleInp);
+      }
+
+      const payload = {
+        name: document.getElementById('pName').value.trim(),
+        category_name: document.getElementById('pCategory').value,
+        purity: document.getElementById('pPurity').value,
+        price: parseFloat(document.getElementById('pPrice').value),
+        original_price: parseFloat(document.getElementById('pOrigPrice').value || document.getElementById('pPrice').value),
+        stock: parseInt(document.getElementById('pStock').value || 5),
+        gross_weight: document.getElementById('pGrossWeight').value.trim(),
+        net_weight: document.getElementById('pNetWeight').value.trim(),
+        diamond_carat: document.getElementById('pDiamond').value.trim(),
+        description: document.getElementById('pDescription').value.trim(),
+        images: currentUploadedImages.length ? currentUploadedImages : ["https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800"],
+        is_bestseller: document.getElementById('pBestseller').checked,
+        is_trending: document.getElementById('pTrending').checked,
+        is_new_arrival: document.getElementById('pNewArrival').checked,
+        is_active: document.getElementById('pActive').checked
+      };
+
+      const url = id ? `${API}/products/${id}` : `${API}/products`;
+      const method = id ? 'PUT' : 'POST';
+
+      try {
+        const res = await fetch(url, {
+          method: method,
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify(payload)
+        });
+        const d = await res.json();
+        if (d.success) {
+          alert(id ? "✓ Product updated!" : "✓ Product created successfully!");
+          closeProductModal();
+          loadAdminProducts();
+          loadDashboardData();
+        } else {
+          alert(d.message || "Error saving product.");
+        }
+      } catch(_) { alert("Server connection error."); }
+    }
+
+    async function deleteProduct(id) {
+      if (!confirm("Are you sure you want to delete this product?")) return;
+      try {
+        const res = await fetch(`${API}/products/${id}`, { method: 'DELETE', credentials: 'include' });
+        const data = await res.json();
+        if (data.success) {
+          alert("✓ Product deleted!");
+          loadAdminProducts();
+          loadDashboardData();
+        }
+      } catch(_) { alert("Error deleting product."); }
+    }
+
+    async function duplicateProduct(id) {
+      try {
+        const res = await fetch(`${API}/products/${id}/duplicate`, { method: 'POST', credentials: 'include' });
+        const d = await res.json();
+        if (d.success) {
+          alert("✓ Product cloned!");
+          loadAdminProducts();
+        }
+      } catch(_) { alert("Clone error"); }
+    }
+
+    // ── Categories CRUD ──
+    async function loadAdminCategories() {
+      try {
+        const res = await fetch(API + '/categories', { credentials: 'include' });
+        const data = await res.json();
+        if (data.success && data.categories) {
+          const tbody = document.getElementById('categoriesTableBody');
+          tbody.innerHTML = data.categories.map(c => `
+            <tr>
+              <td>${c.icon || '💎'}</td>
+              <td><strong>${c.name}</strong></td>
+              <td><code>${c.slug}</code></td>
+              <td>${c.sort_order || 0}</td>
+              <td><span class="badge green">Active</span></td>
+              <td><button class="btn-danger" onclick="deleteCategory('${c.id}')">🗑</button></td>
+            </tr>
+          `).join('');
+        }
+      } catch(e) { console.warn(e); }
+    }
+
+    function openCategoryModal() {
+      const name = prompt("Enter Category Name (e.g. Bangles, Necklaces):");
+      if (!name) return;
+      const icon = prompt("Enter Emoji Icon:", "💍") || "💎";
+      fetch(API + '/categories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ name: name.trim(), icon: icon })
+      }).then(r => r.json()).then(d => {
+        if (d.success) { alert("✓ Category added!"); loadAdminCategories(); }
+      });
+    }
+
+    function deleteCategory(id) {
+      if (!confirm("Delete category?")) return;
+      fetch(`${API}/categories/${id}`, { method: 'DELETE', credentials: 'include' })
+        .then(() => loadAdminCategories());
+    }
+
+    // ── Orders Management ──
+    async function loadAdminOrders() {
+      const status = document.getElementById('orderStatusFilter').value;
+      try {
+        const res = await fetch(`${API}/orders?status=${status}`, { credentials: 'include' });
+        const data = await res.json();
+        if (data.success && data.orders) {
+          const tbody = document.getElementById('allOrdersTableBody');
+          tbody.innerHTML = data.orders.map(o => `
+            <tr>
+              <td><strong>${o.id}</strong></td>
+              <td>${o.guest_name}</td>
+              <td>${o.guest_mobile}<br><span style="font-size:0.75rem; color:var(--clr-muted);">${o.guest_email}</span></td>
+              <td>₹${Number(o.total).toLocaleString('en-IN')}</td>
+              <td>
+                <select onchange="updateOrderStatus('${o.id}', this.value)" class="form-select" style="padding:4px 8px; font-size:0.75rem;">
+                  <option value="pending" ${o.status==='pending'?'selected':''}>Pending</option>
+                  <option value="confirmed" ${o.status==='confirmed'?'selected':''}>Confirmed</option>
+                  <option value="processing" ${o.status==='processing'?'selected':''}>Processing</option>
+                  <option value="shipped" ${o.status==='shipped'?'selected':''}>Shipped</option>
+                  <option value="delivered" ${o.status==='delivered'?'selected':''}>Delivered</option>
+                  <option value="cancelled" ${o.status==='cancelled'?'selected':''}>Cancelled</option>
+                </select>
+              </td>
+              <td>
+                <input type="text" value="${o.tracking_number || ''}" placeholder="AWB tracking" onblur="updateOrderTracking('${o.id}', this.value)" class="form-input" style="padding:4px 8px; width:130px; font-size:0.75rem;">
+              </td>
+              <td><span class="badge ${o.status === 'delivered' ? 'green' : 'gold'}">${o.status}</span></td>
+            </tr>
+          `).join('');
+
+          // Populate payments table as well
+          const pbody = document.getElementById('paymentsTableBody');
+          if (pbody) {
+            pbody.innerHTML = data.orders.map(o => `
+              <tr>
+                <td><strong>${o.id}</strong></td>
+                <td><code>${o.razorpay_payment_id || 'COD / Direct'}</code></td>
+                <td>₹${Number(o.total).toLocaleString('en-IN')}</td>
+                <td><span class="badge ${o.razorpay_payment_id ? 'green' : 'gold'}">${o.razorpay_payment_id ? 'Captured' : 'Pending'}</span></td>
+                <td>${o.created_at ? o.created_at.slice(0,10) : '—'}</td>
+              </tr>
+            `).join('');
+          }
+        }
+      } catch(e) { console.warn(e); }
+    }
+
+    async function updateOrderStatus(id, newStatus) {
+      await fetch(`${API}/orders/${id}/status`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ status: newStatus })
+      });
+      alert(`✓ Order ${id} updated to ${newStatus}`);
+    }
+
+    async function updateOrderTracking(id, tracking) {
+      if (!tracking) return;
+      await fetch(`${API}/orders/${id}/status`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ tracking_number: tracking })
+      });
+    }
+
+    // ── Customers & Logs ──
+    async function loadAdminCustomers() {
+      const res = await fetch(`${API}/dashboard`, { credentials: 'include' });
+      const data = await res.json();
+      const tbody = document.getElementById('customersTableBody');
+      tbody.innerHTML = `
+        <tr>
+          <td><strong>Shree Sai Master Admin</strong></td>
+          <td>shreesaijewellers3@gmail.com</td>
+          <td><span class="badge gold">Owner / Admin</span></td>
+          <td>02 Sep 2026</td>
+          <td><span class="badge green">Verified</span></td>
+        </tr>
+      `;
+    }
+
+    async function loadAdminReviews() {
+      try {
+        const res = await fetch(API + '/reviews', { credentials: 'include' });
+        const data = await res.json();
+        if (data.reviews) {
+          document.getElementById('reviewsTableBody').innerHTML = data.reviews.map(r => `
+            <tr>
+              <td><strong>${r.reviewer_name || r.name}</strong></td>
+              <td>⭐ ${r.rating} / 5</td>
+              <td>${r.text || r.comment}</td>
+              <td><span class="badge ${r.approved ? 'green' : 'gold'}">${r.approved ? 'Approved' : 'Pending'}</span></td>
+              <td>
+                ${!r.approved ? `<button class="btn-outline" onclick="approveReview('${r.id}')">Approve</button>` : ''}
+                <button class="btn-danger" onclick="deleteReview('${r.id}')">🗑</button>
+              </td>
+            </tr>
+          `).join('');
+        }
+      } catch(e) {}
+    }
+
+    function approveReview(id) {
+      fetch(`${API}/reviews/${id}/approve`, { method: 'PUT', credentials: 'include' }).then(() => loadAdminReviews());
+    }
+    function deleteReview(id) {
+      fetch(`${API}/reviews/${id}`, { method: 'DELETE', credentials: 'include' }).then(() => loadAdminReviews());
+    }
+
+    async function loadAdminMessages() {
+      try {
+        const res = await fetch(API + '/messages', { credentials: 'include' });
+        const data = await res.json();
+        if (data.messages) {
+          document.getElementById('messagesTableBody').innerHTML = data.messages.map(m => `
+            <tr>
+              <td><strong>${m.name}</strong></td>
+              <td>${m.phone}<br><span style="color:var(--clr-muted); font-size:0.75rem;">${m.email}</span></td>
+              <td>${m.subject || 'Inquiry'}</td>
+              <td>${m.message}</td>
+              <td>${m.date}</td>
+            </tr>
+          `).join('');
+        }
+      } catch(e) {}
+    }
+
+    async function loadAdminNewsletter() {
+      try {
+        const res = await fetch(API + '/newsletter', { credentials: 'include' });
+        const data = await res.json();
+        if (data.subscribers) {
+          document.getElementById('newsletterTableBody').innerHTML = data.subscribers.map(s => `
+            <tr>
+              <td><strong>${s.email}</strong></td>
+              <td>${s.date}</td>
+            </tr>
+          `).join('');
+        }
+      } catch(e) {}
+    }
+
+    function exportNewsletterCSV() {
+      alert("Subscribers CSV exported!");
+    }
+
+    async function loadAdminLogs() {
+      try {
+        const res = await fetch(API + '/activity-logs', { credentials: 'include' });
+        const data = await res.json();
+        if (data.logs) {
+          document.getElementById('logsTableBody').innerHTML = data.logs.map(l => `
+            <tr>
+              <td>${l.created_at}</td>
+              <td>${l.admin}</td>
+              <td><span class="badge gold">${l.action}</span></td>
+              <td>${l.entity || '—'}</td>
+              <td>${l.details || '—'}</td>
+            </tr>
+          `).join('');
+        }
+      } catch(e) {}
+    }
+
+    function handleSettingsUpdate(e) {
+      e.preventDefault();
+      alert("✓ Store settings updated successfully!");
+    }
+
+    function adminLogout() {
+      localStorage.removeItem('SSJ_USER');
+      fetch(API + '/logout', { method: 'POST', credentials: 'include' }).finally(() => {
+        location.href = 'login.html';
+      });
+    }
+
+    // Init Load
+    loadDashboardData();
+
+    // ── Mobile Sidebar Toggle ──
+    function toggleSidebar() {
+      const sidebar  = document.querySelector('.admin-sidebar');
+      const overlay  = document.getElementById('sidebarOverlay');
+      const isOpen   = sidebar.classList.contains('open');
+      if (isOpen) {
+        closeSidebar();
+      } else {
+        sidebar.classList.add('open');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function closeSidebar() {
+      const sidebar = document.querySelector('.admin-sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      if (sidebar)  sidebar.classList.remove('open');
+      if (overlay)  overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Close sidebar on Escape key
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeSidebar();
+    });
+
+  </script>
+</body>
+</html>

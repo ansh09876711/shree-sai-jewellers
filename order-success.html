@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmed! | Shree Sai Jewellers</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💎</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header style="background:rgba(9,8,10,0.95);border-bottom:1px solid var(--clr-border-gold);padding:var(--sp-4) 0;position:sticky;top:0;z-index:var(--z-sticky);">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;">
+      <a href="index.html" class="brand-logo">
+        <div class="brand-text"><span class="brand-name" style="font-size:var(--fs-base);">Shree Sai Jewellers</span></div>
+      </a>
+      <a href="order-tracking.html" style="font-size:var(--fs-sm);color:var(--clr-gold);">📦 Track Orders →</a>
+    </div>
+  </header>
+
+  <main style="padding:var(--sp-10) 0 var(--sp-16);">
+    <div class="container" style="max-width:700px;">
+      <div id="orderSuccessContent">
+        <div class="loading-overlay"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </main>
+
+  <footer style="background:var(--clr-surface);border-top:1px solid var(--clr-border);padding:var(--sp-8) 0;text-align:center;">
+    <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);">Questions? Contact us at <a href="mailto:care@shreesaijewellers.com" style="color:var(--clr-gold);">care@shreesaijewellers.com</a></p>
+  </footer>
+
+  <div id="toastContainer" class="toast-container"></div>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

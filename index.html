@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shree Sai Jewellers | Handcrafted Gold, Diamond &amp; Gemstone Jewellery</title>
+  <meta name="description" content="Discover handcrafted 22K Hallmarked Gold, Solitaire Diamonds, and Fine Heirloom Jewellery from Shree Sai Jewellers. BIS Certified with Insured Delivery across India.">
+  <meta name="keywords" content="gold jewellery, diamond rings, gemstone jewellery, 22K gold, BIS hallmark, jewellery India">
+  <meta property="og:title" content="Shree Sai Jewellers | Fine Heirloom Jewellery">
+  <meta property="og:description" content="Handcrafted 22K Gold, Diamond &amp; Fine Jewellery. BIS Certified. Pan-India Insured Delivery.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://shreesaijewellers.com/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💎</text></svg>">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "JewelryStore",
+    "name": "Shree Sai Jewellers",
+    "url": "https://shreesaijewellers.com",
+    "telephone": "+919876543210",
+    "address": { "@type": "PostalAddress", "addressLocality": "Indore", "addressRegion": "Madhya Pradesh", "postalCode": "452009", "addressCountry": "IN" },
+    "openingHours": "Mo-Sa 10:00-20:00",
+    "priceRange": "₹₹₹"
+  }
+  </script>
+
+  <!-- Modular Stylesheets: Desktop Base + Mobile Specific -->
+  <link rel="stylesheet" href="css/desktop.css">
+  <link rel="stylesheet" href="css/mobile.css" media="screen and (max-width: 1024px)">
+</head>
+<body>
+
+<!-- ============================================================
+     TOP BAR — Live Rates & Trust Signals
+     ============================================================ -->
+<div class="top-bar">
+  <div class="container top-bar-inner">
+    <div class="top-trust-badges">
+      <span class="trust-badge-item">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+        100% Insured Delivery
+      </span>
+      <span class="top-sep">|</span>
+      <span class="trust-badge-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        BIS 916 Hallmarked
+      </span>
+      <span class="top-sep">|</span>
+      <span class="trust-badge-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        Est. 1984
+      </span>
+    </div>
+
+    <div class="live-rates">
+      <div class="live-pulse">
+        <div class="pulse-dot"></div>
+        <span class="live-label">Live Rates</span>
+      </div>
+      <div class="rate-items">
+        <span class="rate-item"><strong>24K:</strong> <span id="rate24k">Loading…</span></span>
+        <span class="rate-sep">·</span>
+        <span class="rate-item"><strong>22K:</strong> <span id="rate22k">—</span></span>
+        <span class="rate-sep">·</span>
+        <span class="rate-item"><strong>Silver:</strong> <span id="rateSilver">—</span></span>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a href="login.html" class="top-phone" id="topAuthLink" style="color:var(--clr-gold);font-weight:500;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span id="topAuthText">Login / Register</span>
+      </a>
+      <span class="top-sep" style="opacity:0.3;">|</span>
+      <a href="tel:+919876543210" class="top-phone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 11.7 19.79 19.79 0 0 1 1.04 3.12 2 2 0 0 1 3 1.12h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +91 98765 43210
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     MOBILE NAV DRAWER + OVERLAY
+     ============================================================ -->
+<div class="mobile-nav-overlay" id="mobileNavOverlay" onclick="closeMobileNav()"></div>
+<nav class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+  <div class="mobile-nav-header">
+    <a href="index.html" class="brand-logo" style="gap:10px;">
+      <svg style="width:30px;height:30px;filter:drop-shadow(0 0 8px rgba(226,183,85,0.4))" viewBox="0 0 44 44" fill="none"><defs><linearGradient id="gMob" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FFF8E7"/><stop offset="40%" stop-color="#E2B755"/><stop offset="100%" stop-color="#8B6017"/></linearGradient></defs><path d="M22 4L27 14H17L22 4Z" fill="url(#gMob)"/><path d="M22 40L8 16H36L22 40Z" fill="url(#gMob)" opacity="0.9"/><path d="M22 40L16 16H28L22 40Z" fill="url(#gMob)"/><circle cx="22" cy="9" r="2" fill="#FFF8E7"/></svg>
+      <span style="font-family:'Cinzel',serif;font-size:13px;font-weight:600;letter-spacing:0.15em;background:linear-gradient(135deg,#FFF8E7,#E2B755,#8B6017);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-transform:uppercase;">Shree Sai</span>
+    </a>
+    <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close menu">✕</button>
+  </div>
+  <div class="mobile-nav-links">
+    <div class="mobile-nav-section-label">Navigation</div>
+    <a href="index.html" class="mobile-nav-link"><span class="mobile-nav-icon">🏠</span> Home</a>
+    <a href="products.html" class="mobile-nav-link"><span class="mobile-nav-icon">💎</span> All Jewellery</a>
+    <div class="mobile-nav-section-label">Categories</div>
+    <a href="products.html?category=Rings" class="mobile-nav-link"><span class="mobile-nav-icon">💍</span> Rings</a>
+    <a href="products.html?category=Necklaces" class="mobile-nav-link"><span class="mobile-nav-icon">✨</span> Necklaces</a>
+    <a href="products.html?category=Earrings" class="mobile-nav-link"><span class="mobile-nav-icon">💫</span> Earrings</a>
+    <a href="products.html?category=Bangles" class="mobile-nav-link"><span class="mobile-nav-icon">⭕</span> Bangles</a>
+    <a href="products.html?category=Bracelets" class="mobile-nav-link"><span class="mobile-nav-icon">👑</span> Bracelets</a>
+    <a href="products.html?category=Chains" class="mobile-nav-link"><span class="mobile-nav-icon">🔗</span> Chains</a>
+    <div class="mobile-nav-section-label">More</div>
+    <a href="offers.html" class="mobile-nav-link"><span class="mobile-nav-icon">🎁</span> Offers &amp; Sale</a>
+    <button class="mobile-nav-link" style="width:100%;text-align:left;background:none;border:none;cursor:pointer;color:inherit;font:inherit;" onclick="closeMobileNav(); renderWishlistDrawer(); openDrawer('wishlistDrawer')"><span class="mobile-nav-icon">❤️</span> My Wishlist</button>
+    <a href="about.html" class="mobile-nav-link"><span class="mobile-nav-icon">🏛️</span> About Us</a>
+    <a href="contact.html" class="mobile-nav-link"><span class="mobile-nav-icon">📞</span> Contact</a>
+    <a href="login.html" class="mobile-nav-link"><span class="mobile-nav-icon">👤</span> My Account</a>
+    <a href="order-tracking.html" class="mobile-nav-link"><span class="mobile-nav-icon">📦</span> Track Order</a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     MAIN HEADER — Sticky, Glassmorphism
+     ============================================================ -->
+<header class="main-header" id="mainHeader">
+  <div class="container header-inner">
+
+    <!-- Hamburger (mobile) -->
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu" onclick="openMobileNav()">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+
+    <!-- Brand Logo -->
+    <a href="index.html" class="brand-logo" title="Shree Sai Jewellers">
+      <svg class="brand-emblem" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFF8E7"/>
+            <stop offset="40%" stop-color="#E2B755"/>
+            <stop offset="75%" stop-color="#C5933A"/>
+            <stop offset="100%" stop-color="#8B6017"/>
+          </linearGradient>
+        </defs>
+        <path d="M22 4L27 14H17L22 4Z" fill="url(#goldGrad)"/>
+        <path d="M22 40L8 16H36L22 40Z" fill="url(#goldGrad)" opacity="0.9"/>
+        <path d="M22 40L16 16H28L22 40Z" fill="url(#goldGrad)"/>
+        <circle cx="22" cy="9" r="2" fill="#FFF8E7"/>
+        <path d="M9 11L14 16H7L9 11Z" fill="url(#goldGrad)" opacity="0.7"/>
+        <path d="M35 11L37 16H30L35 11Z" fill="url(#goldGrad)" opacity="0.7"/>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-name">Shree Sai Jewellers</span>
+        <span class="brand-tagline">✦ Fine Heirloom Jewellery · Est. 1984 ✦</span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+        <li class="nav-item">
+          <a href="products.html" class="nav-link">Jewellery ▾</a>
+          <div class="nav-dropdown">
+            <a href="products.html?category=Rings">💍 Rings</a>
+            <a href="products.html?category=Necklaces">✨ Necklaces</a>
+            <a href="products.html?category=Earrings">💎 Earrings</a>
+            <a href="products.html?category=Bracelets">👑 Bracelets</a>
+            <a href="products.html?category=Bangles">💫 Bangles</a>
+            <a href="products.html?category=Chains">🔗 Chains</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="products.html" class="nav-link">Collections ▾</a>
+          <div class="nav-dropdown">
+            <a href="products.html?jewellery_type=Gold">🥇 Gold</a>
+            <a href="products.html?jewellery_type=Diamond">💎 Diamond</a>
+            <a href="products.html?jewellery_type=Silver">⚪ Silver</a>
+          </div>
+        </li>
+        <li class="nav-item"><a href="offers.html" class="nav-link">Offers <span class="nav-badge hot">HOT</span></a></li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+        <li class="nav-item"><a href="login.html" class="nav-link nav-auth-link" style="color:var(--clr-gold);font-weight:600;display:flex;align-items:center;gap:4px;"><span style="font-size:1.1em;">👤</span> <span id="navAuthText">Login / Register</span></a></li>
+      </ul>
+    </nav>
+
+    <!-- Nav Actions -->
+    <div class="nav-actions">
+      <!-- Search -->
+      <div class="header-search-wrap">
+        <svg class="search-icon-btn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="headerSearchInput" class="header-search" placeholder="Search jewellery…" autocomplete="off" aria-label="Search">
+        <div id="searchSuggestions" class="search-suggestions"></div>
+      </div>
+
+      <!-- Mobile Quick Search Icon -->
+      <a href="search.html" class="icon-btn mobile-search-btn" title="Search jewellery" aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </a>
+
+      <!-- Track Order -->
+      <a href="order-tracking.html" class="icon-btn" title="Track Order" aria-label="Track Order">
+        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </a>
+
+      <!-- Wishlist -->
+      <button class="icon-btn" data-open-drawer="wishlistDrawer" title="Wishlist" aria-label="Wishlist" onclick="renderWishlistDrawer(); openDrawer('wishlistDrawer')">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="badge-count wishlist-count" style="display:none;">0</span>
+      </button>
+
+      <!-- Cart -->
+      <button class="icon-btn icon-btn-cart" title="Cart" aria-label="Shopping Cart" onclick="renderCartDrawer(); openDrawer('cartDrawer')">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="badge-count cart-count" style="display:none;">0</span>
+      </button>
+
+      <!-- Login / User Account -->
+      <div class="user-nav-wrap" style="position:relative;">
+        <a href="login.html" class="icon-btn" id="userNavBtn" title="My Account" aria-label="Login / My Account" style="text-decoration:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span class="badge-count user-logged-badge" id="userLoggedBadge" style="display:none; background:#6bcb77; width:8px; height:8px; min-width:8px; padding:0; top:4px; right:4px; border-radius:50%;"></span>
+        </a>
+      </div>
+
+
+  </div>
+</header>
+
+<!-- ============================================================
+     SUB-NAV — Category Quick Filters
+     ============================================================ -->
+<nav class="sub-nav" aria-label="Category Navigation">
+  <ul class="sub-nav-list">
+    <li><a href="products.html" class="sub-nav-link" data-category="all"><span class="sub-nav-icon">✦</span> All Jewels</a></li>
+    <li><a href="products.html?category=Rings" class="sub-nav-link" data-category="Rings"><span class="sub-nav-icon">💍</span> Rings</a></li>
+    <li><a href="products.html?category=Necklaces" class="sub-nav-link" data-category="Necklaces"><span class="sub-nav-icon">✨</span> Necklaces</a></li>
+    <li><a href="products.html?category=Earrings" class="sub-nav-link" data-category="Earrings"><span class="sub-nav-icon">💎</span> Earrings</a></li>
+    <li><a href="products.html?category=Bangles" class="sub-nav-link" data-category="Bangles"><span class="sub-nav-icon">💫</span> Bangles</a></li>
+    <li><a href="products.html?category=Bracelets" class="sub-nav-link" data-category="Bracelets"><span class="sub-nav-icon">👑</span> Bracelets</a></li>
+    <li><a href="products.html?category=Chains" class="sub-nav-link" data-category="Chains"><span class="sub-nav-icon">🔗</span> Chains</a></li>
+    <li><a href="products.html?jewellery_type=Gold" class="sub-nav-link"><span class="sub-nav-icon">🥇</span> Gold</a></li>
+    <li><a href="products.html?jewellery_type=Diamond" class="sub-nav-link"><span class="sub-nav-icon">💍</span> Diamond</a></li>
+    <li><a href="products.html?jewellery_type=Silver" class="sub-nav-link"><span class="sub-nav-icon">⚪</span> Silver</a></li>
+    <li><a href="offers.html" class="sub-nav-link"><span class="sub-nav-icon">🎁</span> Offers</a></li>
+  </ul>
+</nav>
+
+<!-- ============================================================
+     HERO SECTION — Dynamic Content from /api/banners
+     ============================================================ -->
+<section class="hero-section" id="hero">
+  <div class="hero-bg">
+    <img id="heroBgImage"
+         src="images/hero_bg.jpg"
+         alt="Premium Jewellery Collection"
+         class="hero-bg-image"
+         loading="eager"
+         onerror="this.src='https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=1920&auto=format&fit=crop'">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="container hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span id="heroEyebrow">Heritage Collection 2026</span>
+      </div>
+      <h1 class="hero-title">
+        <span id="heroTitle">Timeless Elegance,</span>
+        <span class="gold-line" id="heroTitleGold">Crafted for Generations</span>
+      </h1>
+      <p class="hero-desc" id="heroDesc">
+        Discover our bespoke collection of handcrafted 22K certified gold, solitaire diamonds, and fine heirloom jewellery — forged with century-old artisanal mastery.
+      </p>
+      <div class="hero-cta">
+        <a href="products.html" id="heroCTAPrimary" class="btn btn-primary btn-lg">
+          ✦ Explore Collection
+        </a>
+        <a href="products.html?jewellery_type=Gold" id="heroCTASecondary" class="btn btn-outline btn-lg">
+          Gold Collection
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">40+</div>
+          <div class="hero-stat-label">Years of Craft</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">50,000+</div>
+          <div class="hero-stat-label">Happy Customers</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">100%</div>
+          <div class="hero-stat-label">BIS Certified</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-image-frame">
+        <img class="hero-image-main"
+             src="images/categories/necklaces.jpg"
+             alt="Royal Heirloom Jewellery"
+             onerror="this.src='https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80'">
+        <div class="hero-image-badge" style="left: -20px; bottom: 30px;">
+          <div style="font-size:11px; color:var(--clr-gold); text-transform:uppercase; letter-spacing:0.08em; font-weight:700;">✨ Royal Heritage Collection</div>
+          <div style="font-size:var(--fs-md); font-family:var(--font-display); color:#FFF8E7; margin:3px 0 2px;">Emerald & Polki Choker</div>
+          <div style="font-size:11px; color:#6bcb77;">● BIS 916 Hallmarked · 100% Certified</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <span class="scroll-text">Scroll</span>
+    <svg class="scroll-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </div>
+</section><section class="trust-strip">
+  <div class="trust-scroll-wrap">
+    <div class="trust-grid">
+      <div class="trust-item fade-in">
+        <div class="trust-icon">🏛️</div>
+        <div class="trust-info"><h4>BIS 916 Hallmarked</h4><p>Government certified gold purity</p></div>
+      </div>
+      <div class="trust-item fade-in fade-in-delay-1">
+        <div class="trust-icon">💎</div>
+        <div class="trust-info"><h4>IGI Certified Diamonds</h4><p>Conflict-free, lab-graded stones</p></div>
+      </div>
+      <div class="trust-item fade-in fade-in-delay-2">
+        <div class="trust-icon">🛡️</div>
+        <div class="trust-info"><h4>Insured Delivery</h4><p>100% secure doorstep delivery</p></div>
+      </div>
+      <div class="trust-item fade-in fade-in-delay-3">
+        <div class="trust-icon">🔄</div>
+        <div class="trust-info"><h4>Easy Returns</h4><p>Hassle-free 7-day returns</p></div>
+      </div>
+      <div class="trust-item fade-in fade-in-delay-4">
+        <div class="trust-icon">⚖️</div>
+        <div class="trust-info"><h4>Transparent Pricing</h4><p>Full gold, making &amp; stone breakdown</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FEATURED CATEGORIES — Dynamic from /api/categories
+     ============================================================ -->
+<section class="section" id="categoriesSection">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Curated Silhouettes</span>
+      <h2 class="section-title">Shop by Category</h2>
+      <div class="section-divider"><span class="section-divider-icon">✦</span></div>
+    </div>
+    <div class="category-grid" id="categoriesGrid">
+      <!-- Loaded dynamically from /api/categories -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     NEW ARRIVALS — Dynamic from /api/products?is_new_arrival=true
+     ============================================================ -->
+<section class="section" style="background:var(--clr-surface);" id="newArrivalsSection">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Just Arrived</span>
+      <h2 class="section-title">New Arrivals</h2>
+      <div class="section-divider"><span class="section-divider-icon">✨</span></div>
+    </div>
+    <div class="product-grid" id="newArrivalsGrid">
+      <!-- Loaded dynamically -->
+    </div>
+    <div style="text-align:center;margin-top:var(--sp-10);">
+      <a href="products.html?sort=newest" class="btn btn-outline btn-lg">View All New Arrivals →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BEST SELLERS — Dynamic from /api/products?is_bestseller=true
+     ============================================================ -->
+<section class="section" id="bestSellersSection">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Customer Favourites</span>
+      <h2 class="section-title">Best Sellers</h2>
+      <div class="section-divider"><span class="section-divider-icon">⭐</span></div>
+    </div>
+    <div class="product-grid" id="bestSellersGrid">
+      <!-- Loaded dynamically -->
+    </div>
+    <div style="text-align:center;margin-top:var(--sp-10);">
+      <a href="products.html?sort=popular" class="btn btn-outline btn-lg">View All Best Sellers →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TRENDING NOW — Dynamic from /api/products?is_trending=true
+     ============================================================ -->
+<section class="section" style="background:var(--clr-surface);" id="trendingSection">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Most Loved Right Now</span>
+      <h2 class="section-title">Trending Jewellery</h2>
+      <div class="section-divider"><span class="section-divider-icon">🔥</span></div>
+    </div>
+    <div class="product-grid" id="trendingGrid">
+      <!-- Loaded dynamically -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     OFFERS SECTION — Dynamic from /api/offers
+     ============================================================ -->
+<section class="section offers-section" id="offersSection">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Limited Time</span>
+      <h2 class="section-title">Exclusive Offers</h2>
+      <div class="section-divider"><span class="section-divider-icon">🎁</span></div>
+      <div class="offers-live-badge">
+        <span class="pulse-dot"></span>
+        <span>Festive & Bridal Privileges · Instant Discount Coupons</span>
+      </div>
+    </div>
+    <div class="offers-grid" id="offersGrid">
+      <!-- Loaded dynamically from /api/offers -->
+    </div>
+    <div class="offers-action-wrap">
+      <a href="offers.html" class="btn btn-outline offers-all-btn">View All Active Offers →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     WHY CHOOSE US
+     ============================================================ -->
+<section class="section promise-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Our Promise</span>
+      <h2 class="section-title">Why Choose Shree Sai Jewellers</h2>
+      <div class="section-divider"><span class="section-divider-icon">✦</span></div>
+    </div>
+    <div class="promise-grid">
+      <div class="promise-card fade-in">
+        <div class="promise-icon-wrap">🏆</div>
+        <h3 class="promise-title">Certified Jewellery</h3>
+        <p class="promise-desc">Every piece carries BIS Hallmark & IGI certification for 100% purity</p>
+      </div>
+      <div class="promise-card fade-in fade-in-delay-1">
+        <div class="promise-icon-wrap">✨</div>
+        <h3 class="promise-title">Heritage Artistry</h3>
+        <p class="promise-desc">Handcrafted by master artisans with 40+ years of fine jewellery mastery</p>
+      </div>
+      <div class="promise-card fade-in fade-in-delay-2">
+        <div class="promise-icon-wrap">🔒</div>
+        <h3 class="promise-title">Secure Payments</h3>
+        <p class="promise-desc">256-bit encrypted checkout via Razorpay, UPI, Net Banking & Cards</p>
+      </div>
+      <div class="promise-card fade-in fade-in-delay-3">
+        <div class="promise-icon-wrap">🔄</div>
+        <h3 class="promise-title">Easy Returns</h3>
+        <p class="promise-desc">7-day hassle-free returns with doorstep insured pickup across India</p>
+      </div>
+      <div class="promise-card promise-card-wide fade-in fade-in-delay-4">
+        <div class="promise-icon-wrap">🚚</div>
+        <div class="promise-wide-body">
+          <h3 class="promise-title">Insured Doorstep Delivery</h3>
+          <p class="promise-desc">Every shipment is fully insured in tamper-evident secure vault packaging. Free delivery on orders above ₹50,000.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CRAFTSMANSHIP / BRAND STORY
+     ============================================================ -->
+<section class="section story-section" id="craftsmanshipSection">
+  <div class="container">
+    <div class="story-grid">
+      <!-- Story Content -->
+      <div class="story-content fade-in">
+        <span class="section-label">Our Story</span>
+        <h2 class="story-title">
+          Four Decades of<br><span class="text-gold">Royal Artistry</span>
+        </h2>
+        <p class="story-text story-lead">
+          Since 1984, Shree Sai Jewellers has been the custodian of India's rich jewellery heritage. Every piece that leaves our atelier carries the passion of master craftsmen who have devoted their lives to the art of transforming gold, diamonds, and precious stones into timeless heirlooms.
+        </p>
+        <p class="story-text story-sub">
+          From intricate Kundan jewellery to contemporary solitaire rings, our artisans blend age-old techniques with modern precision — creating jewellery that transcends generations.
+        </p>
+        <div class="story-actions">
+          <a href="about.html" class="btn btn-outline story-btn">Discover Our Heritage →</a>
+        </div>
+      </div>
+
+      <!-- Story Visual -->
+      <div class="story-visual fade-in">
+        <div class="story-img-wrap">
+          <img src="https://images.unsplash.com/photo-1573408301185-9146fe634ad0?q=80&w=800&auto=format&fit=crop"
+               alt="Master jewellery craftsman at work"
+               class="story-img" loading="lazy">
+          <div class="story-img-overlay"></div>
+        </div>
+        <div class="story-stats-badge">
+          <div class="story-stat-item">
+            <div class="stat-number">15,000+</div>
+            <div class="stat-label">Designs Created</div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="story-stat-item">
+            <div class="stat-number">98.7%</div>
+            <div class="stat-label">Customer Satisfaction</div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="story-stat-item">
+            <div class="stat-number">40+</div>
+            <div class="stat-label">Years Legacy</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CUSTOMER REVIEWS — Dynamic from /api/reviews?approved=true
+     ============================================================ -->
+<section class="section reviews-section" id="reviewsSection">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">What Our Customers Say</span>
+      <h2 class="section-title">Real Reviews</h2>
+      <div class="section-divider"><span class="section-divider-icon">⭐</span></div>
+      <div class="reviews-trust-badge">
+        <span class="trust-badge-stars">★★★★★</span>
+        <span class="trust-badge-text">4.9 / 5 Rating from 2,500+ Verified Patrons</span>
+      </div>
+    </div>
+    <div class="review-grid" id="reviewsGrid">
+      <!-- Loaded dynamically from /api/reviews?approved=true -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STORE INFORMATION — Dynamic from /api/store-info
+     ============================================================ -->
+<section class="section store-section" id="storeSection">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Visit Our Showroom</span>
+      <h2 class="section-title">Find Us</h2>
+      <div class="section-divider"><span class="section-divider-icon">📍</span></div>
+    </div>
+    <div class="store-grid">
+      <div class="store-info-card fade-in">
+        <div class="store-info-list">
+          <div class="store-info-item">
+            <div class="store-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="store-info-label">Showroom Address</div>
+              <div class="store-info-value" id="storeAddress">Shree Sai Jewellers, Main Market, Indore, Madhya Pradesh - 452009</div>
+            </div>
+          </div>
+          <div class="store-info-item">
+            <div class="store-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 11.7 19.79 19.79 0 0 1 1.04 3.12 2 2 0 0 1 3 1.12h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="store-info-label">Direct Contact</div>
+              <div class="store-info-value"><a href="tel:+919876543210" id="storePhone" style="color:inherit;">+91 98765 43210</a></div>
+            </div>
+          </div>
+          <div class="store-info-item">
+            <div class="store-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="store-info-label">VIP Concierge Email</div>
+              <div class="store-info-value"><a href="mailto:care@shreesaijewellers.com" id="storeEmail" style="color:inherit;">care@shreesaijewellers.com</a></div>
+            </div>
+          </div>
+          <div class="store-info-item">
+            <div class="store-info-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="store-info-label">Store Hours</div>
+              <div class="store-info-value" id="storeHours">Mon–Sat: 10:00 AM – 8:00 PM · Sun: 11:00 AM – 6:00 PM</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="store-action-buttons">
+          <a href="https://maps.app.goo.gl/JpumezhtKE9LDbo37" id="storeMapsLink" target="_blank" rel="noopener" class="btn btn-gold store-action-btn">
+            📍 Get Directions
+          </a>
+          <a href="tel:+919876543210" class="btn btn-outline store-action-btn">
+            📞 Call Showroom
+          </a>
+          <a href="https://wa.me/919876543210?text=Hello%20Shree%20Sai%20Jewellers,%20I%20would%20like%20to%20visit%20your%20showroom" target="_blank" rel="noopener" class="btn btn-outline store-action-btn whatsapp-btn">
+            💬 WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Map Container -->
+      <div class="map-embed fade-in">
+        <iframe
+          src="https://maps.google.com/maps?q=Shree+Sai+Jewellers&ll=22.691971,75.8254417&z=17&output=embed"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Shree Sai Jewellers Showroom Location"></iframe>
+        <a href="https://maps.app.goo.gl/JpumezhtKE9LDbo37" target="_blank" rel="noopener" class="map-tap-badge">
+          🗺 Open in Google Maps ↗
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     NEWSLETTER — POST /api/newsletter
+     ============================================================ -->
+<section class="newsletter-section">
+  <div class="container newsletter-inner">
+    <div class="newsletter-text-col fade-in">
+      <div class="newsletter-badge">
+        <span class="badge-sparkle">✦</span> VIP PRIVILEGE CLUB <span class="badge-sparkle">✦</span>
+      </div>
+      <h2 class="newsletter-title">
+        Stay Updated & Get <span class="text-gold">Exclusive Offers</span>
+      </h2>
+      <p class="newsletter-desc">
+        Be the first to preview bespoke bridal collections, festive gold coin releases, and confidential private-sale privileges.
+      </p>
+      <div class="newsletter-perks">
+        <span class="newsletter-perk-item">
+          <span class="perk-icon">✨</span> Early Access
+        </span>
+        <span class="newsletter-perk-item">
+          <span class="perk-icon">🎁</span> Secret Offers
+        </span>
+        <span class="newsletter-perk-item">
+          <span class="perk-icon">🔒</span> 100% Privacy
+        </span>
+      </div>
+    </div>
+    <div class="newsletter-form-col fade-in">
+      <div class="newsletter-card">
+        <form id="newsletterForm" class="newsletter-form" novalidate>
+          <div class="newsletter-input-wrap">
+            <svg class="newsletter-mail-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <input type="email" name="email" class="newsletter-input" placeholder="Enter your email address" required aria-label="Email for newsletter">
+          </div>
+          <button type="submit" class="btn btn-gold newsletter-submit-btn">
+            <span>Subscribe</span> ✦
+          </button>
+        </form>
+        <div class="newsletter-note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span>No spam. Unsubscribe anytime with 1 click.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="main-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="index.html" class="brand-logo" style="display:inline-flex;margin-bottom:var(--sp-4);">
+          <div class="brand-text">
+            <span class="brand-name" style="font-size:var(--fs-lg);">Shree Sai Jewellers</span>
+            <span class="brand-tagline">✦ Fine Heirloom Jewellery · Est. 1984 ✦</span>
+          </div>
+        </a>
+        <p>Custodians of India's jewellery heritage since 1984. Every piece is handcrafted with love, certified for purity, and delivered with care.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" title="Instagram" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" class="social-link" title="Facebook" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a href="#" class="social-link" title="YouTube" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+          </a>
+          <a href="#" class="social-link" title="WhatsApp" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-col footer-col-quick">
+        <h5>Quick Links</h5>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="products.html">All Jewellery</a>
+          <a href="offers.html">Current Offers</a>
+          <a href="order-tracking.html">Track Order</a>
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+
+      <!-- Categories (Hidden on Mobile) -->
+      <div class="footer-col footer-col-categories">
+        <h5>Categories</h5>
+        <div class="footer-links">
+          <a href="products.html?category=Rings">Rings</a>
+          <a href="products.html?category=Necklaces">Necklaces</a>
+          <a href="products.html?category=Earrings">Earrings</a>
+          <a href="products.html?category=Bangles">Bangles</a>
+          <a href="products.html?category=Bracelets">Bracelets</a>
+          <a href="products.html?category=Chains">Chains</a>
+          <a href="products.html?jewellery_type=Gold">Gold Collection</a>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="footer-col footer-col-contact">
+        <h5>Contact & Support</h5>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span id="footerAddress">Shree Sai Jewellers, Main Market, Indore, Madhya Pradesh - 452009</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 11.7 19.79 19.79 0 0 1 1.04 3.12 2 2 0 0 1 3 1.12h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:+919876543210" style="color:inherit;">+91 98765 43210</a>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:care@shreesaijewellers.com" style="color:inherit;">care@shreesaijewellers.com</a>
+        </div>
+        <div class="footer-policy-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">Shipping Policy</a>
+          <a href="#">Return Policy</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Shree Sai Jewellers. All rights reserved. BIS Hallmarked & IGI Certified Jewellery.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     CART DRAWER
+     ============================================================ -->
+<div id="drawerOverlay" class="drawer-overlay"></div>
+
+<aside id="cartDrawer" class="drawer" role="dialog" aria-modal="true" aria-label="Shopping Cart">
+  <div class="drawer-header">
+    <h2 class="drawer-title">🛍️ Shopping Vault</h2>
+    <button class="drawer-close" onclick="closeDrawer('cartDrawer')" aria-label="Close cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="cartBody" class="drawer-body">
+    <div class="drawer-empty">
+      <div class="empty-icon">🛍️</div>
+      <h3 class="empty-title">Your vault is empty</h3>
+      <p class="empty-desc">Explore our jewellery collection</p>
+      <a href="products.html" class="btn btn-outline btn-sm" onclick="closeAllDrawers()">Browse Jewellery</a>
+    </div>
+  </div>
+  <div id="cartFooter" class="drawer-footer" style="display:none;"></div>
+</aside>
+
+<!-- ============================================================
+     WISHLIST DRAWER
+     ============================================================ -->
+<aside id="wishlistDrawer" class="drawer" role="dialog" aria-modal="true" aria-label="Wishlist">
+  <div class="drawer-header">
+    <h2 class="drawer-title">❤️ My Wishlist</h2>
+    <button class="drawer-close" onclick="closeDrawer('wishlistDrawer')" aria-label="Close wishlist">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="wishlistBody" class="drawer-body"></div>
+</aside>
+
+<!-- ============================================================
+     MOBILE NAVIGATION DRAWER
+     ============================================================ -->
+<div id="mobileNav" class="mobile-nav">
+  <div id="mobileNavBackdrop" class="mobile-nav-backdrop"></div>
+  <div class="mobile-nav-drawer">
+    <div class="mobile-nav-header">
+      <span class="brand-name" style="font-size:var(--fs-base);">Shree Sai Jewellers</span>
+      <button class="drawer-close" onclick="closeMobileNav()" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link active" onclick="closeMobileNav()">Home</a>
+      <a href="products.html" class="mobile-nav-link" onclick="closeMobileNav()">All Jewellery</a>
+      <a href="products.html?category=Rings" class="mobile-nav-link" onclick="closeMobileNav()">💍 Rings</a>
+      <a href="products.html?category=Necklaces" class="mobile-nav-link" onclick="closeMobileNav()">✨ Necklaces</a>
+      <a href="products.html?category=Earrings" class="mobile-nav-link" onclick="closeMobileNav()">💎 Earrings</a>
+      <a href="products.html?category=Bangles" class="mobile-nav-link" onclick="closeMobileNav()">💫 Bangles</a>
+      <a href="products.html?category=Bracelets" class="mobile-nav-link" onclick="closeMobileNav()">👑 Bracelets</a>
+      <a href="products.html?category=Chains" class="mobile-nav-link" onclick="closeMobileNav()">🔗 Chains</a>
+      <a href="offers.html" class="mobile-nav-link" style="color:var(--clr-gold);" onclick="closeMobileNav()">🎁 Offers</a>
+      <a href="order-tracking.html" class="mobile-nav-link" onclick="closeMobileNav()">📦 Track Order</a>
+      <a href="about.html" class="mobile-nav-link" onclick="closeMobileNav()">About Us</a>
+      <a href="contact.html" class="mobile-nav-link" onclick="closeMobileNav()">Contact</a>
+      <a href="login.html" class="mobile-nav-link" id="mobileLoginLink" onclick="closeMobileNav()" style="color:var(--clr-gold); border-top: 1px solid rgba(197,147,58,0.15); margin-top: 8px; padding-top: 16px;">👤 Login / My Account</a>
+    </div>
+
+    <div class="mobile-nav-footer">
+      <div style="font-size:var(--fs-xs);color:var(--clr-text-muted);margin-bottom:var(--sp-3);">📞 +91 98765 43210</div>
+      <div style="font-size:var(--fs-xs);color:var(--clr-text-muted);">📧 care@shreesaijewellers.com</div>
+    </div>
+  </div>
+</div>
+
+<!-- Back to Top -->
+<button id="backToTop" class="back-to-top" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<!-- Toast container -->
+<div id="toastContainer" class="toast-container"></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script>
+// ── Nav User Auth Check ─────────────────────────────────────
+(async function checkNavAuth() {
+  try {
+    const cached = JSON.parse(localStorage.getItem('SSJ_USER') || 'null');
+    if (cached) updateUserNav(cached);
+    const res = await fetch(CONFIG.API_BASE_URL.replace('/api','') + '/api/auth/me', { credentials: 'include' });
+    const data = await res.json();
+    if (data.success && data.logged_in) {
+      localStorage.setItem('SSJ_USER', JSON.stringify(data.user));
+      updateUserNav(data.user);
+    } else {
+      localStorage.removeItem('SSJ_USER');
+    }
+  } catch(_) {}
+})();
+
+function updateUserNav(user) {
+  const btn = document.getElementById('userNavBtn');
+  const badge = document.getElementById('userLoggedBadge');
+  const navText = document.getElementById('navAuthText');
+  const topText = document.getElementById('topAuthText');
+  const mobileLink = document.getElementById('mobileLoginLink');
+
+  if (btn) btn.title = 'Hi, ' + user.name + ' — My Account';
+  if (badge) badge.style.display = 'block';
+  if (navText) navText.textContent = user.name ? user.name.split(' ')[0] : 'My Account';
+  if (topText) topText.textContent = 'Hi, ' + (user.name ? user.name.split(' ')[0] : 'User');
+  if (mobileLink) mobileLink.textContent = '👤 Hi, ' + user.name + ' (My Account)';
+}
+
+// Mobile Nav
+function openMobileNav() {
+  document.getElementById('mobileNavDrawer').classList.add('open');
+  document.getElementById('mobileNavOverlay').classList.add('show');
+  document.getElementById('hamburgerBtn').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeMobileNav() {
+  document.getElementById('mobileNavDrawer').classList.remove('open');
+  document.getElementById('mobileNavOverlay').classList.remove('show');
+  document.getElementById('hamburgerBtn').classList.remove('open');
+  document.body.style.overflow = '';
+}
+// Close on escape key
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMobileNav(); });
+</script>
+
+<!-- ============================================================
+     BOTTOM NAVIGATION (Mobile Only)
+     ============================================================ -->
+<nav class="bottom-nav" id="bottomNav">
+  <a href="index.html" class="bottom-nav-item active">
+    <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+    <span>Home</span>
+  </a>
+  <a href="products.html" class="bottom-nav-item">
+    <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    <span>Shop</span>
+    <span class="bottom-badge cart-count-mob" style="display:none">0</span>
+  </a>
+  <a href="offers.html" class="bottom-nav-item">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+    <span>Offers</span>
+  </a>
+  <button class="bottom-nav-item" onclick="renderWishlistDrawer(); openDrawer('wishlistDrawer')">
+    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    <span>Wishlist</span>
+    <span class="bottom-badge wishlist-count-mob" style="display:none">0</span>
+  </button>
+  <a href="login.html" class="bottom-nav-item">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <span>Account</span>
+  </a>
+</nav>
+
+</body>
+</html>
+

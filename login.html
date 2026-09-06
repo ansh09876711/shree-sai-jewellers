@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Register — Shree Sai Jewellers</title>
+  <meta name="description" content="Shree Sai Jewellers mein login ya naya account banayein. Exclusive offers, order tracking aur wishlist ka faida uthayein.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💎</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Official Google Identity Services SDK -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <style>
+    /* ══════════════════════════════════════════════════════════════════
+       ULTRA-PREMIUM AUTHENTICATION STYLING
+    ══════════════════════════════════════════════════════════════════ */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #080402;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #FFF8E7;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Royal Background ── */
+    .auth-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 16px;
+      position: relative;
+      background: 
+        radial-gradient(circle at 50% 0%, rgba(226, 183, 85, 0.18) 0%, transparent 55%),
+        radial-gradient(circle at 10% 90%, rgba(139, 96, 23, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(197, 147, 58, 0.1) 0%, transparent 45%),
+        linear-gradient(180deg, #0d0603 0%, #060301 100%);
+      overflow: hidden;
+    }
+
+    /* Subtle ambient luxury mesh */
+    .auth-page::before {
+      content: '';
+      position: absolute;
+      width: 140%;
+      height: 140%;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, rgba(226,183,85,0.25), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,248,231,0.2), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 90px 40px, rgba(226,183,85,0.3), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, rgba(197,147,58,0.2), rgba(0,0,0,0));
+      background-repeat: repeat;
+      background-size: 200px 200px;
+      opacity: 0.6;
+      pointer-events: none;
+      animation: sparkleDrift 40s linear infinite;
+    }
+
+    @keyframes sparkleDrift {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50px, -50px); }
+    }
+
+    /* Ambient glowing orbs */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      opacity: 0.35;
+      animation: pulseGlow 8s ease-in-out infinite alternate;
+    }
+    .glow-orb-1 {
+      top: 5%;
+      left: 20%;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, #C5933A, transparent 70%);
+    }
+    .glow-orb-2 {
+      bottom: 10%;
+      right: 15%;
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, #8B6017, transparent 70%);
+      animation-delay: -4s;
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(0.9) translate(0, 0); opacity: 0.25; }
+      100% { transform: scale(1.15) translate(20px, 15px); opacity: 0.45; }
+    }
+
+    /* ── Compact Luxury Card ── */
+    .auth-card {
+      width: 100%;
+      max-width: 410px;
+      background: linear-gradient(165deg, rgba(28, 18, 10, 0.75) 0%, rgba(14, 8, 4, 0.85) 100%);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid rgba(226, 183, 85, 0.22);
+      border-radius: 20px;
+      box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(197, 147, 58, 0.08),
+        inset 0 1px 0 rgba(255, 248, 231, 0.15),
+        inset 0 0 20px rgba(197, 147, 58, 0.03);
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+      animation: cardEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes cardEnter {
+      from { opacity: 0; transform: translateY(20px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Top gold shimmer bar */
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #FFF8E7, #E2B755, #C5933A, transparent);
+    }
+
+    /* ── Header Branding (Compact) ── */
+    .auth-brand {
+      text-align: center;
+      padding: 24px 24px 16px;
+      position: relative;
+    }
+
+    .brand-emblem-svg {
+      width: 42px;
+      height: 42px;
+      margin: 0 auto 8px;
+      display: block;
+      filter: drop-shadow(0 4px 12px rgba(226, 183, 85, 0.4));
+      transition: transform 0.4s ease;
+    }
+    .auth-brand:hover .brand-emblem-svg {
+      transform: scale(1.08) rotate(3deg);
+    }
+
+    .auth-brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #FFFDF8 0%, #F5D78E 40%, #E2B755 70%, #9E7324 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+    }
+    .auth-brand-tagline {
+      font-size: 0.68rem;
+      color: rgba(226, 183, 85, 0.7);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-top: 3px;
+    }
+
+    /* ── Tab Switcher (Pill Style) ── */
+    .auth-tabs-wrap {
+      padding: 0 24px;
+      margin-bottom: 18px;
+    }
+    .auth-tabs {
+      display: flex;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(226, 183, 85, 0.15);
+      border-radius: 12px;
+      padding: 3px;
+      position: relative;
+    }
+    .auth-tab {
+      flex: 1;
+      padding: 8px 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: rgba(255, 248, 231, 0.55);
+      background: transparent;
+      border: none;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .auth-tab.active {
+      color: #1a0a00;
+      background: linear-gradient(135deg, #FFF8E7 0%, #E2B755 60%, #C5933A 100%);
+      box-shadow: 0 4px 12px rgba(197, 147, 58, 0.35);
+    }
+    .auth-tab:hover:not(.active) {
+      color: #FFF8E7;
+    }
+
+    /* ── Content Body ── */
+    .auth-body {
+      padding: 0 24px 24px;
+    }
+
+    /* ── Google Sign In Button (Prominent) ── */
+    .google-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      color: #FFF8E7;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .google-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(226, 183, 85, 0.4);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    }
+    .google-btn:active {
+      transform: translateY(0);
+    }
+    .google-icon {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ── Divider ── */
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(226, 183, 85, 0.2), transparent);
+    }
+    .auth-divider span {
+      font-size: 0.68rem;
+      color: rgba(226, 183, 85, 0.55);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ── Input Fields ── */
+    .auth-field {
+      margin-bottom: 12px;
+    }
+    .auth-field label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(226, 183, 85, 0.85);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .auth-input-wrap {
+      position: relative;
+    }
+    .auth-input-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 15px;
+      height: 15px;
+      color: rgba(226, 183, 85, 0.45);
+      pointer-events: none;
+      transition: color 0.2s;
+    }
+    .auth-input {
+      width: 100%;
+      padding: 10px 14px 10px 38px;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(226, 183, 85, 0.2);
+      border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.86rem;
+      color: #FFF8E7;
+      outline: none;
+      transition: all 0.25s ease;
+    }
+    .auth-input::placeholder { color: rgba(255, 248, 231, 0.25); font-size: 0.82rem; }
+    .auth-input:focus {
+      border-color: #E2B755;
+      background: rgba(226, 183, 85, 0.05);
+      box-shadow: 0 0 0 3px rgba(226, 183, 85, 0.15);
+    }
+    .auth-input-wrap:focus-within .auth-input-icon {
+      color: #E2B755;
+    }
+
+    /* Password Eye Toggle */
+    .pw-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: rgba(226, 183, 85, 0.4);
+      padding: 0;
+      display: flex;
+      align-items: center;
+      transition: color 0.2s;
+    }
+    .pw-toggle:hover { color: #E2B755; }
+
+    /* ── Submit Button ── */
+    .auth-submit-btn {
+      width: 100%;
+      padding: 11px 0;
+      margin-top: 6px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #FFF8E7 0%, #E2B755 50%, #C5933A 100%);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #1a0a00;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      transition: all 0.25s ease;
+      box-shadow: 0 6px 20px rgba(197, 147, 58, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+    .auth-submit-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(226, 183, 85, 0.45);
+      filter: brightness(1.05);
+    }
+    .auth-submit-btn:active { transform: translateY(0); }
+    .auth-submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-spinner {
+      display: none;
+      width: 15px;
+      height: 15px;
+      border: 2px solid rgba(26,10,0,0.3);
+      border-top-color: #1a0a00;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    .auth-submit-btn.loading .btn-spinner { display: inline-block; }
+    .auth-submit-btn.loading .btn-text { display: none; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Messages ── */
+    .auth-msg {
+      display: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .auth-msg.error {
+      display: block;
+      background: rgba(220, 53, 69, 0.15);
+      border: 1px solid rgba(220, 53, 69, 0.35);
+      color: #ff8a92;
+    }
+    .auth-msg.success {
+      display: block;
+      background: rgba(40, 167, 69, 0.15);
+      border: 1px solid rgba(40, 167, 69, 0.35);
+      color: #6bcb77;
+    }
+
+    /* ── Forms Switcher ── */
+    .auth-form { display: none; }
+    .auth-form.active { display: block; animation: formFade 0.25s ease; }
+    @keyframes formFade {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Password strength ── */
+    .pw-strength {
+      height: 3px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 4px;
+      margin-top: 5px;
+      overflow: hidden;
+    }
+    .pw-strength-bar {
+      height: 100%;
+      border-radius: 4px;
+      width: 0%;
+      transition: all 0.3s ease;
+    }
+    .pw-strength-bar.weak   { width: 33%; background: #ff6b6b; }
+    .pw-strength-bar.medium { width: 66%; background: #ffd93d; }
+    .pw-strength-bar.strong { width: 100%; background: #6bcb77; }
+    .pw-strength-label {
+      font-size: 0.68rem;
+      margin-top: 3px;
+      color: rgba(255,248,231,0.4);
+    }
+
+    /* ── Footer Link ── */
+    .auth-footer {
+      text-align: center;
+      margin-top: 14px;
+    }
+    .auth-footer a {
+      font-size: 0.78rem;
+      color: rgba(226, 183, 85, 0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .auth-footer a:hover { color: #FFF8E7; }
+
+    /* ── Forgot Password Link ── */
+    .forgot-pw-link {
+      display: block;
+      text-align: right;
+      font-size: 0.72rem;
+      color: rgba(226, 183, 85, 0.6);
+      text-decoration: none;
+      margin-top: -4px;
+      margin-bottom: 10px;
+      transition: color 0.2s;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .forgot-pw-link:hover { color: #E2B755; }
+
+    /* ── Forgot / Reset Panel ── */
+    .auth-panel {
+      display: none;
+      animation: formFade 0.25s ease;
+    }
+    .auth-panel.active { display: block; }
+
+    .panel-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.75rem;
+      color: rgba(226, 183, 85, 0.6);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: color 0.2s;
+    }
+    .panel-back-btn:hover { color: #FFF8E7; }
+
+    .panel-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: #FFF8E7;
+      margin-bottom: 4px;
+    }
+    .panel-subtitle {
+      font-size: 0.76rem;
+      color: rgba(255, 248, 231, 0.45);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    /* ── Logged In Card State ── */
+    .auth-logged-in {
+      display: none;
+      text-align: center;
+      padding: 10px 0;
+    }
+    .auth-logged-in.show { display: block; }
+    .auth-avatar {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, #FFF8E7, #E2B755);
+      color: #1a0a00;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 0 auto 12px;
+      box-shadow: 0 8px 24px rgba(226, 183, 85, 0.35);
+    }
+    .auth-welcome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      color: #FFF8E7;
+      margin-bottom: 2px;
+    }
+    .auth-welcome-email {
+      font-size: 0.78rem;
+      color: rgba(226, 183, 85, 0.7);
+      margin-bottom: 20px;
+    }
+    .logged-action-btn {
+      display: block;
+      width: 100%;
+      padding: 10px 0;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      margin-bottom: 8px;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .logged-action-btn.primary {
+      background: linear-gradient(135deg, #FFF8E7, #E2B755);
+      color: #1a0a00;
+      border: none;
+    }
+    .logged-action-btn.outline {
+      background: transparent;
+      color: #E2B755;
+      border: 1px solid rgba(226, 183, 85, 0.3);
+    }
+    .logged-action-btn.danger {
+      background: transparent;
+      color: #ff8a92;
+      border: 1px solid rgba(255, 100, 100, 0.25);
+    }
+
+    @media (max-width: 440px) {
+      .auth-card { border-radius: 16px; }
+      .auth-brand { padding: 20px 18px 12px; }
+      .auth-body { padding: 0 18px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="auth-page">
+  <!-- Ambient background lighting -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <div class="auth-card">
+
+    <!-- ── Brand Header ── -->
+    <div class="auth-brand">
+      <svg class="brand-emblem-svg" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFF8E7"/>
+            <stop offset="40%" stop-color="#E2B755"/>
+            <stop offset="75%" stop-color="#C5933A"/>
+            <stop offset="100%" stop-color="#8B6017"/>
+          </linearGradient>
+        </defs>
+        <path d="M22 4L27 14H17L22 4Z" fill="url(#goldGrad)"/>
+        <path d="M22 40L8 16H36L22 40Z" fill="url(#goldGrad)" opacity="0.9"/>
+        <path d="M22 40L16 16H28L22 40Z" fill="url(#goldGrad)"/>
+        <circle cx="22" cy="9" r="2" fill="#FFF8E7"/>
+        <path d="M9 11L14 16H7L9 11Z" fill="url(#goldGrad)" opacity="0.7"/>
+        <path d="M35 11L37 16H30L35 11Z" fill="url(#goldGrad)" opacity="0.7"/>
+      </svg>
+      <h1 class="auth-brand-name">Shree Sai Jewellers</h1>
+      <p class="auth-brand-tagline">✦ Fine Heirloom Jewellery · Est. 1984 ✦</p>
+    </div>
+
+    <!-- ══ LOGGED IN STATE ══════════════════════════════════════ -->
+    <div class="auth-body">
+      <div class="auth-logged-in" id="loggedInState">
+        <div class="auth-avatar" id="userAvatar">👤</div>
+        <div class="auth-welcome" id="welcomeMsg">Welcome!</div>
+        <div class="auth-welcome-email" id="welcomeEmail"></div>
+        <div>
+          <a href="index.html" class="logged-action-btn primary">🏠 Continue to Storefront</a>
+          <a href="products.html" class="logged-action-btn outline">💎 Explore Collections</a>
+          <a href="order-tracking.html" class="logged-action-btn outline">📦 Track My Order</a>
+          <button class="logged-action-btn outline" onclick="doLogout()" style="color:#FFF8E7; border-color:rgba(226,183,85,0.4); margin-bottom:8px;">🔄 Switch Account</button>
+          <button class="logged-action-btn danger" onclick="doLogout()">🚪 Sign Out</button>
+        </div>
+      </div>
+
+      <!-- ══ LOGIN / REGISTER CONTAINER ════════════════════════════ -->
+      <div id="authForms">
+        
+        <!-- Tab selector -->
+        <div class="auth-tabs-wrap" style="padding:0; margin-bottom:14px;">
+          <div class="auth-tabs">
+            <button class="auth-tab active" id="tabLogin" onclick="switchTab('login')">
+              <span>🔑</span> Sign In
+            </button>
+            <button class="auth-tab" id="tabRegister" onclick="switchTab('register')">
+              <span>✨</span> Create Account
+            </button>
+          </div>
+        </div>
+
+        <!-- ── Official Google Sign In Container (Rendered directly by Google) ── -->
+        <div id="googleButtonDiv" style="display:flex; justify-content:center; margin-bottom:14px; min-height:44px;"></div>
+
+        <!-- Custom Fallback Google Button (triggers Google prompt) -->
+        <button type="button" class="google-btn" id="customGoogleBtn" onclick="triggerGooglePrompt()" style="display:none;">
+          <svg class="google-icon" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.15C3.29 21.43 7.37 24 12 24z"/>
+            <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.26C.46 8.16 0 9.94 0 12s.46 3.84 1.26 5.42l4.02-3.15z"/>
+            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.37 0 3.29 2.57 1.26 6.58l4.02 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+          </svg>
+          <span id="googleBtnText">Continue with Google</span>
+        </button>
+
+        <div class="auth-divider">
+          <span>or sign in with email</span>
+        </div>
+
+        <!-- ── LOGIN FORM ── -->
+        <div class="auth-form active" id="formLogin">
+          <div class="auth-msg" id="loginMsg"></div>
+
+          <form id="loginForm" onsubmit="doLogin(event)">
+            <div class="auth-field">
+              <label for="loginEmail">Email Address</label>
+              <div class="auth-input-wrap">
+                <input type="email" id="loginEmail" class="auth-input" placeholder="name@example.com" required autocomplete="email">
+                <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label for="loginPassword">Password</label>
+              <div class="auth-input-wrap">
+                <input type="password" id="loginPassword" class="auth-input" placeholder="••••••••" required autocomplete="current-password">
+                <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <button type="button" class="pw-toggle" onclick="togglePw('loginPassword', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <button type="button" class="forgot-pw-link" onclick="showPanel('forgot')">Forgot Password?</button>
+
+            <button type="submit" class="auth-submit-btn" id="loginBtn">
+              <span class="btn-spinner"></span>
+              <span class="btn-text">🔑 Sign In</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- ── REGISTER FORM ── -->
+        <div class="auth-form" id="formRegister">
+          <div class="auth-msg" id="registerMsg"></div>
+
+          <form id="registerForm" onsubmit="doRegister(event)">
+            <div class="auth-field">
+              <label for="regName">Full Name *</label>
+              <div class="auth-input-wrap">
+                <input type="text" id="regName" class="auth-input" placeholder="Your full name" required autocomplete="name">
+                <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label for="regEmail">Email Address *</label>
+              <div class="auth-input-wrap">
+                <input type="email" id="regEmail" class="auth-input" placeholder="name@example.com" required autocomplete="email">
+                <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label for="regPhone">Mobile Number</label>
+              <div class="auth-input-wrap">
+                <input type="tel" id="regPhone" class="auth-input" placeholder="+91 98765 43210" autocomplete="tel">
+                <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.11 11.7 19.79 19.79 0 0 1 1.04 3.12 2 2 0 0 1 3 1.12h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+            </div>
+
+            <div class="auth-field">
+              <label for="regPassword">Password *</label>
+              <div class="auth-input-wrap">
+                <input type="password" id="regPassword" class="auth-input" placeholder="Minimum 6 characters" required autocomplete="new-password" oninput="checkPwStrength(this.value)">
+                <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <button type="button" class="pw-toggle" onclick="togglePw('regPassword', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+              <div class="pw-strength"><div class="pw-strength-bar" id="pwBar"></div></div>
+              <div class="pw-strength-label" id="pwLabel"></div>
+            </div>
+
+            <button type="submit" class="auth-submit-btn" id="registerBtn">
+              <span class="btn-spinner"></span>
+              <span class="btn-text">✨ Create Account</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- ── FORGOT PASSWORD PANEL ── -->
+        <div class="auth-panel" id="panelForgot">
+          <button class="panel-back-btn" onclick="showPanel('login')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+            Back to Sign In
+          </button>
+          <p class="panel-title">Reset Password</p>
+          <p class="panel-subtitle">Enter your registered email address. We'll send you a reset link valid for 1 hour.</p>
+
+          <div class="auth-msg" id="forgotMsg"></div>
+
+          <form id="forgotForm" onsubmit="doForgotPassword(event)">
+            <div class="auth-field">
+              <label for="forgotEmail">Email Address</label>
+              <div class="auth-input-wrap">
+                <input type="email" id="forgotEmail" class="auth-input" placeholder="name@example.com" required autocomplete="email">
+                <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+            </div>
+            <button type="submit" class="auth-submit-btn" id="forgotBtn">
+              <span class="btn-spinner"></span>
+              <span class="btn-text">📧 Send Reset Link</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- ── RESET PASSWORD PANEL ── -->
+        <div class="auth-panel" id="panelReset">
+          <p class="panel-title">🔑 Set New Password</p>
+          <p class="panel-subtitle">Enter your new password below.</p>
+
+          <div class="auth-msg" id="resetMsg"></div>
+
+          <form id="resetForm" onsubmit="doResetPassword(event)">
+            <input type="hidden" id="resetToken">
+            <div class="auth-field">
+              <label for="newPassword">New Password</label>
+              <div class="auth-input-wrap">
+                <input type="password" id="newPassword" class="auth-input" placeholder="Minimum 6 characters" required autocomplete="new-password" oninput="checkResetPwStrength(this.value)">
+                <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <button type="button" class="pw-toggle" onclick="togglePw('newPassword', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+              <div class="pw-strength"><div class="pw-strength-bar" id="resetPwBar"></div></div>
+              <div class="pw-strength-label" id="resetPwLabel"></div>
+            </div>
+            <div class="auth-field">
+              <label for="confirmNewPassword">Confirm Password</label>
+              <div class="auth-input-wrap">
+                <input type="password" id="confirmNewPassword" class="auth-input" placeholder="••••••••" required autocomplete="new-password">
+                <svg class="auth-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </div>
+            </div>
+            <button type="submit" class="auth-submit-btn" id="resetBtn">
+              <span class="btn-spinner"></span>
+              <span class="btn-text">✅ Update Password</span>
+            </button>
+          </form>
+        </div>
+
+      </div>
+
+      <!-- Back to store -->
+      <div class="auth-footer">
+        <a href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+          Return to Storefront
+        </a>
+      </div>
+    </div>
+
+  </div><!-- /.auth-card -->
+</div><!-- /.auth-page -->
+
+<script src="config.js"></script>
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   Auth Logic — Official Google Identity Services SDK Integration
+══════════════════════════════════════════════════════════════════ */
+const API = (window.CONFIG ? CONFIG.API_BASE_URL.replace('/api', '') : '') + '/api/auth';
+
+// ── Initialize Official Google Identity SDK ──
+function initGoogleAuth() {
+  if (window.google && google.accounts && google.accounts.id) {
+    try {
+      google.accounts.id.initialize({
+        client_id: CONFIG.GOOGLE_CLIENT_ID || '522438848529-659s446ebjffea7u2h4j21d3e8e2u527.apps.googleusercontent.com',
+        callback: handleGoogleCredentialResponse,
+        auto_select: false,
+        cancel_on_tap_outside: true
+      });
+
+      // Render Google's official Sign-In button
+      const btnContainer = document.getElementById('googleButtonDiv');
+      if (btnContainer) {
+        google.accounts.id.renderButton(btnContainer, {
+          theme: 'outline',
+          size: 'large',
+          type: 'standard',
+          shape: 'pill',
+          text: 'continue_with',
+          logo_alignment: 'left',
+          width: 350
+        });
+      }
+
+      // Display native Google One-Tap prompt if eligible
+      google.accounts.id.prompt();
+    } catch (err) {
+      console.warn("Google SDK init warning:", err);
+      showFallbackGoogleBtn();
+    }
+  } else {
+    // If SDK is still loading, retry shortly
+    setTimeout(initGoogleAuth, 300);
+  }
+}
+
+function showFallbackGoogleBtn() {
+  const fallback = document.getElementById('customGoogleBtn');
+  if (fallback) fallback.style.display = 'flex';
+}
+
+function triggerGooglePrompt() {
+  if (window.google && google.accounts && google.accounts.id) {
+    google.accounts.id.prompt();
+  }
+}
+
+// ── Official Google Credential (JWT) Handler & Supabase Sync ──
+async function handleGoogleCredentialResponse(response) {
+  try {
+    // Decode base64 JWT payload returned by Google
+    const base64Url = response.credential.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    const payload = JSON.parse(jsonPayload);
+    
+    // Real user profile from Google
+    const googleData = {
+      google_id: payload.sub,
+      name: payload.name || payload.given_name || 'Google User',
+      email: payload.email,
+      avatar: payload.picture || ''
+    };
+
+    // Save and sync with Supabase PostgreSQL
+    try {
+      const res = await fetch(API + '/google', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify(googleData)
+      });
+      const data = await res.json();
+      if (data.success && data.user) {
+        saveLocalUser(data.user);
+      } else {
+        saveLocalUser(googleData);
+      }
+    } catch (_) {
+      saveLocalUser(googleData);
+    }
+
+    showMsg('loginMsg', `✓ Welcome back, ${googleData.name}! Successfully signed in with Google.`, 'success');
+    
+    setTimeout(() => {
+      const isOwner = (googleData.email || '').toLowerCase() === 'shreesaijewellers3@gmail.com';
+      const next = isOwner ? 'admin.html' : (new URLSearchParams(location.search).get('next') || 'index.html');
+      location.href = next;
+    }, 600);
+
+  } catch (err) {
+    console.error("Error decoding Google credential:", err);
+    showMsg('loginMsg', 'Google sign-in encountered an issue. Please try again.', 'error');
+  }
+}
+
+// ── Tab Switcher ──
+function switchTab(tab) {
+  document.getElementById('formLogin').classList.toggle('active', tab === 'login');
+  document.getElementById('formRegister').classList.toggle('active', tab === 'register');
+  document.getElementById('tabLogin').classList.toggle('active', tab === 'login');
+  document.getElementById('tabRegister').classList.toggle('active', tab === 'register');
+  clearMsgs();
+  // Hide panels, show main forms
+  document.getElementById('authForms').style.display = '';
+  ['panelForgot','panelReset'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('active');
+  });
+  // Show tab row and google button
+  document.querySelector('.auth-tabs-wrap') && (document.querySelector('.auth-tabs-wrap').style.display = '');
+  document.getElementById('googleButtonDiv') && (document.getElementById('googleButtonDiv').style.display = '');
+  document.getElementById('customGoogleBtn') && (document.getElementById('customGoogleBtn').style.display = '');
+  document.querySelector('.auth-divider') && (document.querySelector('.auth-divider').style.display = '');
+}
+
+// ── Panel Switcher (Forgot / Reset) ──
+function showPanel(panel) {
+  const panels   = { forgot: 'panelForgot', reset: 'panelReset' };
+  const forms    = ['formLogin', 'formRegister'];
+  const isPanel  = panel === 'forgot' || panel === 'reset';
+  const tabWrap  = document.querySelector('.auth-tabs-wrap');
+  const gBtn     = document.getElementById('googleButtonDiv');
+  const gBtnFb   = document.getElementById('customGoogleBtn');
+  const divider  = document.querySelector('.auth-divider');
+
+  // Hide all forms & panels first
+  forms.forEach(id => document.getElementById(id).classList.remove('active'));
+  Object.values(panels).forEach(id => document.getElementById(id).classList.remove('active'));
+
+  if (isPanel) {
+    // Show only the requested panel, hide Google/tabs
+    document.getElementById(panels[panel]).classList.add('active');
+    if (tabWrap) tabWrap.style.display = 'none';
+    if (gBtn) gBtn.style.display = 'none';
+    if (gBtnFb) gBtnFb.style.display = 'none';
+    if (divider) divider.style.display = 'none';
+  } else {
+    // Restore normal login view
+    switchTab(panel);
+  }
+}
+
+// ── Check reset token on page load ──
+(function checkResetToken() {
+  const params = new URLSearchParams(location.search);
+  const token  = params.get('reset_token');
+  if (token) {
+    document.getElementById('resetToken').value = token;
+    // Remove token from URL to prevent reuse
+    history.replaceState(null, '', location.pathname);
+    showPanel('reset');
+  }
+})();
+
+function clearMsgs() {
+  ['loginMsg', 'registerMsg'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) { el.className = 'auth-msg'; el.textContent = ''; }
+  });
+}
+
+function showMsg(id, text, type) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.className = 'auth-msg ' + type;
+    el.textContent = text;
+  }
+}
+
+function togglePw(inputId, btn) {
+  const inp = document.getElementById(inputId);
+  const isText = inp.type === 'text';
+  inp.type = isText ? 'password' : 'text';
+  btn.querySelector('svg').innerHTML = isText
+    ? '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>'
+    : '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>';
+}
+
+function checkPwStrength(pw) {
+  const bar = document.getElementById('pwBar');
+  const lbl = document.getElementById('pwLabel');
+  if (!pw) { bar.className = 'pw-strength-bar'; lbl.textContent = ''; return; }
+  const hasUpper = /[A-Z]/.test(pw);
+  const hasNum   = /[0-9]/.test(pw);
+  const hasSpec  = /[^A-Za-z0-9]/.test(pw);
+  const score = (pw.length >= 8 ? 1 : 0) + (hasUpper ? 1 : 0) + (hasNum ? 1 : 0) + (hasSpec ? 1 : 0);
+  if (pw.length < 6) { bar.className = 'pw-strength-bar weak'; lbl.textContent = '⚠ Too weak'; }
+  else if (score <= 2) { bar.className = 'pw-strength-bar weak'; lbl.textContent = '⚠ Weak password'; }
+  else if (score === 3) { bar.className = 'pw-strength-bar medium'; lbl.textContent = '✓ Moderate password'; }
+  else { bar.className = 'pw-strength-bar strong'; lbl.textContent = '✓✓ Strong password!'; }
+}
+
+function setLoading(btnId, loading) {
+  const btn = document.getElementById(btnId);
+  if (!btn) return;
+  btn.disabled = loading;
+  btn.classList.toggle('loading', loading);
+}
+
+// ── Email Login ──
+async function doLogin(e) {
+  e.preventDefault();
+  clearMsgs();
+  setLoading('loginBtn', true);
+  try {
+    const res = await fetch(API + '/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({
+        email: document.getElementById('loginEmail').value.trim(),
+        password: document.getElementById('loginPassword').value
+      })
+    });
+    const data = await res.json();
+    if (data.success) {
+      saveLocalUser(data.user);
+      showMsg('loginMsg', '✓ ' + data.message, 'success');
+      const isOwner = (data.user && (data.user.email || '').toLowerCase() === 'shreesaijewellers3@gmail.com');
+      setTimeout(() => { location.href = isOwner ? 'admin.html' : 'index.html'; }, 600);
+    } else {
+      showMsg('loginMsg', data.message || 'Login failed', 'error');
+    }
+  } catch (err) {
+    showMsg('loginMsg', 'Connection error. Please try again.', 'error');
+  }
+  setLoading('loginBtn', false);
+}
+
+// ── Register ──
+async function doRegister(e) {
+  e.preventDefault();
+  clearMsgs();
+  setLoading('registerBtn', true);
+  try {
+    const res = await fetch(API + '/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({
+        name: document.getElementById('regName').value.trim(),
+        email: document.getElementById('regEmail').value.trim(),
+        phone: document.getElementById('regPhone').value.trim(),
+        password: document.getElementById('regPassword').value
+      })
+    });
+    const data = await res.json();
+    if (data.success) {
+      saveLocalUser(data.user);
+      showMsg('registerMsg', '🎉 ' + data.message, 'success');
+      const isOwner = (data.user && (data.user.email || '').toLowerCase() === 'shreesaijewellers3@gmail.com');
+      setTimeout(() => { location.href = isOwner ? 'admin.html' : 'index.html'; }, 600);
+    } else {
+      showMsg('registerMsg', data.message || 'Registration failed', 'error');
+    }
+  } catch (err) {
+    showMsg('registerMsg', 'Connection error. Please try again.', 'error');
+  }
+  setLoading('registerBtn', false);
+}
+
+// ── Logout ──
+async function doLogout() {
+  try {
+    await fetch(API + '/logout', { method: 'POST', credentials: 'include' });
+  } catch(_) {}
+  clearLocalUser();
+  location.reload();
+}
+
+function saveLocalUser(user) {
+  localStorage.setItem('SSJ_USER', JSON.stringify(user));
+}
+function clearLocalUser() {
+  localStorage.removeItem('SSJ_USER');
+}
+function getLocalUser() {
+  try { return JSON.parse(localStorage.getItem('SSJ_USER')); } catch(_) { return null; }
+}
+
+async function checkSession() {
+  const cached = getLocalUser();
+  if (cached) renderLoggedIn(cached);
+
+  try {
+    const res = await fetch(API + '/me', { credentials: 'include' });
+    const data = await res.json();
+    if (data.success && data.logged_in) {
+      saveLocalUser(data.user);
+      renderLoggedIn(data.user);
+    } else if (!cached) {
+      renderLoggedOut();
+    }
+  } catch(_) {
+    if (!cached) renderLoggedOut();
+  }
+}
+
+function renderLoggedIn(user) {
+  document.getElementById('loggedInState').classList.add('show');
+  document.getElementById('authForms').style.display = 'none';
+  const initial = (user.name || 'U')[0].toUpperCase();
+  document.getElementById('userAvatar').textContent = initial;
+  document.getElementById('welcomeMsg').textContent = 'Welcome, ' + user.name + '!';
+  document.getElementById('welcomeEmail').textContent = user.email;
+
+  const isAdmin = (user.email || '').toLowerCase() === 'shreesaijewellers3@gmail.com';
+  let adminBtn = document.getElementById('adminPortalBtn');
+  if (isAdmin) {
+    if (!adminBtn) {
+      adminBtn = document.createElement('a');
+      adminBtn.id = 'adminPortalBtn';
+      adminBtn.href = 'admin.html';
+      adminBtn.className = 'logged-action-btn primary';
+      adminBtn.style.cssText = 'background:linear-gradient(135deg, #FFE082, #FFB300); color:#1a0a00; font-weight:700; margin-bottom:10px;';
+      adminBtn.textContent = '👑 Open Admin Dashboard';
+      const container = document.querySelector('#loggedInState > div:last-child');
+      if (container) container.insertBefore(adminBtn, container.firstChild);
+    }
+  }
+}
+
+function renderLoggedOut() {
+  document.getElementById('loggedInState').classList.remove('show');
+  document.getElementById('authForms').style.display = 'block';
+  initGoogleAuth();
+}
+
+checkSession();
+initGoogleAuth();
+
+if (new URLSearchParams(location.search).get('tab') === 'register') {
+  switchTab('register');
+}
+
+// ── Forgot Password ──
+async function doForgotPassword(e) {
+  e.preventDefault();
+  clearMsgs();
+  const btn   = document.getElementById('forgotBtn');
+  const email = document.getElementById('forgotEmail').value.trim();
+
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  try {
+    const res  = await fetch(API + '/forgot-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ email })
+    });
+    const data = await res.json();
+    showMsg('forgotMsg', data.message, data.success ? 'success' : 'error');
+    if (data.success) {
+      document.getElementById('forgotForm').reset();
+    }
+  } catch (err) {
+    showMsg('forgotMsg', 'Network error. Please try again.', 'error');
+  } finally {
+    btn.classList.remove('loading');
+    btn.disabled = false;
+  }
+}
+
+// ── Reset Password ──
+async function doResetPassword(e) {
+  e.preventDefault();
+  clearMsgs();
+  const btn     = document.getElementById('resetBtn');
+  const token   = document.getElementById('resetToken').value;
+  const newPw   = document.getElementById('newPassword').value;
+  const confirm = document.getElementById('confirmNewPassword').value;
+
+  if (newPw !== confirm) {
+    showMsg('resetMsg', 'Passwords do not match', 'error');
+    return;
+  }
+  if (newPw.length < 6) {
+    showMsg('resetMsg', 'Password must be at least 6 characters', 'error');
+    return;
+  }
+
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  try {
+    const res  = await fetch(API + '/reset-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ token, password: newPw })
+    });
+    const data = await res.json();
+    showMsg('resetMsg', data.message, data.success ? 'success' : 'error');
+    if (data.success) {
+      document.getElementById('resetForm').reset();
+      setTimeout(() => showPanel('login'), 2000);
+    }
+  } catch (err) {
+    showMsg('resetMsg', 'Network error. Please try again.', 'error');
+  } finally {
+    btn.classList.remove('loading');
+    btn.disabled = false;
+  }
+}
+
+// ── Password strength for reset panel ──
+function checkResetPwStrength(pw) {
+  const bar = document.getElementById('resetPwBar');
+  const lbl = document.getElementById('resetPwLabel');
+  if (!pw) { bar.className = 'pw-strength-bar'; lbl.textContent = ''; return; }
+  const score = (pw.length >= 8 ? 1 : 0) + (/[A-Z]/.test(pw) ? 1 : 0) + (/[0-9]/.test(pw) ? 1 : 0) + (/[^A-Za-z0-9]/.test(pw) ? 1 : 0);
+  if (pw.length < 6)        { bar.className = 'pw-strength-bar weak';   lbl.textContent = 'Too short'; }
+  else if (score <= 1)      { bar.className = 'pw-strength-bar weak';   lbl.textContent = 'Weak'; }
+  else if (score === 2)     { bar.className = 'pw-strength-bar medium'; lbl.textContent = 'Medium'; }
+  else                      { bar.className = 'pw-strength-bar strong'; lbl.textContent = 'Strong ✓'; }
+}
+</script>
+</body>
+</html>
