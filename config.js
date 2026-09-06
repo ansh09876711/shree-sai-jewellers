@@ -14,7 +14,7 @@ const CONFIG = {
   // Auto-detect local vs production API URL
   API_BASE_URL: isLocalhost 
     ? (window.location.port === '5000' ? `${window.location.origin}/api` : 'http://localhost:5000/api')
-    : 'https://shree-sai-jewellers-api-production-f5cc.up.railway.app/api',
+    : 'https://shree-sai-jewellers.onrender.com/api',
 
   // Razorpay public key — NEVER put the secret key here
   RAZORPAY_KEY: 'rzp_test_XXXXXXXXXXXXXXXX',
