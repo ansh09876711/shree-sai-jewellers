@@ -17,18 +17,15 @@ def _build_engine():
             except ImportError:
                 url = url.replace("postgresql://", "postgresql+pg8000://", 1)
 
-        # Supabase needs SSL + conservative pool for free tier (max 15 connections)
+        # Supabase Transaction Pooler — SSL in URL params, no connect_args
+        # Pool settings conservative for free tier
         return create_engine(
-            url,
+            url + ("&sslmode=require" if "?" in url else "?sslmode=require"),
             pool_pre_ping=True,
             pool_size=3,
             max_overflow=5,
             pool_timeout=30,
             pool_recycle=300,
-            connect_args={
-                "sslmode": "require",
-                "connect_timeout": 10,
-            }
         )
     else:
         # SQLite fallback
