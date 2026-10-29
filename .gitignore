@@ -52,3 +52,14 @@ node_modules/
 backend/__pycache__/
 backend/routes/__pycache__/
 backend/services/__pycache__/
+
+# Root-level Python files — only needed for backend hosting (Render/Railway)
+# Keeping these out of repo root prevents Vercel from detecting Flask
+requirements.txt
+wsgi.py
+.python-version
+Procfile
+Dockerfile
+.dockerignore
+copy_category_images.py
+split_css.py
