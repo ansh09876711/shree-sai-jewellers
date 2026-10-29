@@ -46,4 +46,20 @@ class Config:
     ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "care@shreesaijewellers.com")
 
     # CORS
-    CORS_ORIGINS = [origin.strip() for origin in os.getenv("CORS_ORIGINS", "*").split(",")]
+    _env_origins = [origin.strip() for origin in os.getenv("CORS_ORIGINS", "").split(",") if origin.strip()]
+    _default_origins = [
+        "https://shree-sai-jewellers-03.vercel.app",
+        "https://shree-sai-jewellers.pages.dev",
+        "https://cbaf18f8.shree-sai-jewellers.pages.dev",
+        "https://main.shree-sai-jewellers.pages.dev",
+        "https://shreesaijewellers.com",
+        "http://localhost:5000",
+        "http://localhost:5173",
+        "http://localhost:8080",
+        "http://127.0.0.1:5000",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:8080",
+        r"https://.*\.vercel\.app",
+        r"https://.*\.pages\.dev"
+    ]
+    CORS_ORIGINS = list(dict.fromkeys(_env_origins + _default_origins)) if _env_origins else _default_origins

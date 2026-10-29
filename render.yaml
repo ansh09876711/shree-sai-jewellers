@@ -27,4 +27,4 @@ services:
       - key: ADMIN_EMAIL
         sync: false
       - key: CORS_ORIGINS
-        value: "https://shree-sai-jewellers.pages.dev,https://cbaf18f8.shree-sai-jewellers.pages.dev,https://main.shree-sai-jewellers.pages.dev,http://localhost:8080"
+        value: "https://shree-sai-jewellers-03.vercel.app,https://shree-sai-jewellers.pages.dev,https://cbaf18f8.shree-sai-jewellers.pages.dev,https://main.shree-sai-jewellers.pages.dev,http://localhost:8080,http://localhost:5000"

@@ -2,7 +2,7 @@ import os
 from flask import Flask, jsonify
 from flask_cors import CORS
 from .config import Config
-from .database import engine, Base
+from .database import engine, Base, SessionLocal
 
 # Import all route blueprints
 from .routes.products_bp import products_bp
@@ -27,9 +27,18 @@ def create_app():
     # Initialize CORS
     CORS(app, origins=Config.CORS_ORIGINS, supports_credentials=True)
 
-    # Initialize tables if not existing
+    # Initialize tables if not existing and seed if database is empty
     try:
         Base.metadata.create_all(bind=engine)
+        db = SessionLocal()
+        try:
+            from .models import Category
+            if db.query(Category).count() == 0:
+                print("[Database] Empty database detected. Running initial seed...")
+                from .seed import seed_database
+                seed_database()
+        finally:
+            db.close()
     except Exception as db_err:
         print(f"[Database Initialization Warning] {db_err}")
 

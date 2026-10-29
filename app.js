@@ -21,7 +21,7 @@ const ApiService = {
     }
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 15000);
+    const timeoutId = setTimeout(() => controller.abort(), 35000);
 
     try {
       const response = await fetch(url, {
@@ -849,34 +849,63 @@ async function loadProductSection(containerId, apiParams, skeletonCount = 4) {
   }
 }
 
+function renderOfferCards(container, offers) {
+  container.innerHTML = offers.map(offer => `
+    <div class="offer-card fade-in">
+      <div class="offer-tag">${offer.tag || 'Special Offer'}</div>
+      <div class="offer-title">${offer.title}</div>
+      ${offer.discount_percent ? `<div class="offer-discount">${offer.discount_percent}% OFF</div>` : ''}
+      ${offer.flat_discount ? `<div class="offer-discount">${fmtINR(offer.flat_discount)} OFF</div>` : ''}
+      <p style="font-size:var(--fs-sm);color:var(--clr-text-secondary);">${offer.description || ''}</p>
+      ${offer.coupon_code ? `
+        <div class="offer-code-wrap">
+          <span class="offer-code">${offer.coupon_code}</span>
+          <button class="btn btn-sm btn-outline" onclick="copyCode('${offer.coupon_code}')">Copy</button>
+        </div>` : ''}
+      <div class="offer-expiry">${offer.valid_till ? 'Valid till: ' + new Date(offer.valid_till).toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' }) : ''}</div>
+      ${offer.category ? `<a href="products.html?category=${encodeURIComponent(offer.category)}" class="btn btn-primary btn-sm">Shop Now</a>` : ''}
+    </div>
+  `).join('');
+  observeFadeIns(container);
+}
+
+const DEFAULT_OFFERS = [
+  {
+    id: 'off_festive10',
+    tag: 'Festive Special',
+    title: '10% Off Making Charges',
+    description: 'Enjoy 10% flat discount on gold & diamond making charges on orders above ₹1,00,000.',
+    coupon_code: 'SAI10',
+    discount_percent: 10,
+    valid_till: '2026-12-31'
+  },
+  {
+    id: 'off_bridal_flat',
+    tag: 'Bridal Season',
+    title: 'Flat ₹15,000 Off on Bridal Sets',
+    description: 'Exclusive bridal promotion for wedding season purchases above ₹3,00,000.',
+    coupon_code: 'BRIDAL15',
+    flat_discount: 15000,
+    valid_till: '2026-11-30'
+  }
+];
+
 // Load offers
 async function loadOffers(containerId = 'offersGrid') {
   const container = document.getElementById(containerId);
   if (!container) return;
-  container.innerHTML = Skeleton.productCard(3);
+  container.innerHTML = Skeleton.productCard(2);
   try {
     const data = await ApiService.getOffers();
-    const offers = data.offers || data;
-    if (!offers.length) { container.innerHTML = '<p style="color:var(--clr-text-muted);text-align:center;padding:var(--sp-8);">No active offers at the moment.</p>'; return; }
-    container.innerHTML = offers.map(offer => `
-      <div class="offer-card fade-in">
-        <div class="offer-tag">${offer.tag || 'Special Offer'}</div>
-        <div class="offer-title">${offer.title}</div>
-        ${offer.discount_percent ? `<div class="offer-discount">${offer.discount_percent}% OFF</div>` : ''}
-        ${offer.flat_discount ? `<div class="offer-discount">${fmtINR(offer.flat_discount)} OFF</div>` : ''}
-        <p style="font-size:var(--fs-sm);color:var(--clr-text-secondary);">${offer.description || ''}</p>
-        ${offer.coupon_code ? `
-          <div class="offer-code-wrap">
-            <span class="offer-code">${offer.coupon_code}</span>
-            <button class="btn btn-sm btn-outline" onclick="copyCode('${offer.coupon_code}')">Copy</button>
-          </div>` : ''}
-        <div class="offer-expiry">${offer.valid_till ? 'Valid till: ' + new Date(offer.valid_till).toLocaleDateString('en-IN', { day:'numeric', month:'long', year:'numeric' }) : ''}</div>
-        ${offer.category ? `<a href="products.html?category=${encodeURIComponent(offer.category)}" class="btn btn-primary btn-sm">Shop Now</a>` : ''}
-      </div>
-    `).join('');
-    observeFadeIns(container);
+    const offers = (data && (data.offers || data)) || [];
+    if (!offers.length) {
+      renderOfferCards(container, DEFAULT_OFFERS);
+      return;
+    }
+    renderOfferCards(container, offers);
   } catch (err) {
-    container.innerHTML = buildStateBox('⚠️', 'Could not load offers', err.message);
+    console.warn('[Offers] API unreachable, falling back to promotional offers:', err);
+    renderOfferCards(container, DEFAULT_OFFERS);
   }
 }
 
