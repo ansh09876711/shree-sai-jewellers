@@ -438,7 +438,7 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--sp-6);
+  gap: var(--sp-4);
   padding: var(--sp-4) 0;
 }
 
@@ -452,9 +452,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .brand-emblem {
-  width: 44px;
-  height: 44px;
-  filter: drop-shadow(0 0 12px rgba(226,183,85,0.4));
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 10px rgba(226,183,85,0.45));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.brand-logo:hover .brand-emblem {
+  transform: scale(1.08);
+  filter: drop-shadow(0 4px 18px rgba(226,183,85,0.75));
 }
 
 .brand-text {

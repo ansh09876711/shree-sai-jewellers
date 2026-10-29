@@ -97,10 +97,11 @@
     margin-right: auto !important;
   }
   .brand-emblem {
-    width: 28px !important;
-    height: 28px !important;
+    width: 32px !important;
+    height: 32px !important;
+    object-fit: contain !important;
     flex-shrink: 0 !important;
-    filter: drop-shadow(0 0 10px rgba(226, 183, 85, 0.55)) !important;
+    filter: drop-shadow(0 2px 6px rgba(226, 183, 85, 0.55)) !important;
   }
   .brand-text {
     display: flex !important;
