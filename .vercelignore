@@ -1,0 +1,20 @@
+# Ignore Python backend files — Vercel serves static HTML only
+api/
+backend/
+.venv/
+__pycache__/
+*.py
+*.pyc
+requirements.txt
+wsgi.py
+Procfile
+Dockerfile
+.dockerignore
+render.yaml
+render.env
+railway.toml
+shree_sai_jewellers.db
+uploads/
+.python-version
+split_css.py
+copy_category_images.py
